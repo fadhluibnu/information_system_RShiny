@@ -39,7 +39,7 @@ tabItemKarakteristik <- tabItem(tabName = "karakteristik",
                                     condition = "input.skala_usaha == true",
                                     box(title = "Skala Usaha", width = 6, 
                                         plotOutput("pie_chart_skala_usaha"))
-                                  ),
+                                  )
                                 ),
                                 fluidRow(
                                   box(title = "Karakteristik Desa", width = 12, 
