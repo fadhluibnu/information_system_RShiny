@@ -1,87 +1,84 @@
+
 data_pendanaan <- read_csv("data/Pendanaan.csv")
 
 output$data_table_pendanaan <- renderDT({
-  data_pendanaan_tabel <- data_pendanaan %>%
-  mutate(
-    
-    Apakah_BapakIbu_tahu_mengenai_pendanaan_untuk_mengembangkan_usaha = ifelse(Apakah_BapakIbu_tahu_mengenai_pendanaan_untuk_mengembangkan_usaha == 1, "Tahu", "Tidak Tahu"),
-    
-    Apakah_Bapak_Ibu_tahu_yang_dimaksud_dengan_dana_desa = ifelse(Apakah_Bapak_Ibu_tahu_yang_dimaksud_dengan_dana_desa == 1, "Tahu", "Tidak Tahu"),
-    
-    Apakah_Bapak_Ibu_tahu_yang_dimaksud_dengan_dana_CSR_Coorporate_Social_Responsibility
-    = ifelse(Apakah_Bapak_Ibu_tahu_yang_dimaksud_dengan_dana_CSR_Coorporate_Social_Responsibility
-             == 1, "Tahu", "Tidak Tahu"),
-    
-    Modal_Usaha_Bapak_Ibu_diperoleh_dari = recode(Modal_Usaha_Bapak_Ibu_diperoleh_dari, 
-                                                  `1` = "Modal sendiri",
-                                                  `2` = "Pinjam saudara",
-                                                  `3` = "Pinjam bank",
-                                                  `4` = "Bantuan desa",
-                                                  `5` = "Bantuan dana CSR",
-                                                  `6` = "Lainnya"),
-    
-    Apakah_Bapak_Ibu_mengetahui_adanya_perusahaan_listrik
-    = ifelse(Apakah_Bapak_Ibu_mengetahui_adanya_perusahaan_listrik
-             == 1, "Tahu", "Tidak Tahu"),
-    
-    Apakah_perusahaan_memberikan_bantuan_buat_masyarakat_desa = recode(Apakah_perusahaan_memberikan_bantuan_buat_masyarakat_desa, 	
+  data_pendanaan_tabel <- read_csv("data/Pendanaan.csv")
+  data_pendanaan_tabel <- data_pendanaan_tabel %>%
+    mutate(
+      
+      Apakah_BapakIbu_tahu_mengenai_pendanaan_untuk_mengembangkan_usaha = ifelse(Apakah_BapakIbu_tahu_mengenai_pendanaan_untuk_mengembangkan_usaha == 1, "Tahu", "Tidak Tahu"),
+      
+      Apakah_Bapak_Ibu_tahu_yang_dimaksud_dengan_dana_desa = ifelse(Apakah_Bapak_Ibu_tahu_yang_dimaksud_dengan_dana_desa == 1, "Tahu", "Tidak Tahu"),
+      
+      Apakah_Bapak_Ibu_tahu_yang_dimaksud_dengan_dana_CSR_Coorporate_Social_Responsibility
+      = ifelse(Apakah_Bapak_Ibu_tahu_yang_dimaksud_dengan_dana_CSR_Coorporate_Social_Responsibility
+               == 1, "Tahu", "Tidak Tahu"),
+      
+      Modal_Usaha_Bapak_Ibu_diperoleh_dari = recode(Modal_Usaha_Bapak_Ibu_diperoleh_dari, 
+                                                    `1` = "Modal sendiri",
+                                                    `2` = "Pinjam saudara",
+                                                    `3` = "Pinjam bank",
+                                                    `4` = "Bantuan desa",
+                                                    `5` = "Bantuan dana CSR",
+                                                    `6` = "Lainnya"),
+      
+      Apakah_Bapak_Ibu_mengetahui_adanya_perusahaan_listrik
+      = ifelse(Apakah_Bapak_Ibu_mengetahui_adanya_perusahaan_listrik
+               == 1, "Tahu", "Tidak Tahu"),
+      
+      Apakah_perusahaan_memberikan_bantuan_buat_masyarakat_desa = recode(Apakah_perusahaan_memberikan_bantuan_buat_masyarakat_desa, 	
+                                                                         `2`="Tidak Tahu",	
+                                                                         `1`="Tahu")
+      ,
+      dalam_bentuk=recode(dalam_bentuk,
+                          `1`="Sumbangan tidak mengikat (hibah)",
+                          `2`="Sumbangan bergulir",
+                          `3`="Pelatihan",
+                          `4`="Bimbingan teknis usaha",
+                          `5`="Lainnya",
+                          .default ="-",
+                          .missing = "-"),
+      
+      Apakah_pemerintah_desa_memberikan_bantuan_buat_masyarakat=recode(Apakah_pemerintah_desa_memberikan_bantuan_buat_masyarakat, 
                                                                        `2`="Tidak Tahu",	
-                                                                       `1`="Tahu")
-    ,
-    dalam_bentuk=recode(dalam_bentuk,
-                        `1`="Sumbangan tidak mengikat (hibah)",
-                        `2`="Sumbangan bergulir",
-                        `3`="Pelatihan",
-                        `4`="Bimbingan teknis usaha",
-                        `5`="Lainnya",
-                        .default ="Tidak Mengisi",
-                        .missing = "Tidak Mengisi"),
-    
-    Apakah_pemerintah_desa_memberikan_bantuan_buat_masyarakat=recode(Apakah_pemerintah_desa_memberikan_bantuan_buat_masyarakat, 
-                                                                     `2`="Tidak Tahu",	
-                                                                     `1`="Tahu"),
-    
-    Jika_ya_dalam_bentuk=recode(Jika_ya_dalam_bentuk,
-                                `1`="Sumbangan tidak mengikat (hibah)",
-                                `2`="Sumbangan bergulir",
-                                `3`="Pelatihan",
-                                `4`="Bimbingan teknis usaha",
-                                `5`="Lainnya",
-                                .default ="Tidak Mengisi",
-                                .missing = "Tidak Mengisi")
-    
-    
-  )
+                                                                       `1`="Tahu"),
+      
+      Jika_ya_dalam_bentuk=recode(Jika_ya_dalam_bentuk,
+                                  `1`="Sumbangan tidak mengikat (hibah)",
+                                  `2`="Sumbangan bergulir",
+                                  `3`="Pelatihan",
+                                  `4`="Bimbingan teknis usaha",
+                                  `5`="Lainnya",
+                                  .default ="-",
+                                  .missing = "-")
+      
+      
+    )
+  
 
 data_pendanaan_tabel <- data_pendanaan_tabel %>%
   rename(
     `Apakah Bapak/Ibu tahu mengenai pendanaan untuk mengembangkan usaha?` = Apakah_BapakIbu_tahu_mengenai_pendanaan_untuk_mengembangkan_usaha,
-    
     `Apakah Bapak/Ibu tahu yang dimaksud dengan dana desa?` = Apakah_Bapak_Ibu_tahu_yang_dimaksud_dengan_dana_desa,
-    
+
     `Apakah Bapak/Ibu tahu yang dimaksud dengan dana CSR (Coorporate Social Responsibility)?` = Apakah_Bapak_Ibu_tahu_yang_dimaksud_dengan_dana_CSR_Coorporate_Social_Responsibility,
-    
+
     `Modal Usaha Bapak/Ibu diperoleh dari` = Modal_Usaha_Bapak_Ibu_diperoleh_dari,
-    
+
     `Modal awal (Rp)` = Modal_awal,
-    
+
     `Apakah Bapak/Ibu mengetahui adanya perusahaan listrik?` = Apakah_Bapak_Ibu_mengetahui_adanya_perusahaan_listrik,
-    
+
     `Jika tahu, sudah berapa lama perusahaan beraktifitas? (tahun)`=Jika_tahu_sudah_berapa_lama_perusahaan_beraktifitas_tahun,
-    
-    `Apakah perusahaan memberikan bantuan buat masyarakat desa?`=Apakah_perusahaan_memberikan_bantuan_buat_masyarakat_desa,
-    
+
     `Jika ya, dalam bentuk`=dalam_bentuk,
     
-    `Bentuk bantuan yang diharapkan sebaiknya dilakukan oleh perusahaan tersebut?` = Bentuk_bantuan_yang_diharapkan_sebaiknya_dilakukan_oleh_perusahaan_tersebut,
-    
+    `Apakah perusahaan memberikan bantuan buat masyarakat desa?` = Apakah_perusahaan_memberikan_bantuan_buat_masyarakat_desa,
     `Apakah pemerintah desa memberikan bantuan buat masyarakat?` = Apakah_pemerintah_desa_memberikan_bantuan_buat_masyarakat,
-    
-    `Jika iya, dalam bentuk` =Jika_ya_dalam_bentuk, 
-    
-    `Apa bentuk bantuan yang diharapkan sebaiknya dilakukan oleh perusahaan tersebut?` = Bentuk_bantuan_yang_diharapkan_sebaiknya_dilakukan_oleh_perusahaan_tersebu
-    
+
+    `Jika iya, dalam bentuk` =Jika_ya_dalam_bentuk
   )
+
 
   datatable(data_pendanaan_tabel, options = list(
     headerCallback = JS(
@@ -112,11 +109,17 @@ data_pendanaan_tabel <- data_pendanaan_tabel %>%
         <th style=\"border: none; padding: 0px 10px 0px 14px;\">
         </th> 
         <th style=\"border: none; padding: 0px 10px 0px 14px;\">
-          <input style=\"transform: scale(1.2);\" type=\"checkbox\" id=\"PerusahaanListrik\">
+          <input style=\"transform: scale(1.2);\" type=\"checkbox\" id=\"PerusahaanListrik2\">
         </th> 
         <th style=\"border: none; padding: 0px 10px 0px 14px;\">
+          <input style=\"transform: scale(1.2);\" type=\"checkbox\" id=\"PerusahaanListrik3\">
         </th> 
         <th style=\"border: none; padding: 0px 10px 0px 14px;\">
+          <input style=\"transform: scale(1.2);\" type=\"checkbox\" id=\"BantuanDesa\">
+        </th>
+        <th style=\"border: none; padding: 0px 10px 0px 14px;\">
+          <input style=\"transform: scale(1.2);\" type=\"checkbox\" id=\"BantuanDesa2\">
+        </th>
       </tr>`);",
       "  $('#PengembanganUsaha').on('click', function(){",
       "    Shiny.setInputValue('PengembanganUsaha', this.checked);",
@@ -136,13 +139,23 @@ data_pendanaan_tabel <- data_pendanaan_tabel %>%
       "  $('#PerusahaanListrik').on('click', function(){",
       "    Shiny.setInputValue('PerusahaanListrik', this.checked);",
       "  });",
+      "  $('#PerusahaanListrik2').on('click', function(){",
+      "    Shiny.setInputValue('PerusahaanListrik2', this.checked);",
+      "  });",
+      "  $('#PerusahaanListrik3').on('click', function(){",
+      "    Shiny.setInputValue('PerusahaanListrik2', this.checked);",
+      "  });",
+      "  $('#BantuanDesa').on('click', function(){",
+      "    Shiny.setInputValue('BantuanDesa', this.checked);",
+      "  });",
+      "  $('#BantuanDesa2').on('click', function(){",
+      "    Shiny.setInputValue('BantuanDesa2', this.checked);",
+      "  });",
       "  }",
       "}"
     ),
     columnDefs = list(
-      list(orderable = FALSE, className = 'select-checkbox', targets = 0),
-      list(width = '500px', targets = 10),
-      list(width = '500px', targets = 13)
+      list(orderable = FALSE, className = 'select-checkbox', targets = 0)
     ),
     select = list(style = 'multi', selector = 'td:first-child'),
     scrollX = TRUE, 
@@ -457,73 +470,6 @@ output$barChartModalCombined <- renderPlot({
 })
 
 # Keberadaan Perusahaan Listrik
-output$pieChartKeberadaanPerusahanListrik <- renderPlot({
-  kebradaan_perusahaan <- data_pendanaan %>%
-    rename(`KebradaanPerusahaan` = Apakah_Bapak_Ibu_mengetahui_adanya_perusahaan_listrik)
-
-  kebradaan_perusahaan <- kebradaan_perusahaan %>%
-    mutate(KebradaanPerusahaan = ifelse(KebradaanPerusahaan == 1, "Tahu", "Tidak Tahu"))
-
-  kebradaan_perusahaan <- kebradaan_perusahaan %>%
-    count(KebradaanPerusahaan) %>%
-    mutate(percentage = n / sum(n) * 100,
-           label = paste0(KebradaanPerusahaan, "\n", round(percentage, 1), "%"))
-
-  ggplot(kebradaan_perusahaan, aes(x = "", y = n, fill = KebradaanPerusahaan)) +
-    geom_bar(stat = "identity", width = 1) +
-    coord_polar(theta = "y") +
-    theme_void() +
-    geom_text(aes(label = label), position = position_stack(vjust = 0.5))+
-    theme(legend.position = "bottom") +
-    guides(fill = guide_legend(title = "Keterangan : "))
-})
-
-output$analysisKeberadaanPerusahanListrik <- renderText({
-  kebradaan_perusahaan <- data_pendanaan %>%
-    rename(`KebradaanPerusahaan` = Apakah_Bapak_Ibu_mengetahui_adanya_perusahaan_listrik)
-
-
-  kebradaan_perusahaan <- kebradaan_perusahaan %>%
-    mutate(KebradaanPerusahaan = ifelse(KebradaanPerusahaan == 1, "Tahu", "Tidak Tahu"))
-
-  kebradaan_perusahaan <- kebradaan_perusahaan %>%
-    count(KebradaanPerusahaan) %>%
-    mutate(percentage = n / sum(n) * 100)
-
-  tahu_count <- kebradaan_perusahaan %>%
-    filter(KebradaanPerusahaan == "Tahu") %>%
-    pull(n)
-
-  tidak_tahu_count <- kebradaan_perusahaan %>%
-    filter(KebradaanPerusahaan == "Tidak Tahu") %>%
-    pull(n)
-
-  tahu_percentage <- kebradaan_perusahaan %>%
-    filter(KebradaanPerusahaan == "Tahu") %>%
-    pull(percentage)
-
-  tidak_tahu_percentage <- kebradaan_perusahaan %>%
-    filter(KebradaanPerusahaan == "Tidak Tahu") %>%
-    pull(percentage)
-
-  # Kesimpulan dan Solusi
-  if (tahu_percentage > tidak_tahu_percentage) {
-    conclusion <- "Dari hasil survey, banyak masyarakat tentang keberadaan perusahaan listrik."
-    solution <- "Hal ini mengindikasikan bahwa kesadaran akan layanan listrik cukup tinggi di kalangan masyarakat yang disurvei"
-  } else {
-    conclusion <- "Dari hasil survey, banyak masyarakat belum mengetahui tentang keberadaan perusahaan listrik"
-    solution <- "jadi, untuk meningkatkan kesadaran akan layanan listrik di masyarakat yang masih belum mengetahuinya seperti melakukan kampanye sosialisasi yang lebih intensif dengan menyediakan informasi yang lebih mudah diakses oleh masyarakat."
-  }
-
-  analysis <- paste(
-    "Dari hasil survey, sebanyak", tahu_count, "orang (", round(tahu_percentage, 1), "%) mengetahui mengenai keberadaan perusahaan listrik",
-    "Sementara itu, sebanyak", tidak_tahu_count, "orang (", round(tidak_tahu_percentage, 1), "%) tidak mengetahui mengenai keberadaan perusahaan listrik",
-    conclusion,
-    solution
-  )
-
-  analysis
-})
 
 output$barChartTahuBantuan <- renderPlot({
   modal_combined_data <- data_pendanaan %>%
@@ -602,4 +548,87 @@ output$analysisText <- renderText({
     "Sebaliknya, ", tidak_tahu_tidak_dapat_bantuan, " responden (",
     round(tidak_tahu_tidak_dapat_bantuan / total_responden * 100, 2), "%) tidak mengetahui adanya perusahaan listrik dan juga tidak menerima bantuan."
   )
+})
+
+output$pie_chartJenisBantuanPerusahaan <- renderPlot({
+  bantuan_perusahaan <- data_pendanaan %>%
+    count(dalam_bentuk) %>%
+    mutate(dalam_bentuk=recode(dalam_bentuk,
+                                `1`="Sumbangan tidak mengikat (hibah)",
+                                `2`="Sumbangan bergulir",
+                                `3`="Pelatihan",
+                                `4`="Bimbingan teknis usaha",
+                                `5`="Lainnya",
+                                .default ="- \n Tidak Mengisi",
+                                .missing = "- \n Tidak Mengisi")
+      ,percentage = n / sum(n) * 100,
+           label = paste0(dalam_bentuk, "\n", round(percentage, 1), "%"))
+  
+  ggplot(bantuan_perusahaan, aes(x = "", y = n, fill = dalam_bentuk)) +
+    geom_bar(stat = "identity", width = 1) +
+    coord_polar("y") +
+    theme_void() +
+    geom_text(aes(label = label), position = position_stack(vjust = 0.5)) +
+    labs(fill = "Bentuk Bantuan Dari perusahaan", title = "Bentuk Bantuan Dari perusahaan")
+})
+
+output$analysisTextBantuanPerusahaan <- renderText({
+  analysisTextBantuanPerusahaan <- "Masyarakat Desa Mekarsari mengharapkan bantuan dari perusahaan berupa bantuan sesuai dengan kebutuhan yang diajukan dalam proposal, santunan untuk anak yatim, serta pelatihan dan penyuluhan untuk meningkatkan wawasan dan sumber daya manusia (SDM)."
+  analysisTextBantuanPerusahaan
+})
+
+
+output$barChartTahuBantuanDesa <- renderPlot({
+  modal_combined_data <- data_pendanaan %>%
+    rename(BantuanDesa  = Apakah_pemerintah_desa_memberikan_bantuan_buat_masyarakat, 
+           Bantuan = Jika_ya_dalam_bentuk)
+  
+  # Recode data
+  modal_combined_data <- modal_combined_data %>%
+    mutate(BantuanDesa = recode(BantuanDesa,
+                                `2`="Tidak Tahu", 
+                                `1`="Tahu"), 
+           Bantuan = recode(Bantuan,
+                            `1`="Sumbangan tidak mengikat (hibah)",
+                            `2`="Sumbangan bergulir",
+                            `3`="Pelatihan",
+                            `4`="Bimbingan teknis usaha",
+                            `5`="Lainnya",
+                            .default = "-",
+                            .missing = "-"))
+  
+  # Filter out rows with NA after recoding
+  modal_combined_data <- modal_combined_data %>%
+    mutate(Bantuan = ifelse(is.na(Bantuan) & BantuanDesa == "Tidak Tahu", "-", Bantuan))
+  
+  # Convert to factors
+  modal_combined_data$BantuanDesa <- factor(modal_combined_data$BantuanDesa, levels = c("Tahu", "Tidak Tahu"))
+  modal_combined_data$Bantuan <- as.factor(modal_combined_data$Bantuan)
+  
+  # Create data frame for plotting
+  modal_combined_count <- modal_combined_data %>%
+    group_by(BantuanDesa, Bantuan) %>%
+    summarise(count = n()) %>%
+    ungroup()
+  
+  # Define number of bars and colors
+  num_bars <- nrow(modal_combined_count)
+  colors <- RColorBrewer::brewer.pal(min(num_bars * 10, 4), "Dark2")
+  
+  # Plot the data
+  ggplot(modal_combined_count, aes(x = BantuanDesa, y = count, fill = Bantuan)) +
+    geom_bar(stat = "identity", position = position_dodge()) +
+    theme_minimal() +
+    scale_fill_manual(values = colors) +
+    labs(title = "Distribusi Bentuk Bantuan Berdasarkan Pengetahuan Adanya Dana Desa",
+         x = "Pengetahuan Adanya Dana Desa",
+         y = "Jumlah Responden",
+         fill = "Bentuk Bantuan") +
+    theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+    scale_y_continuous(breaks = seq(0, max(modal_combined_count$count, na.rm = TRUE), by = 1)) # Adding manual breaks for y-axis
+})
+
+output$analysisTextBantuanDesa <- renderText({
+  analysisTextBantuanDesa <- "Masyarakat Desa Mekarsari mengharapkan bantuan dari Pemerintahan Desa berupa BLT setiap bulan, sembako, koperasi untuk modal usaha, pelatihan untuk menambah keterampilan, pembangunan infrastruktur, serta subsidi harga pupuk dan bibit."
+  analysisTextBantuanDesa
 })

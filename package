@@ -5,29 +5,3 @@ install.packages("DT")
 install.packages("ggplot2")
 install.packages("dplyr")
 install.packages("viridis")
-
-                                  #     box(title = "Analisis Keberadaan Perusahan Listrik", 
-                                  #         status = "primary", 
-                                  #         solidHeader = TRUE, 
-                                  #         width = 12, 
-                                  #         textOutput("analysisKeberadaanPerusahanListrik"))),
-                                  # box(title = "Word Frequency by Type", plotOutput("barplotFreqWord"), width = 12),
-
-
-
-  # output$data_table <- renderDT({
-  #   datatable(data, options = list(
-  #     headerCallback = JS(
-  #       "function(thead, data, start, end, display){",
-  #       "  var $th = $(thead).find('th:contains(\"Usia\")');",
-  #       "  $th.html('Usia <input type=\"checkbox\" id=\"select-all\">');",
-  #       "  $('#select-all').on('click', function(){",
-  #       "    var rows = table.rows({ 'search': 'applied' }).nodes();",
-  #       "    $('input[type=\"checkbox\"]', rows).prop('checked', this.checked);",
-  #       "  });",
-  #       "}"
-  #     ),
-  #     columnDefs = list(list(orderable = FALSE, className = 'select-checkbox', targets = 0)),
-  #     select = list(style = 'multi', selector = 'td:first-child')
-  #   ), selection = 'none', escape = FALSE)
-  # })

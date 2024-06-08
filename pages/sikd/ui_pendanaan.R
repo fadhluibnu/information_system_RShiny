@@ -79,26 +79,53 @@ tabItemPendanaan <- tabItem(tabName = "pendanaan",
                             ),
                             
                             conditionalPanel(
-                              condition = "input.PerusahaanListrik == true",
+                              condition = "input.PerusahaanListrik == true || input.PerusahaanListrik2 == true || input.PerusahaanListrik3 == true",
                               box(title = "Perusahan Listrik",
                                   width = 12,
                                   fluidRow(
                                     box(title = "Keberadaan Perusahan Listrik", 
                                         status = "primary", solidHeader = TRUE, 
                                         width = 12,
-                                        h5("Apakah Bapak/Ibu mengetahui adanya perusahaan listrik?"),
+                                        h5(tags$b("Apakah Bapak/Ibu mengetahui adanya perusahaan listrik?")),
                                         plotOutput("barChartTahuBantuan"),
                                         box(
                                           title = "Hasil Analisis",
                                           width = 12,
                                           textOutput("analysisText")
-                                        )
+                                        ),
+                                        h5(tags$b("Jenis Bantuan")),
+                                        plotOutput("pie_chartJenisBantuanPerusahaan"),
+                                        box(
+                                          title = "Hasil Analisis",
+                                          width = 12,
+                                          textOutput("analysisTextBantuanPerusahaan")
+                                        ),
                                       ),
                                     ),
                               ),
                             ),
+                            
+                            conditionalPanel(
+                              condition = "input.BantuanDesa == true || input.BantuanDesa2 == true",
+                              box(title = "Bantuan Pemerintah Desa",
+                                  width = 12,
+                                  fluidRow(
+                                    box(title = "Keberadaan Perusahan Listrik", 
+                                        status = "primary", solidHeader = TRUE, 
+                                        width = 12,
+                                        h5(tags$b("Apakah pemerintah desa memberikan bantuan buat masyarakat?")),
+                                        plotOutput("barChartTahuBantuanDesa"),
+                                        box(
+                                          title = "Hasil Analisis",
+                                          width = 12,
+                                          textOutput("analysisTextBantuanDesa")
+                                        ),
+                                    ),
+                                  ),
+                              ),
+                            ),
                             fluidRow(
-                              box(title = "Karakteristik Desa", width = 12, 
+                              box(title = "Pendanaan Desa", width = 12, 
                                   DTOutput("data_table_pendanaan"))
                             )
                             
