@@ -1,6 +1,5 @@
 tabItemPeningkatanPAD <- tabItem(
   tabName = "PeningkatanPAD",
-  h1("PAD"),
   conditionalPanel(
     condition = "input.DesaPembagunan == true || input.DesaInfrastruktur == true || input.DesaBumdes == true",
     fluidRow(

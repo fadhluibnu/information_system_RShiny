@@ -1,53 +1,52 @@
-pathPAD <- "data/PeningkatanPAD.csv"
+pathPerekonomian <- "data/PeningkatanPerekonomianDesa.csv"
 
-output$data_table_PeningkatanPAD <- renderDT({
-  data <- read_csv(pathPAD)
+output$data_table_PeningkatanPerekonomian <- renderDT({
+  data <- read_csv(pathPerekonomian)
   
   data <- data %>%
     mutate(
-      `Dana-desa-digunakan-untuk-membentuk-kegiatan-pembangunan-desa-(termasuk-membangun-usaha)` = recode(`Dana-desa-digunakan-untuk-membentuk-kegiatan-pembangunan-desa-(termasuk-membangun-usaha)`, 
+      `Terbukanya-usaha-ekonomi-rakyat,-karena-adanya-dana-desa` = recode(`Terbukanya-usaha-ekonomi-rakyat,-karena-adanya-dana-desa`,
                   `3`='Berperan',
                   `2`='Cukup Berperan',
                   `1`='Kurang Berperan',
-      ),
-      `Dana-desa-digunakan-untuk-membangun-Infrastruktur-desa-(misalnya-:-jalan)-` = recode(`Dana-desa-digunakan-untuk-membangun-Infrastruktur-desa-(misalnya-:-jalan)-`, 
+                  ),
+      `Dana-desa-menambah-penghasilan-masyarakat` = recode(`Dana-desa-menambah-penghasilan-masyarakat`,
                   `3`='Berperan',
                   `2`='Cukup Berperan',
                   `1`='Kurang Berperan',
-      ),
-      `Dana-desa-membantu-permodalan-bagi-kegiatan-BUMDes` = recode(`Dana-desa-membantu-permodalan-bagi-kegiatan-BUMDes`, 
+                  ),
+      `Adanya-Dana-desa-membantu-mengembangkan-modal-untuk-rakyat` = recode(`Adanya-Dana-desa-membantu-mengembangkan-modal-untuk-rakyat`,
                   `3`='Berperan',
                   `2`='Cukup Berperan',
                   `1`='Kurang Berperan',
-      ),
-      `Dana-CSR-digunakan-untuk-membentuk-kegiatan-pembangunan-desa` = recode(`Dana-CSR-digunakan-untuk-membentuk-kegiatan-pembangunan-desa`, 
+                  ),
+      `Terbukanya-usaha-ekonomi-rakyat,-karena-adanya-dana-CSR` = recode(`Terbukanya-usaha-ekonomi-rakyat,-karena-adanya-dana-CSR`,
                   `3`='Berperan',
                   `2`='Cukup Berperan',
                   `1`='Kurang Berperan',
-      ),
-      `Dana-CSR-digunakan-untuk-membangun-Infrastruktur-desa-(misalnya-:-jalan)-` = recode(`Dana-CSR-digunakan-untuk-membangun-Infrastruktur-desa-(misalnya-:-jalan)-`, 
+                  ),
+      `Dana-CSR-menambah-penghasilan-masyarakat` = recode(`Dana-CSR-menambah-penghasilan-masyarakat`,
                   `3`='Berperan',
                   `2`='Cukup Berperan',
                   `1`='Kurang Berperan',
-      ),
-      `Dana-CSR-membantu-permodalan-bagi-kegiatan-BUMDes` = recode(`Dana-CSR-membantu-permodalan-bagi-kegiatan-BUMDes`, 
+                  ),
+      `Adanya-Dana-CSR-membantu-mengembangkan-modal-untuk-rakyat` = recode(`Adanya-Dana-CSR-membantu-mengembangkan-modal-untuk-rakyat`,
                   `3`='Berperan',
                   `2`='Cukup Berperan',
                   `1`='Kurang Berperan',
-      ),
+                  )
     )
-  
   data <- data %>%
     rename(
-      `Dana desa digunakan untuk membentuk kegiatan pembangunan desa (termasuk membangun usaha)` = `Dana-desa-digunakan-untuk-membentuk-kegiatan-pembangunan-desa-(termasuk-membangun-usaha)`,
-      `Dana desa digunakan untuk membangun Infrastruktur desa (misalnya : jalan) ` = `Dana-desa-digunakan-untuk-membangun-Infrastruktur-desa-(misalnya-:-jalan)-`,
-      `Dana desa membantu permodalan bagi kegiatan BUMDes` = `Dana-desa-membantu-permodalan-bagi-kegiatan-BUMDes`,
-      `Dana CSR digunakan untuk membentuk kegiatan pembangunan desa` = `Dana-CSR-digunakan-untuk-membentuk-kegiatan-pembangunan-desa`,
-      `Dana CSR digunakan untuk membangun Infrastruktur desa (misalnya : jalan) ` = `Dana-CSR-digunakan-untuk-membangun-Infrastruktur-desa-(misalnya-:-jalan)-`,
-      `Dana CSR membantu permodalan bagi kegiatan BUMDes` = `Dana-CSR-membantu-permodalan-bagi-kegiatan-BUMDes`
+      `Terbukanya usaha ekonomi rakyat, karena adanya dana desa`=`Terbukanya-usaha-ekonomi-rakyat,-karena-adanya-dana-desa`,
+      `Dana desa menambah penghasilan masyarakat`=`Dana-desa-menambah-penghasilan-masyarakat`,
+      `Adanya Dana desa membantu mengembangkan modal untuk rakyat`=`Adanya-Dana-desa-membantu-mengembangkan-modal-untuk-rakyat`,
+      `Terbukanya usaha ekonomi rakyat, karena adanya dana CSR`=`Terbukanya-usaha-ekonomi-rakyat,-karena-adanya-dana-CSR`,
+      `Dana CSR menambah penghasilan masyarakat`=`Dana-CSR-menambah-penghasilan-masyarakat`,
+      `Adanya Dana CSR membantu mengembangkan modal untuk rakyat`=`Adanya-Dana-CSR-membantu-mengembangkan-modal-untuk-rakyat`,
     )
   
-  datatable(data, selection = 'none', rownames = FALSE, options = list(
+  datatable(data, selection = 'none', rownames = FALSE, , options = list(
     headerCallback = JS(
       "function(thead, data, start, end, display){",
       "  if (!$('#checkboxLoaded').length) {",
@@ -56,41 +55,41 @@ output$data_table_PeningkatanPAD <- renderDT({
         <th style=\"border: none; padding: 0px 10px 0px 14px;\">
         </th> 
         <th style=\"border: none; padding: 0px 10px 0px 14px;\">
-          <input style=\"transform: scale(1.2);\" type=\"checkbox\" id=\"DesaPembagunan\">
+          <input style=\"transform: scale(1.2);\" type=\"checkbox\" id=\"DesaEkonomi\">
         </th> 
         <th style=\"border: none; padding: 0px 10px 0px 14px;\">
-          <input style=\"transform: scale(1.2);\" type=\"checkbox\" id=\"DesaInfrastruktur\">
+          <input style=\"transform: scale(1.2);\" type=\"checkbox\" id=\"DesaPengahasilan\">
         </th> 
         <th style=\"border: none; padding: 0px 10px 0px 14px;\">
-          <input style=\"transform: scale(1.2);\" type=\"checkbox\" id=\"DesaBumdes\">
+          <input style=\"transform: scale(1.2);\" type=\"checkbox\" id=\"DesaModal\">
         </th> 
         <th style=\"border: none; padding: 0px 10px 0px 14px;\">
-          <input style=\"transform: scale(1.2);\" type=\"checkbox\" id=\"CSRPembangunan\">
+          <input style=\"transform: scale(1.2);\" type=\"checkbox\" id=\"CSREkonomi\">
         </th> 
         <th style=\"border: none; padding: 0px 10px 0px 14px;\">
-          <input style=\"transform: scale(1.2);\" type=\"checkbox\" id=\"CSRInfrastruktur\">
+          <input style=\"transform: scale(1.2);\" type=\"checkbox\" id=\"CSRPenghasilan\">
         </th> 
         <th style=\"border: none; padding: 0px 10px 0px 14px;\">
-          <input style=\"transform: scale(1.2);\" type=\"checkbox\" id=\"CSRBumdes\">
+          <input style=\"transform: scale(1.2);\" type=\"checkbox\" id=\"CSRModal\">
         </th>
       </tr>`);",
-      "  $('#DesaPembagunan').on('click', function(){",
-      "    Shiny.setInputValue('DesaPembagunan', this.checked);",
+      "  $('#DesaEkonomi').on('click', function(){",
+      "    Shiny.setInputValue('DesaEkonomi', this.checked);",
       "  });",
-      "  $('#DesaInfrastruktur').on('click', function(){",
-      "    Shiny.setInputValue('DesaInfrastruktur', this.checked);",
+      "  $('#DesaPengahasilan').on('click', function(){",
+      "    Shiny.setInputValue('DesaPengahasilan', this.checked);",
       "  });",
-      "  $('#DesaBumdes').on('click', function(){",
-      "    Shiny.setInputValue('DesaBumdes', this.checked);",
+      "  $('#DesaModal').on('click', function(){",
+      "    Shiny.setInputValue('DesaModal', this.checked);",
       "  });",
-      "  $('#CSRPembangunan').on('click', function(){",
-      "    Shiny.setInputValue('CSRPembangunan', this.checked);",
+      "  $('#CSREkonomi').on('click', function(){",
+      "    Shiny.setInputValue('CSREkonomi', this.checked);",
       "  });",
-      "  $('#CSRInfrastruktur').on('click', function(){",
-      "    Shiny.setInputValue('CSRInfrastruktur', this.checked);",
+      "  $('#CSRPenghasilan').on('click', function(){",
+      "    Shiny.setInputValue('CSRPenghasilan', this.checked);",
       "  });",
-      "  $('#CSRBumdes').on('click', function(){",
-      "    Shiny.setInputValue('CSRBumdes', this.checked);",
+      "  $('#CSRModal').on('click', function(){",
+      "    Shiny.setInputValue('CSRModal', this.checked);",
       "  });",
       "  }",
       "}"
@@ -104,32 +103,34 @@ output$data_table_PeningkatanPAD <- renderDT({
   ))
 })
 
+
+
 # Dana Desa
-output$barPlotPeningkatanPADDanaDesa <- renderPlot({
-  dana_data <- read_csv(pathPAD) %>%
+output$barPlotPeningkatanPerekonomianDanaDesa <- renderPlot({
+  dana_data <- read_csv(pathPerekonomian) %>%
     rename(
-      `Dana Kegiatan Pembangunan Desa` = `Dana-desa-digunakan-untuk-membentuk-kegiatan-pembangunan-desa-(termasuk-membangun-usaha)`,
-      `Dana Pembagunan Infrastruktur` = `Dana-desa-digunakan-untuk-membangun-Infrastruktur-desa-(misalnya-:-jalan)-`,
-      `Dana desa membantu permodalan \nbagi kegiatan BUMDes` = `Dana-desa-membantu-permodalan-bagi-kegiatan-BUMDes`
+      `Peran Dana Desa Untuk Usaha Rakyat` = `Terbukanya-usaha-ekonomi-rakyat,-karena-adanya-dana-desa`,
+      `Peran Dana Desa Dalam \nMenambah Penghasilan Rakyat` = `Dana-desa-menambah-penghasilan-masyarakat`,
+      `Peran Dana Desa Untuk Modal Rakyat` = `Adanya-Dana-desa-membantu-mengembangkan-modal-untuk-rakyat`
     ) %>%
     mutate(
-      `Dana Kegiatan Pembangunan Desa` = recode(`Dana Kegiatan Pembangunan Desa`,
-                              `3` = "Berperan",
-                              `2` = "Cukup Berperan",
-                              `1` = "Kurang Berperan"),
-      `Dana Pembagunan Infrastruktur` = recode(`Dana Pembagunan Infrastruktur`,
-                                      `3` = "Berperan",
-                                      `2` = "Cukup Berperan",
-                                      `1` = "Kurang Berperan"),
-      `Dana desa membantu permodalan \nbagi kegiatan BUMDes` = recode(`Dana desa membantu permodalan \nbagi kegiatan BUMDes`,
-                           `3` = "Berperan",
-                           `2` = "Cukup Berperan",
-                           `1` = "Kurang Berperan")
+      `Peran Dana Desa Untuk Usaha Rakyat` = recode(`Peran Dana Desa Untuk Usaha Rakyat`,
+                                                `3` = "Berperan",
+                                                `2` = "Cukup Berperan",
+                                                `1` = "Kurang Berperan"),
+      `Peran Dana Desa Dalam \nMenambah Penghasilan Rakyat` = recode(`Peran Dana Desa Dalam \nMenambah Penghasilan Rakyat`,
+                                               `3` = "Berperan",
+                                               `2` = "Cukup Berperan",
+                                               `1` = "Kurang Berperan"),
+      `Peran Dana Desa Untuk Modal Rakyat` = recode(`Peran Dana Desa Untuk Modal Rakyat`,
+                                                                    `3` = "Berperan",
+                                                                    `2` = "Cukup Berperan",
+                                                                    `1` = "Kurang Berperan")
     )
   
   # Convert to long format
   dana_long <- dana_data %>%
-    pivot_longer(cols = c(`Dana Kegiatan Pembangunan Desa`, `Dana Pembagunan Infrastruktur`, `Dana desa membantu permodalan \nbagi kegiatan BUMDes`),
+    pivot_longer(cols = c(`Peran Dana Desa Untuk Usaha Rakyat`, `Peran Dana Desa Dalam \nMenambah Penghasilan Rakyat`, `Peran Dana Desa Untuk Modal Rakyat`),
                  names_to = "Variable",
                  values_to = "Score")
   
@@ -155,92 +156,24 @@ output$barPlotPeningkatanPADDanaDesa <- renderPlot({
     scale_y_continuous(breaks = seq(0, max(dana_count$count, na.rm = TRUE), by = 1)) # Adding manual breaks for y-axis
 })
 
-output$analysisDanaKegiatanPembangunanDesa <- renderText({
+output$analysisPeranDanaDesaUntukUsahaRakyat <- renderText({
   # Membaca data
-  dana_data <- read_csv(pathPAD) %>%
-    select(`Dana Kegiatan Pembangunan Desa` = `Dana-desa-digunakan-untuk-membentuk-kegiatan-pembangunan-desa-(termasuk-membangun-usaha)`) %>%
-    mutate(`Dana Kegiatan Pembangunan Desa` = recode(`Dana Kegiatan Pembangunan Desa`,
-                                   `3` = "Berperan",
-                                   `2` = "Cukup Berperan",
-                                   `1` = "Kurang Berperan"))
-  
-  # Menghitung jumlah dan persentase
-  analysis <- dana_data %>%
-    count(`Dana Kegiatan Pembangunan Desa`) %>%
-    mutate(percentage = n / sum(n) * 100)
-  
-  # Fungsi untuk mendapatkan nilai dengan penanganan NA
-  get_value <- function(df, category, column) {
-    value <- df %>%
-      filter(`Dana Kegiatan Pembangunan Desa` == category) %>%
-      pull({{ column }})
-    if (length(value) == 0) return(0)
-    return(value)
-  }
-  
-  # Mendapatkan jumlah dan persentase masing-masing kategori
-  berperan_count <- get_value(analysis, "Berperan", n)
-  cukup_berperan_count <- get_value(analysis, "Cukup Berperan", n)
-  kurang_berperan_count <- get_value(analysis, "Kurang Berperan", n)
-  
-  berperan_percentage <- get_value(analysis, "Berperan", percentage)
-  cukup_berperan_percentage <- get_value(analysis, "Cukup Berperan", percentage)
-  kurang_berperan_percentage <- get_value(analysis, "Kurang Berperan", percentage)
-  
-  # Menentukan kategori dengan persentase tertinggi
-  highest <- analysis %>%
-    filter(percentage == max(percentage)) %>%
-    pull(`Dana Kegiatan Pembangunan Desa`)
-  
-  highest_percentage <- max(berperan_percentage, cukup_berperan_percentage, kurang_berperan_percentage)
-  
-  # Menyusun kesimpulan dan saran
-  if (highest == "Berperan") {
-    conclusion <- "Dari hasil survey, banyak masyarakat memberikan respon \"Berperan\" tentang penggunaan dana desa untuk membentuk kegiatan pembangunan desa."
-    solution <- "Pemerintah desa dapat melanjutkan dan meningkatkan program agar hasilnya lebih maksimal."
-    if(cukup_berperan_count > 0 || kurang_berperan_count > 0){
-      solution <- paste(solution, " Karena masih terdapat masyarakat yang merespon Cukup Berperan ataupun Kurang Berperan")
-    }
-  } else if (highest == "Cukup Berperan") {
-    conclusion <- "Dari hasil survey, banyak masyarakat memberikan respon \"Cukup Berperan\" tentang penggunaan dana desa untuk membentuk kegiatan pembangunan desa."
-    solution <- "Pemerintah desa harus melakukan evaluasi dan meningkatkan program agar hasilnya lebih maksimal."
-  } else {
-    conclusion <- "Dari hasil survey, banyak masyarakat memberikan respon \"Kurang Berperan\" tentang penggunaan dana desa untuk membentuk kegiatan pembangunan desa."
-    solution <- "Pemerintah desa harus melakukan evaluasi dan meningkatkan program agar hasilnya lebih maksimal."
-  }
-  
-  # Menyusun hasil analisis
-  analysis_text <- paste(
-    paste("Berperan:", berperan_count, "orang (", round(berperan_percentage, 1), "%), "),
-    paste("Cukup Berperan:", cukup_berperan_count, "orang (", round(cukup_berperan_percentage, 1), "%), "),
-    paste("Kurang berperan:", kurang_berperan_count, "orang (", round(kurang_berperan_percentage, 1), "%)"),
-    ".\n\n",
-    conclusion,
-    solution,
-    sep = "\n"
-  )
-  
-  return(analysis_text)
-})
-
-output$analysisDanaPembagunanInfrastruktur <- renderText({
-  # Membaca data
-  dana_data <- read_csv(pathPAD) %>%
-    select(`Dana Pembagunan Infrastruktur` = `Dana-desa-digunakan-untuk-membangun-Infrastruktur-desa-(misalnya-:-jalan)-`,) %>%
-    mutate(`Dana Pembagunan Infrastruktur` = recode(`Dana Pembagunan Infrastruktur`,
+  dana_data <- read_csv(pathPerekonomian) %>%
+    select(`Peran Dana Desa Untuk Usaha Rakyat` = `Terbukanya-usaha-ekonomi-rakyat,-karena-adanya-dana-desa`) %>%
+    mutate(`Peran Dana Desa Untuk Usaha Rakyat` = recode(`Peran Dana Desa Untuk Usaha Rakyat`,
                                                      `3` = "Berperan",
                                                      `2` = "Cukup Berperan",
                                                      `1` = "Kurang Berperan"))
   
   # Menghitung jumlah dan persentase
   analysis <- dana_data %>%
-    count(`Dana Pembagunan Infrastruktur`) %>%
+    count(`Peran Dana Desa Untuk Usaha Rakyat`) %>%
     mutate(percentage = n / sum(n) * 100)
   
   # Fungsi untuk mendapatkan nilai dengan penanganan NA
   get_value <- function(df, category, column) {
     value <- df %>%
-      filter(`Dana Pembagunan Infrastruktur` == category) %>%
+      filter(`Peran Dana Desa Untuk Usaha Rakyat` == category) %>%
       pull({{ column }})
     if (length(value) == 0) return(0)
     return(value)
@@ -258,25 +191,93 @@ output$analysisDanaPembagunanInfrastruktur <- renderText({
   # Menentukan kategori dengan persentase tertinggi
   highest <- analysis %>%
     filter(percentage == max(percentage)) %>%
-    pull(`Dana Pembagunan Infrastruktur`)
+    pull(`Peran Dana Desa Untuk Usaha Rakyat`)
   
   highest_percentage <- max(berperan_percentage, cukup_berperan_percentage, kurang_berperan_percentage)
   
   # Menyusun kesimpulan dan saran
   if (highest == "Berperan") {
-    conclusion <- "Dari hasil survey, banyak masyarakat memberikan respon \"Berperan\" tentang penggunaan dana desa untuk pembangunan infrastruktur desa"
+    conclusion <- "Dari hasil survey, banyak masyarakat memberikan respon \"Berperan\" tentang penggunaan dana desa dalam mendukung terbuknya usaha ekonomi masyarakat."
     solution <- "Pemerintah desa dapat melanjutkan dan meningkatkan program agar hasilnya lebih maksimal."
     if(cukup_berperan_count > 0 || kurang_berperan_count > 0){
       solution <- paste(solution, " Karena masih terdapat masyarakat yang merespon Cukup Berperan ataupun Kurang Berperan")
     }
   } else if (highest == "Cukup Berperan") {
-    conclusion <- "Dari hasil survey, banyak masyarakat memberikan respon \"Cukup Berperan\" tentang penggunaan dana desa untuk pembangunan infrastruktur desa"
+    conclusion <- "Dari hasil survey, banyak masyarakat memberikan respon \"Cukup Berperan\" tentang penggunaan dana desa dalam mendukung terbuknya usaha ekonomi masyarakat."
     solution <- "Pemerintah desa harus melakukan evaluasi dan meningkatkan program agar hasilnya lebih maksimal."
   } else {
-    conclusion <- "Dari hasil survey, banyak masyarakat memberikan respon \"Kurang Berperan\" tentang penggunaan dana desa untuk pembangunan infrastruktur desa"
+    conclusion <- "Dari hasil survey, banyak masyarakat memberikan respon \"Kurang Berperan\" tentang penggunaan dana desa dalam mendukung terbuknya usaha ekonomi masyarakat."
     solution <- "Pemerintah desa harus melakukan evaluasi dan meningkatkan program agar hasilnya lebih maksimal."
   }
   
+  # Menyusun hasil analisis
+  analysis_text <- paste(
+    paste("Berperan:", berperan_count, "orang (", round(berperan_percentage, 1), "%), "),
+    paste("Cukup Berperan:", cukup_berperan_count, "orang (", round(cukup_berperan_percentage, 1), "%), "),
+    paste("Kurang Berperan:", kurang_berperan_count, "orang (", round(kurang_berperan_percentage, 1), "%)"),
+    ".\n\n",
+    conclusion,
+    solution,
+    sep = "\n"
+  )
+  
+  return(analysis_text)
+})
+
+output$analysisPeranDanaDesaDalamMenambahPenghasilanRakyat <- renderText({
+  # Membaca data
+  dana_data <- read_csv(pathPerekonomian) %>%
+    select(PeranDanaDesaDalamMenambahPenghasilanRakyat = `Dana-desa-menambah-penghasilan-masyarakat`) %>%
+    mutate(PeranDanaDesaDalamMenambahPenghasilanRakyat = recode(PeranDanaDesaDalamMenambahPenghasilanRakyat,
+                                                     `3` = "Berperan",
+                                                     `2` = "Cukup Berperan",
+                                                     `1` = "Kurang Berperan"))
+
+  # Menghitung jumlah dan persentase
+  analysis <- dana_data %>%
+    count(PeranDanaDesaDalamMenambahPenghasilanRakyat) %>%
+    mutate(percentage = n / sum(n) * 100)
+
+  # Fungsi untuk mendapatkan nilai dengan penanganan NA
+  get_value <- function(df, category, column) {
+    value <- df %>%
+      filter(PeranDanaDesaDalamMenambahPenghasilanRakyat == category) %>%
+      pull({{ column }})
+    if (length(value) == 0) return(0)
+    return(value)
+  }
+
+  # Mendapatkan jumlah dan persentase masing-masing kategori
+  berperan_count <- get_value(analysis, "Berperan", n)
+  cukup_berperan_count <- get_value(analysis, "Cukup Berperan", n)
+  kurang_berperan_count <- get_value(analysis, "Kurang Berperan", n)
+
+  berperan_percentage <- get_value(analysis, "Berperan", percentage)
+  cukup_berperan_percentage <- get_value(analysis, "Cukup Berperan", percentage)
+  kurang_berperan_percentage <- get_value(analysis, "Kurang Berperan", percentage)
+
+  # Menentukan kategori dengan persentase tertinggi
+  highest <- analysis %>%
+    filter(percentage == max(percentage)) %>%
+    pull(PeranDanaDesaDalamMenambahPenghasilanRakyat)
+
+  highest_percentage <- max(berperan_percentage, cukup_berperan_percentage, kurang_berperan_percentage)
+
+  # Menyusun kesimpulan dan saran
+  if (highest == "Berperan") {
+    conclusion <- "Dari hasil survey, banyak masyarakat memberikan respon \"Berperan\" tentang penggunaan dana desa dalam menambah penghasilan masyarakat."
+    solution <- "Pemerintah desa dapat melanjutkan dan meningkatkan program agar hasilnya lebih maksimal."
+    if(cukup_berperan_count > 0 || kurang_berperan_count > 0){
+      solution <- paste(solution, " Karena masih terdapat masyarakat yang merespon Cukup Berperan ataupun Kurang Berperan")
+    }
+  } else if (highest == "Cukup Berperan") {
+    conclusion <- "Dari hasil survey, banyak masyarakat memberikan respon \"Cukup Berperan\" tentang penggunaan dana desa dalam menambah penghasilan masyarakat."
+    solution <- "Pemerintah desa harus melakukan evaluasi dan meningkatkan program agar hasilnya lebih maksimal."
+  } else {
+    conclusion <- "Dari hasil survey, banyak masyarakat memberikan respon \"Kurang Berperan\" tentang penggunaan dana desa dalam menambah penghasilan masyarakat."
+    solution <- "Pemerintah desa harus melakukan evaluasi dan meningkatkan program agar hasilnya lebih maksimal."
+  }
+
   # Menyusun hasil analisis
   analysis_text <- paste(
     paste("Berperan:", berperan_count, "orang (", round(berperan_percentage, 1), "%), "),
@@ -287,28 +288,28 @@ output$analysisDanaPembagunanInfrastruktur <- renderText({
     solution,
     sep = "\n"
   )
-  
+
   return(analysis_text)
 })
 
-output$analysisDanaPemodalanBUMDes <- renderText({
+output$analysisPeranDanaDesaUntukModalRakyat <- renderText({
   # Membaca data
-  dana_data <- read_csv(pathPAD) %>%
-    select(`Dana desa membantu permodalan \nbagi kegiatan BUMDes` = `Dana-desa-membantu-permodalan-bagi-kegiatan-BUMDes`) %>%
-    mutate(`Dana desa membantu permodalan \nbagi kegiatan BUMDes` = recode(`Dana desa membantu permodalan \nbagi kegiatan BUMDes`,
-                                                    `3` = "Berperan",
-                                                    `2` = "Cukup Berperan",
-                                                    `1` = "Kurang Berperan"))
+  dana_data <- read_csv(pathPerekonomian) %>%
+    select(PeranDanaDesaUntukModalRakyat = `Adanya-Dana-desa-membantu-mengembangkan-modal-untuk-rakyat`) %>%
+    mutate(PeranDanaDesaUntukModalRakyat = recode(PeranDanaDesaUntukModalRakyat,
+                                                     `3` = "Berperan",
+                                                     `2` = "Cukup Berperan",
+                                                     `1` = "Kurang Berperan"))
   
   # Menghitung jumlah dan persentase
   analysis <- dana_data %>%
-    count(`Dana desa membantu permodalan \nbagi kegiatan BUMDes`) %>%
+    count(PeranDanaDesaUntukModalRakyat) %>%
     mutate(percentage = n / sum(n) * 100)
   
   # Fungsi untuk mendapatkan nilai dengan penanganan NA
   get_value <- function(df, category, column) {
     value <- df %>%
-      filter(`Dana desa membantu permodalan \nbagi kegiatan BUMDes` == category) %>%
+      filter(PeranDanaDesaUntukModalRakyat == category) %>%
       pull({{ column }})
     if (length(value) == 0) return(0)
     return(value)
@@ -326,27 +327,22 @@ output$analysisDanaPemodalanBUMDes <- renderText({
   # Menentukan kategori dengan persentase tertinggi
   highest <- analysis %>%
     filter(percentage == max(percentage)) %>%
-    pull(`Dana desa membantu permodalan \nbagi kegiatan BUMDes`)
+    pull(PeranDanaDesaUntukModalRakyat)
   
   highest_percentage <- max(berperan_percentage, cukup_berperan_percentage, kurang_berperan_percentage)
   
-  
-  # paste("Berperan:", berperan_count, "orang (", round(berperan_percentage, 1), "%), "),
-  # paste("Cukup Berperan:", cukup_berperan_count, "orang (", round(cukup_berperan_percentage, 1), "%), "),
-  # paste("Kurang Berperan:", kurang_berperan_count, "orang (", round(kurang_berperan_percentage, 1), "%)"),
-  
   # Menyusun kesimpulan dan saran
   if (highest == "Berperan") {
-    conclusion <- "Dari hasil survey, banyak masyarakat memberikan respon \"Berperan\" tentang penggunaan dana desa untuk membantu permodalan bagi kegiatan BUMDes"
+    conclusion <- "Dari hasil survey, banyak masyarakat memberikan respon \"Berperan\" tentang penggunaan dana desa untuk membantu mengembangkang modal untuk rakyat."
     solution <- "Pemerintah desa dapat melanjutkan dan meningkatkan program agar hasilnya lebih maksimal."
     if(cukup_berperan_count > 0 || kurang_berperan_count > 0){
       solution <- paste(solution, " Karena masih terdapat masyarakat yang merespon Cukup Berperan ataupun Kurang Berperan")
     }
   } else if (highest == "Cukup Berperan") {
-    conclusion <- "Dari hasil survey, banyak masyarakat memberikan respon \"Cukup Berperan\" tentang penggunaan dana desa untuk membantu permodalan bagi kegiatan BUMDes"
+    conclusion <- "Dari hasil survey, banyak masyarakat memberikan respon \"Cukup Berperan\" tentang penggunaan dana desa untuk membantu mengembangkang modal untuk rakyat."
     solution <- "Pemerintah desa harus melakukan evaluasi dan meningkatkan program agar hasilnya lebih maksimal."
   } else {
-    conclusion <- "Dari hasil survey, banyak masyarakat memberikan respon \"Kurang Berperan\" tentang penggunaan dana desa untuk membantu permodalan bagi kegiatan BUMDes"
+    conclusion <- "Dari hasil survey, banyak masyarakat memberikan respon \"Kurang Berperan\" tentang penggunaan dana desa untuk membantu mengembangkang modal untuk rakyat."
     solution <- "Pemerintah desa harus melakukan evaluasi dan meningkatkan program agar hasilnya lebih maksimal."
   }
   
@@ -365,31 +361,34 @@ output$analysisDanaPemodalanBUMDes <- renderText({
 })
 
 # CSR
-output$barPlotPeningkatanPADCSR <- renderPlot({
-  dana_data <- read_csv(pathPAD) %>%
+output$barPlotPeningkatanPerekonomianCSR <- renderPlot({
+  
+  dana_data <- read_csv(pathPerekonomian) %>%
     rename(
-      `Dana Kegiatan Pembangunan Desa` = `Dana-CSR-digunakan-untuk-membentuk-kegiatan-pembangunan-desa`,
-      `Dana Pembagunan Infrastruktur` = `Dana-CSR-digunakan-untuk-membangun-Infrastruktur-desa-(misalnya-:-jalan)-`,
-      `Dana Untuk Membantu Permodalan BUMDes` = `Dana-CSR-membantu-permodalan-bagi-kegiatan-BUMDes`
-    ) %>%
+      `Terbukanya usaha ekonomi rakyat, \nkarena adanya dana CSR` = `Terbukanya-usaha-ekonomi-rakyat,-karena-adanya-dana-CSR`,
+      `Dana CSR menambah penghasilan masyarakat` = `Dana-CSR-menambah-penghasilan-masyarakat`,
+      `Adanya Dana CSR membantu \nmengembangkan modal untuk rakyat` = `Adanya-Dana-CSR-membantu-mengembangkan-modal-untuk-rakyat`,
+    )%>%
     mutate(
-      `Dana Kegiatan Pembangunan Desa` = recode(`Dana Kegiatan Pembangunan Desa`,
-                                                `3` = "Berperan",
-                                                `2` = "Cukup Berperan",
-                                                `1` = "Kurang Berperan"),
-      `Dana Pembagunan Infrastruktur` = recode(`Dana Pembagunan Infrastruktur`,
-                                               `3` = "Berperan",
-                                               `2` = "Cukup Berperan",
-                                               `1` = "Kurang Berperan"),
-      `Dana Untuk Membantu Permodalan BUMDes` = recode(`Dana Untuk Membantu Permodalan BUMDes`,
-                                                                    `3` = "Berperan",
-                                                                    `2` = "Cukup Berperan",
-                                                                    `1` = "Kurang Berperan")
+      `Terbukanya usaha ekonomi rakyat, \nkarena adanya dana CSR` = recode(`Terbukanya usaha ekonomi rakyat, \nkarena adanya dana CSR`,
+                  `3`='Berperan',
+                  `2`='Cukup Berperan',
+                  `1`='Kurang Berperan',
+                  ),
+      `Dana CSR menambah penghasilan masyarakat` = recode(`Dana CSR menambah penghasilan masyarakat`,
+                  `3`='Berperan',
+                  `2`='Cukup Berperan',
+                  `1`='Kurang Berperan',
+                  ),
+      `Adanya Dana CSR membantu \nmengembangkan modal untuk rakyat` = recode(`Adanya Dana CSR membantu \nmengembangkan modal untuk rakyat`,
+                  `3`='Berperan',
+                  `2`='Cukup Berperan',
+                  `1`='Kurang Berperan',
+                  ),
     )
   
-  # Convert to long format
   dana_long <- dana_data %>%
-    pivot_longer(cols = c(`Dana Kegiatan Pembangunan Desa`, `Dana Pembagunan Infrastruktur`, `Dana Untuk Membantu Permodalan BUMDes`),
+    pivot_longer(cols = c(`Terbukanya usaha ekonomi rakyat, \nkarena adanya dana CSR`, `Dana CSR menambah penghasilan masyarakat`, `Adanya Dana CSR membantu \nmengembangkan modal untuk rakyat`),
                  names_to = "Variable",
                  values_to = "Score")
   
@@ -407,7 +406,7 @@ output$barPlotPeningkatanPADCSR <- renderPlot({
     geom_bar(stat = "identity", position = position_dodge()) +
     theme_minimal() +
     scale_fill_manual(values = colors) +
-    labs(title = "Pengaruh Dana CSR pada Kegiatan Pembangunan Desa",
+    labs(title = "Pengaruh Dana Desa pada Kegiatan Pembangunan Desa",
          x = "Variabel",
          y = "Jumlah Respon",
          fill = "Pengaruh") +
@@ -415,24 +414,24 @@ output$barPlotPeningkatanPADCSR <- renderPlot({
     scale_y_continuous(breaks = seq(0, max(dana_count$count, na.rm = TRUE), by = 1)) # Adding manual breaks for y-axis
 })
 
-output$analysisDanaCSRKegiatanPembangunanDesa <- renderText({
+output$analysisPeranDanaCSRUntukUsahaRakyat <- renderText({
   # Membaca data
-  dana_data <- read_csv(pathPAD) %>%
-    select(`Dana Kegiatan Pembangunan Desa` = `Dana-CSR-digunakan-untuk-membentuk-kegiatan-pembangunan-desa`) %>%
-    mutate(`Dana Kegiatan Pembangunan Desa` = recode(`Dana Kegiatan Pembangunan Desa`,
+  dana_data <- read_csv(pathPerekonomian) %>%
+    select(PeranDanaCSRUntukUsahaRakyat = `Terbukanya-usaha-ekonomi-rakyat,-karena-adanya-dana-CSR`) %>%
+    mutate(PeranDanaCSRUntukUsahaRakyat = recode(PeranDanaCSRUntukUsahaRakyat,
                                                      `3` = "Berperan",
                                                      `2` = "Cukup Berperan",
                                                      `1` = "Kurang Berperan"))
   
   # Menghitung jumlah dan persentase
   analysis <- dana_data %>%
-    count(`Dana Kegiatan Pembangunan Desa`) %>%
+    count(PeranDanaCSRUntukUsahaRakyat) %>%
     mutate(percentage = n / sum(n) * 100)
   
   # Fungsi untuk mendapatkan nilai dengan penanganan NA
   get_value <- function(df, category, column) {
     value <- df %>%
-      filter(`Dana Kegiatan Pembangunan Desa` == category) %>%
+      filter(PeranDanaCSRUntukUsahaRakyat == category) %>%
       pull({{ column }})
     if (length(value) == 0) return(0)
     return(value)
@@ -450,22 +449,22 @@ output$analysisDanaCSRKegiatanPembangunanDesa <- renderText({
   # Menentukan kategori dengan persentase tertinggi
   highest <- analysis %>%
     filter(percentage == max(percentage)) %>%
-    pull(`Dana Kegiatan Pembangunan Desa`)
+    pull(PeranDanaCSRUntukUsahaRakyat)
   
   highest_percentage <- max(berperan_percentage, cukup_berperan_percentage, kurang_berperan_percentage)
-
+  
   # Menyusun kesimpulan dan saran
   if (highest == "Berperan") {
-    conclusion <- "Dari hasil survey, banyak masyarakat memberikan respon \"Berperan\" tentang penggunaan dana CSR untuk membentuk kegiatan pembangunan desa."
+    conclusion <- "Dari hasil survey, banyak masyarakat memberikan respon \"Berperan\" tentang penggunaan danadana CSR dalam menambah penghasilan masyarakat."
     solution <- "Pemerintah desa dapat melanjutkan dan meningkatkan program agar hasilnya lebih maksimal."
     if(cukup_berperan_count > 0 || kurang_berperan_count > 0){
       solution <- paste(solution, " Karena masih terdapat masyarakat yang merespon Cukup Berperan ataupun Kurang Berperan")
     }
   } else if (highest == "Cukup Berperan") {
-    conclusion <- "Dari hasil survey, banyak masyarakat memberikan respon \"Cukup Berperan\" tentang penggunaan dana CSR untuk membentuk kegiatan pembangunan desa."
+    conclusion <- "Dari hasil survey, banyak masyarakat memberikan respon \"Cukup Berperan\" tentang penggunaan danadana CSR dalam menambah penghasilan masyarakat."
     solution <- "Pemerintah desa harus melakukan evaluasi dan meningkatkan program agar hasilnya lebih maksimal."
   } else {
-    conclusion <- "Dari hasil survey, banyak masyarakat memberikan respon \"Kurang Berperan\" tentang penggunaan dana CSR untuk membentuk kegiatan pembangunan desa."
+    conclusion <- "Dari hasil survey, banyak masyarakat memberikan respon \"Kurang Berperan\" tentang penggunaan danadana CSR dalam menambah penghasilan masyarakat."
     solution <- "Pemerintah desa harus melakukan evaluasi dan meningkatkan program agar hasilnya lebih maksimal."
   }
   
@@ -483,23 +482,24 @@ output$analysisDanaCSRKegiatanPembangunanDesa <- renderText({
   return(analysis_text)
 })
 
-output$analysisDanaCSRPembagunanInfra <- renderText({
+output$analysisPeranDanaCSRDalamMenambahPenghasilanRakyat <- renderText({
   # Membaca data
-  dana_data <- read_csv(pathPAD) %>%
-    select(`Dana Pembagunan Infrastruktur` = `Dana-CSR-digunakan-untuk-membangun-Infrastruktur-desa-(misalnya-:-jalan)-`,) %>%
-    mutate(`Dana Pembagunan Infrastruktur` = recode(`Dana Pembagunan Infrastruktur`,
-                                                    `3` = "Berperan",
-                                                    `2` = "Cukup Berperan",
-                                                    `1` = "Kurang Berperan"))
+  dana_data <- read_csv(pathPerekonomian) %>%
+    select(PeranDanaCSRDalamMenambahPenghasilanRakyat = `Dana-CSR-menambah-penghasilan-masyarakat`) %>%
+    mutate(PeranDanaCSRDalamMenambahPenghasilanRakyat = recode(PeranDanaCSRDalamMenambahPenghasilanRakyat,
+                                                     `3` = "Berperan",
+                                                     `2` = "Cukup Berperan",
+                                                     `1` = "Kurang Berperan"))
+  
   # Menghitung jumlah dan persentase
   analysis <- dana_data %>%
-    count(`Dana Pembagunan Infrastruktur`) %>%
+    count(PeranDanaCSRDalamMenambahPenghasilanRakyat) %>%
     mutate(percentage = n / sum(n) * 100)
   
   # Fungsi untuk mendapatkan nilai dengan penanganan NA
   get_value <- function(df, category, column) {
     value <- df %>%
-      filter(`Dana Pembagunan Infrastruktur` == category) %>%
+      filter(PeranDanaCSRDalamMenambahPenghasilanRakyat == category) %>%
       pull({{ column }})
     if (length(value) == 0) return(0)
     return(value)
@@ -517,22 +517,22 @@ output$analysisDanaCSRPembagunanInfra <- renderText({
   # Menentukan kategori dengan persentase tertinggi
   highest <- analysis %>%
     filter(percentage == max(percentage)) %>%
-    pull(`Dana Pembagunan Infrastruktur`)
+    pull(PeranDanaCSRDalamMenambahPenghasilanRakyat)
   
   highest_percentage <- max(berperan_percentage, cukup_berperan_percentage, kurang_berperan_percentage)
   
   # Menyusun kesimpulan dan saran
   if (highest == "Berperan") {
-    conclusion <- "Dari hasil survey, banyak masyarakat memberikan respon \"Berperan\" tentang penggunaan dana desa untuk pembangunan infrastruktur desa"
+    conclusion <- "Dari hasil survey, banyak masyarakat memberikan respon \"Berperan\" tentang penggunaan dana CSR dalam menambah penghasilan masyarakat."
     solution <- "Pemerintah desa dapat melanjutkan dan meningkatkan program agar hasilnya lebih maksimal."
     if(cukup_berperan_count > 0 || kurang_berperan_count > 0){
       solution <- paste(solution, " Karena masih terdapat masyarakat yang merespon Cukup Berperan ataupun Kurang Berperan")
     }
   } else if (highest == "Cukup Berperan") {
-    conclusion <- "Dari hasil survey, banyak masyarakat memberikan respon \"Cukup Berperan\" tentang penggunaan dana desa untuk pembangunan infrastruktur desa"
+    conclusion <- "Dari hasil survey, banyak masyarakat memberikan respon \"Cukup Berperan\" tentang penggunaan dana CSR dalam menambah penghasilan masyarakat."
     solution <- "Pemerintah desa harus melakukan evaluasi dan meningkatkan program agar hasilnya lebih maksimal."
   } else {
-    conclusion <- "Dari hasil survey, banyak masyarakat memberikan respon \"Kurang Berperan\" tentang penggunaan dana desa untuk pembangunan infrastruktur desa"
+    conclusion <- "Dari hasil survey, banyak masyarakat memberikan respon \"Kurang Berperan\" tentang penggunaan dana CSR dalam menambah penghasilan masyarakat."
     solution <- "Pemerintah desa harus melakukan evaluasi dan meningkatkan program agar hasilnya lebih maksimal."
   }
   
@@ -550,24 +550,24 @@ output$analysisDanaCSRPembagunanInfra <- renderText({
   return(analysis_text)
 })
 
-output$analysisDanaCSRPemodalanBUMDes <- renderText({
+output$analysisPeranDanaCSRUntukModalRakyat <- renderText({
   # Membaca data
-  dana_data <- read_csv(pathPAD) %>%
-    select(`Dana desa membantu permodalan \nbagi kegiatan BUMDes` = `Dana-CSR-membantu-permodalan-bagi-kegiatan-BUMDes`) %>%
-    mutate(`Dana desa membantu permodalan \nbagi kegiatan BUMDes` = recode(`Dana desa membantu permodalan \nbagi kegiatan BUMDes`,
-                                                                         `3` = "Berperan",
-                                                                         `2` = "Cukup Berperan",
-                                                                         `1` = "Kurang Berperan"))
+  dana_data <- read_csv(pathPerekonomian) %>%
+    select(PeranDanaCSRUntukModalRakyat = `Adanya-Dana-CSR-membantu-mengembangkan-modal-untuk-rakyat`) %>%
+    mutate(PeranDanaCSRUntukModalRakyat = recode(PeranDanaCSRUntukModalRakyat,
+                                                     `3` = "Berperan",
+                                                     `2` = "Cukup Berperan",
+                                                     `1` = "Kurang Berperan"))
   
   # Menghitung jumlah dan persentase
   analysis <- dana_data %>%
-    count(`Dana desa membantu permodalan \nbagi kegiatan BUMDes`) %>%
+    count(PeranDanaCSRUntukModalRakyat) %>%
     mutate(percentage = n / sum(n) * 100)
   
   # Fungsi untuk mendapatkan nilai dengan penanganan NA
   get_value <- function(df, category, column) {
     value <- df %>%
-      filter(`Dana desa membantu permodalan \nbagi kegiatan BUMDes` == category) %>%
+      filter(PeranDanaCSRUntukModalRakyat == category) %>%
       pull({{ column }})
     if (length(value) == 0) return(0)
     return(value)
@@ -585,22 +585,22 @@ output$analysisDanaCSRPemodalanBUMDes <- renderText({
   # Menentukan kategori dengan persentase tertinggi
   highest <- analysis %>%
     filter(percentage == max(percentage)) %>%
-    pull(`Dana desa membantu permodalan \nbagi kegiatan BUMDes`)
+    pull(PeranDanaCSRUntukModalRakyat)
   
   highest_percentage <- max(berperan_percentage, cukup_berperan_percentage, kurang_berperan_percentage)
   
   # Menyusun kesimpulan dan saran
   if (highest == "Berperan") {
-    conclusion <- "Dari hasil survey, banyak masyarakat memberikan respon \"Berperan\" tentang penggunaan dana desa untuk membantu permodalan bagi kegiatan BUMDes"
+    conclusion <- "Dari hasil survey, banyak masyarakat memberikan respon \"Berperan\" tentang penggunaan dana CSR untuk membantu mengembangkang modal untuk rakyat."
     solution <- "Pemerintah desa dapat melanjutkan dan meningkatkan program agar hasilnya lebih maksimal."
     if(cukup_berperan_count > 0 || kurang_berperan_count > 0){
       solution <- paste(solution, " Karena masih terdapat masyarakat yang merespon Cukup Berperan ataupun Kurang Berperan")
     }
   } else if (highest == "Cukup Berperan") {
-    conclusion <- "Dari hasil survey, banyak masyarakat memberikan respon \"Cukup Berperan\" tentang penggunaan dana desa untuk membantu permodalan bagi kegiatan BUMDes"
+    conclusion <- "Dari hasil survey, banyak masyarakat memberikan respon \"Cukup Berperan\" tentang penggunaan dana CSR untuk membantu mengembangkang modal untuk rakyat."
     solution <- "Pemerintah desa harus melakukan evaluasi dan meningkatkan program agar hasilnya lebih maksimal."
   } else {
-    conclusion <- "Dari hasil survey, banyak masyarakat memberikan respon \"Kurang Berperan\" tentang penggunaan dana desa untuk membantu permodalan bagi kegiatan BUMDes"
+    conclusion <- "Dari hasil survey, banyak masyarakat memberikan respon \"Kurang Berperan\" tentang penggunaan dana CSR untuk membantu mengembangkang modal untuk rakyat."
     solution <- "Pemerintah desa harus melakukan evaluasi dan meningkatkan program agar hasilnya lebih maksimal."
   }
   
