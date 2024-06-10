@@ -1,6 +1,5 @@
 tabItemPeningkatanPerekonomian <- tabItem(
   tabName = "PeningkatanPerekonomian",
-  h1("Peningkatan Perekonomian"),
   conditionalPanel(
     condition = "input.DesaEkonomi == true || input.DesaPengahasilan == true || input.DesaModal == true",
     fluidRow(

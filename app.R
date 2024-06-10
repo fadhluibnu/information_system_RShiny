@@ -18,6 +18,7 @@ source("pages/sikd/ui_pendanaan.R")
 source("pages/profil/ui_profilDesa.R")
 source("pages/sikd/ui_peningkatanPAD.R")
 source("pages/sikd/ui_peningkatanPerekonomian.R")
+source("pages/sikd/ui_peningkatanProgramWisata.R")
 
 ui <- dashboardPage(
   skin = "black",
@@ -43,7 +44,7 @@ ui <- dashboardPage(
                menuSubItem("Pendanaan Desa", tabName = "pendanaan", icon = icon("sack-dollar")),
                  menuSubItem("Peningkatan PAD", tabName = "PeningkatanPAD", icon = icon("money-bill-trend-up")),
                menuSubItem("Peningkatan Perekonomian", tabName = "PeningkatanPerekonomian", icon = icon("arrow-up-right-dots")),
-               menuSubItem("Program Wisata", tabName = "programwisata", icon = icon("arrow-up-from-water-pump"))
+               menuSubItem("Peningkatan Program Wisata", tabName = "programwisata", icon = icon("arrow-up-from-water-pump"))
       )
     )
   ),
@@ -61,7 +62,8 @@ ui <- dashboardPage(
       tabItemPendanaan,
       tabItemProfilDesa,
       tabItemPeningkatanPAD,
-      tabItemPeningkatanPerekonomian
+      tabItemPeningkatanPerekonomian,
+      tabItemPeningkatanProgramWisata
     )
   )
 )
@@ -73,6 +75,7 @@ server <- function(input, output) {
   source("pages/sikd/server_pendanaan.R", local=TRUE)
   source("pages/sikd/server_peningkatanPAD.R", local=TRUE)
   source("pages/sikd/server_peningkatanPerekonomian.R", local=TRUE)
+  source("pages/sikd/server_peningkatanProgramWisata.R", local=TRUE)
 }
 
 shinyApp(ui, server)
