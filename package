@@ -7,3 +7,43 @@ install.packages("dplyr")
 install.packages("viridis")
 
 test
+
+
+  # # Menghitung jumlah dan persentase
+  # analysis <- dana_data %>%
+  #   count(`Dana Pembagunan Infrastruktur`) %>%
+  #   mutate(percentage = n / sum(n) * 100)
+  # 
+  # # Mendapatkan jumlah dan persentase masing-masing kategori
+  # berperan_count <- analysis %>%
+  #   filter(`Dana Pembagunan Infrastruktur` == "Berperan") %>%
+  #   pull(n)
+  # 
+  # cukup_berperan_count <- analysis %>%
+  #   filter(`Dana Pembagunan Infrastruktur` == "Cukup berperan") %>%
+  #   pull(n)
+  # 
+  # kurang_berperan_count <- analysis %>%
+  #   filter(`Dana Pembagunan Infrastruktur` == "Kurang Berperan") %>%
+  #   pull(n)
+  # 
+  # berperan_percentage <- analysis %>%
+  #   filter(`Dana Pembagunan Infrastruktur` == "Berperan") %>%
+  #   pull(percentage)
+  # 
+  # cukup_berperan_percentage <- analysis %>%
+  #   filter(`Dana Pembagunan Infrastruktur` == "Cukup berperan") %>%
+  #   pull(percentage)
+  # 
+  # kurang_berperan_percentage <- analysis %>%
+  #   filter(`Dana Pembagunan Infrastruktur` == "Kurang Berperan") %>%
+  #   pull(percentage)
+  # 
+  # # Menangani kemungkinan nilai NA
+  # if (is.na(berperan_count)) berperan_count <- 0
+  # if (is.na(cukup_berperan_count)) cukup_berperan_count <- 0
+  # if (is.na(kurang_berperan_count)) kurang_berperan_count <- 0
+  # if (is.na(berperan_percentage)) berperan_percentage <- 0
+  # if (is.na(cukup_berperan_percentage)) cukup_berperan_percentage <- 0
+  # if (is.na(kurang_berperan_percentage)) kurang_berperan_percentage <- 0
+  
