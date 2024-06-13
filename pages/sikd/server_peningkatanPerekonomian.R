@@ -47,7 +47,18 @@ render_server_peningkatan_perekonomian <- function() {
         `Adanya Dana CSR membantu mengembangkan modal untuk rakyat`=Adanya.Dana.CSR.membantu.mengembangkan.modal.untuk.rakyat,
       )
     
-    datatable(data, selection = 'none', rownames = FALSE, , options = list(
+    action_buttons <- paste0(
+      '<button class="update-btn" data-id="', data$No, '">Update</button>',
+      '<button class="delete-btn" data-id="', data$No, '">Delete</button>'
+    )
+    data$Actions <- action_buttons
+    
+    data <- data%>%
+      rename(
+        ID = No
+      )
+    
+    datatable(data, selection = 'none', escape = FALSE, rownames = TRUE, colnames = c('No' = 1), options = list(
       headerCallback = JS(
         "function(thead, data, start, end, display){",
         "  if (!$('#peningkatanPerekonomian-checkbox').length) {",
@@ -96,12 +107,17 @@ render_server_peningkatan_perekonomian <- function() {
         "}"
       ),
       columnDefs = list(
-        list(orderable = FALSE, className = 'select-checkbox-peningkatan-perekonomian', targets = 0)
+        list(orderable = FALSE, className = 'select-checkbox-peningkatan-perekonomian', targets = 0),
+        list(targets = 0, visible = TRUE),
+        list(targets = ncol(data), orderable = FALSE, searchable = FALSE)
       ),
       select = list(style = 'multi', selector = 'td:first-child'),
-      scrollX = TRUE, 
-      autoWidth = TRUE
-    ))
+      scrollX = TRUE
+    ))%>%
+      formatStyle(
+        columns = c('Actions'),
+        cursor = 'pointer'
+      )
   })
   
   

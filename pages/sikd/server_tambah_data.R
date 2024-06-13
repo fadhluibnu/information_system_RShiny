@@ -51,9 +51,9 @@ resetInputs <- function() {
   updateTextInput(session, "Jenis.Usaha", value = "")
   updateSelectInput(session, "skala.usaha")
   
-  updateTextInput(session,"Jenis.potensi")	
-  updateTextInput(session,"Bidang")	
-  updateTextInput(session,"Jumlah.satuan")
+  updateTextInput(session,"Jenis.potensi", value = "")	
+  updateTextInput(session,"Bidang", value = "")	
+  updateTextInput(session,"Jumlah.satuan", value = "")
   
   updateSelectInput(session,"Apakah.BapakIbu.tahu.mengenai.pendanaan.untuk.mengembangkan.usaha")
   updateSelectInput(session,"Apakah.Bapak.Ibu.tahu.yang.dimaksud.dengan.dana.desa")
@@ -96,44 +96,78 @@ resetInputs <- function() {
 
 # Read CSV file
 # Karakteristik
-loadDataKarakteristik <- reactive({
-  if (file.exists(pathTambahKarakteristik)) {
-    read_csv(pathTambahKarakteristik)
-  } else {
-    data.frame(
-      No = character(),
-      Nama = character(),
-      jenis.kelamin = character(),
-      Usia = character(),
-      Pendidikan = character(),
-      Pekerjaan.Utama = character(),
-      Pekerjaan.Sampingan = character(),
-      Memulai.Usaha = character(),
-      Jenis.Usaha = character(),
-      skala.usaha = character()
-    )
-  }
-})
+loadDataKarakteristik <- function() {
+    if (file.exists(pathTambahKarakteristik)) {
+      read.csv(pathTambahKarakteristik)
+    } else {
+      data.frame(
+        No = character(),
+        Nama = character(),
+        jenis.kelamin = character(),
+        Usia = character(),
+        Pendidikan = character(),
+        Pekerjaan.Utama = character(),
+        Pekerjaan.Sampingan = character(),
+        Memulai.Usaha = character(),
+        Jenis.Usaha = character(),
+        skala.usaha = character()
+      )
+    }
+}
+  
+# reactive({
+#   if (file.exists(pathTambahKarakteristik)) {
+#     read.csv(pathTambahKarakteristik)
+#   } else {
+#     data.frame(
+#       No = character(),
+#       Nama = character(),
+#       jenis.kelamin = character(),
+#       Usia = character(),
+#       Pendidikan = character(),
+#       Pekerjaan.Utama = character(),
+#       Pekerjaan.Sampingan = character(),
+#       Memulai.Usaha = character(),
+#       Jenis.Usaha = character(),
+#       skala.usaha = character()
+#     )
+#   }
+# })
 
 # Potensi Desa
-loadDataPotensiDesa <- reactive({
-  if (file.exists(pathTambahPotensiDesa)) {
-    read_csv(pathTambahPotensiDesa)
-  } else {
-    data.frame(
-      Jenis.potensi=character(),	
-      Bidang=character(),	
-      Jumlah.satuan=character()
-    )
-  }
-})
+loadDataPotensiDesa <- function(){
+    if (file.exists(pathTambahPotensiDesa)) {
+      read.csv(pathTambahPotensiDesa)
+    } else {
+      data.frame(
+        No = integer(),
+        Jenis.potensi=character(),
+        Bidang=character(),
+        Jumlah.satuan=character()
+      )
+    }
+}
+  
+# reactive({
+#   if (file.exists(pathTambahPotensiDesa)) {
+#     read.csv(pathTambahPotensiDesa)
+#   } else {
+#     data.frame(
+#       No = integer(),
+#       Jenis.potensi=character(),	
+#       Bidang=character(),	
+#       Jumlah.satuan=character()
+#     )
+#   }
+# })
 
 # Pendanaan
-loadDataPendanaan <- reactive({
+loadDataPendanaan <- function(){
   if (file.exists(pathTambahPendanaan)) {
-    read_csv(pathTambahPendanaan)
+    read.csv(pathTambahPendanaan)
   } else {
     data.frame(
+      No = integer(),
       Apakah.BapakIbu.tahu.mengenai.pendanaan.untuk.mengembangkan.usaha =
         character(),
       Apakah.Bapak.Ibu.tahu.yang.dimaksud.dengan.dana.desa = character(),
@@ -149,14 +183,15 @@ loadDataPendanaan <- reactive({
       Jika.ya.dalam.bentuk = character()
     )
   }
-})
+}
 
 # Peningkatan PAD
-loadDataPeningkatanPAD <- reactive({
+loadDataPeningkatanPAD <- function(){
   if (file.exists(pathTambahPeningkatanPAD)) {
-    read_csv(pathTambahPeningkatanPAD)
+    read.csv(pathTambahPeningkatanPAD)
   } else {
     data.frame(
+      No = integer(),
       Dana.desa.digunakan.untuk.membentuk.kegiatan.pembangunan.desa.termasuk.membangun.usaha =
         character(), 
       Dana.desa.digunakan.untuk.membangun.Infrastruktur.desa.misalnya.jalan =
@@ -169,14 +204,15 @@ loadDataPeningkatanPAD <- reactive({
       Dana.CSR.membantu.permodalan.bagi.kegiatan.BUMDes = character()
     )
   }
-})
+}
 
 # Peningkatan Perekonomian
-loadDataPeningkatanPerekonomian <- reactive({
+loadDataPeningkatanPerekonomian <- function(){
   if (file.exists(pathTambahPeningkatanPerekonomian)) {
-    read_csv(pathTambahPeningkatanPerekonomian)
+    read.csv(pathTambahPeningkatanPerekonomian)
   } else {
     data.frame(
+      No = integer(),
       Terbukanya.usaha.ekonomi.rakyat.karena.adanya.dana.desa = character(), Dana.desa.menambah.penghasilan.masyarakat =
         character(), 
       Adanya.Dana.desa.membantu.mengembangkan.modal.untuk.rakyat =
@@ -188,20 +224,20 @@ loadDataPeningkatanPerekonomian <- reactive({
         character()
     )
   }
-})
+}
 
 
 # Peningkatan Program Wisata
-loadDataPeningkatanProgramWisata <- reactive({
+loadDataPeningkatanProgramWisata <- function(){
   if (file.exists(pathTambahPeningkatanProgramWisata)) {
-    read_csv(pathTambahPeningkatanProgramWisata)
+    read.csv(pathTambahPeningkatanProgramWisata)
   } else {
     data.frame(
       Terdapat.tempat.wisata.yang.dikelola.dengan.menggunakan.dana.desa=character(),	
       Terdapat.tempat.wisata.yang.dikelola.dengan.menggunakan.dana.CSR=character(),
     )
   }
-})
+}
 
 # Generate new ID
 # Karakteristik
@@ -267,9 +303,16 @@ generateIDPeningkatanProgramWisata <- reactive({
 # Add data
 observeEvent(input$add, {
   
+  showModal(modalDialog(
+    title = "Loading...",
+    "Proses Penambahan Data",
+    easyClose = FALSE,
+    footer = NULL
+  ))
+  
   # Karakteristik
   new_data_karakteristik <- data.frame(
-    No = generateIDKarakteristik(),
+    No = max(as.integer(loadDataKarakteristik()$No), na.rm = TRUE) + 1,
     Nama = input$Nama,
     jenis.kelamin = input$jenis.kelamin,
     Usia = input$Usia,
@@ -288,7 +331,7 @@ observeEvent(input$add, {
   
   # Potensi Desa
   new_data_potensi_desa <- data.frame(
-    No = generateIDPotensiDesa(),
+    No = max(as.integer(loadDataPotensiDesa()$No), na.rm = TRUE) + 1,
     Jenis.potensi=input$Jenis.potensi,	
     Bidang=input$Bidang,	
     Jumlah.satuan=input$Jumlah.satuan,
@@ -301,7 +344,7 @@ observeEvent(input$add, {
   
   # Pendanaan
   new_data_pendanaan <- data.frame(
-    No = generateIDPendanaan(),
+    No = max(as.integer(loadDataPendanaan()$No), na.rm = TRUE) + 1,
     Apakah.BapakIbu.tahu.mengenai.pendanaan.untuk.mengembangkan.usaha = input$Apakah.BapakIbu.tahu.mengenai.pendanaan.untuk.mengembangkan.usaha,
     Apakah.Bapak.Ibu.tahu.yang.dimaksud.dengan.dana.desa = input$Apakah.Bapak.Ibu.tahu.yang.dimaksud.dengan.dana.desa,
     Apakah.Bapak.Ibu.tahu.yang.dimaksud.dengan.dana.CSR.Coorporate.Social.Responsibility =
@@ -324,7 +367,7 @@ observeEvent(input$add, {
   
   # Peningkatan PAD
   new_data_peningkatan_PAD <- data.frame(
-    No = generateIDPeningkatanPAD(),
+    No = max(as.integer(loadDataPeningkatanPAD()$No), na.rm = TRUE) + 1,
     Dana.desa.digunakan.untuk.membentuk.kegiatan.pembangunan.desa.termasuk.membangun.usaha =
       input$Dana.desa.digunakan.untuk.membentuk.kegiatan.pembangunan.desa.termasuk.membangun.usaha, Dana.desa.digunakan.untuk.membangun.Infrastruktur.desa.misalnya.jalan =
       input$Dana.desa.digunakan.untuk.membangun.Infrastruktur.desa.misalnya.jalan, Dana.desa.membantu.permodalan.bagi.kegiatan.BUMDes =
@@ -342,7 +385,7 @@ observeEvent(input$add, {
   
   # Peningkatan Perekonomian
   new_data_peningkatan_Perekonomian <- data.frame(
-    No = generateIDPeningkatanPerekonomian(),
+    No = max(as.integer(loadDataPeningkatanPerekonomian()$No), na.rm = TRUE) + 1,
     Terbukanya.usaha.ekonomi.rakyat.karena.adanya.dana.desa = input$Terbukanya.usaha.ekonomi.rakyat.karena.adanya.dana.desa, 
     Dana.desa.menambah.penghasilan.masyarakat =
       input$Dana.desa.menambah.penghasilan.masyarakat, 
@@ -365,7 +408,7 @@ observeEvent(input$add, {
   
   # Peningkatan Program Wista
   new_data_peningkatan_program_wisata <- data.frame(
-    No = generateIDPeningkatanProgramWisata(),
+    No = max(as.integer(loadDataPeningkatanProgramWisata()$No), na.rm = TRUE) + 1,
     Terdapat.tempat.wisata.yang.dikelola.dengan.menggunakan.dana.desa=input$Terdapat.tempat.wisata.yang.dikelola.dengan.menggunakan.dana.desa,	
     Terdapat.tempat.wisata.yang.dikelola.dengan.menggunakan.dana.CSR=input$Terdapat.tempat.wisata.yang.dikelola.dengan.menggunakan.dana.CSR,
     stringsAsFactors = FALSE
@@ -385,13 +428,6 @@ observeEvent(input$add, {
     file.rename(paste0(pathTambahPeningkatanPerekonomian, ".tmp"), pathTambahPeningkatanPerekonomian)
     file.rename(paste0(pathTambahPeningkatanProgramWisata, ".tmp"), pathTambahPeningkatanProgramWisata)
     
-    showModal(modalDialog(
-      title = "Success",
-      "Data berhasil ditambahkan.",
-      easyClose = TRUE,
-      footer = NULL
-    ))
-    
     resetInputs()
     render_server_karakteristik()
     render_server_pendanaan()
@@ -400,6 +436,14 @@ observeEvent(input$add, {
     render_server_peningkatan_wisata()
     render_server_potensi_desa()
     
+    removeModal()
+    
+    showModal(modalDialog(
+      title = "Success",
+      "Data berhasil ditambahkan.",
+      easyClose = TRUE,
+      footer = NULL
+    ))
   } else {
     unlink(paste0(pathTambahKarakteristik, ".tmp"))
     unlink(paste0(pathTambahPotensiDesa, ".tmp"))
@@ -407,6 +451,8 @@ observeEvent(input$add, {
     unlink(paste0(pathTambahPeningkatanPAD, ".tmp"))
     unlink(paste0(pathTambahPeningkatanPerekonomian, ".tmp"))
     unlink(paste0(pathTambahPeningkatanProgramWisata, ".tmp"))
+    
+    removeModal()
     
     showModal(modalDialog(
       title = "Error",
@@ -416,4 +462,81 @@ observeEvent(input$add, {
     ))
   }
   
+})
+
+# Delete data
+observeEvent(input$delete_id, {
+  
+  showModal(modalDialog(
+    title = "Loading...",
+    "Proses Penghapusan Data",
+    easyClose = FALSE,
+    footer = NULL
+  ))
+  
+  No <- as.integer(input$delete_id)
+
+  data_karakteristik <- loadDataKarakteristik()
+  data_potensi_desa <- loadDataPotensiDesa()
+  data_pendanaan <- loadDataPendanaan()
+  data_peningkatan_PAD <- loadDataPeningkatanPAD()
+  data_peningkatan_perekonomian <- loadDataPeningkatanPerekonomian()
+  data_peningkatan_program_wisata <- loadDataPeningkatanProgramWisata()
+
+  data_karakteristik <- data_karakteristik[data_karakteristik$No != No, ]
+  data_potensi_desa <- data_potensi_desa[data_potensi_desa$No != No, ]
+  data_pendanaan <- data_pendanaan[data_pendanaan$No != No, ]
+  data_peningkatan_PAD <- data_peningkatan_PAD[data_peningkatan_PAD$No != No, ]
+  data_peningkatan_perekonomian <- data_peningkatan_perekonomian[data_peningkatan_perekonomian$No != No, ]
+  data_peningkatan_program_wisata <- data_peningkatan_program_wisata[data_peningkatan_program_wisata$No != No, ]
+
+
+  successKarakteristik <- safeWriteCSV(data_karakteristik, paste0(pathTambahKarakteristik, ".tmp"))
+  successPotensiDesa <- safeWriteCSV(data_potensi_desa, paste0(pathTambahPotensiDesa, ".tmp"))
+  successPendanaan <- safeWriteCSV(data_pendanaan, paste0(pathTambahPendanaan, ".tmp"))
+  successPeningkatanPAD <- safeWriteCSV(data_peningkatan_PAD, paste0(pathTambahPeningkatanPAD, ".tmp"))
+  successPeningkatanPerekonomian <- safeWriteCSV(data_peningkatan_perekonomian, paste0(pathTambahPeningkatanPerekonomian, ".tmp"))
+  successPeningkatanProgramWisata <- safeWriteCSV(data_peningkatan_program_wisata, paste0(pathTambahPeningkatanProgramWisata, ".tmp"))
+
+  if (successKarakteristik && successPotensiDesa && successPendanaan && successPeningkatanPAD && successPeningkatanPerekonomian && successPeningkatanProgramWisata) {
+
+    file.rename(paste0(pathTambahKarakteristik, ".tmp"), pathTambahKarakteristik)
+    file.rename(paste0(pathTambahPotensiDesa, ".tmp"), pathTambahPotensiDesa)
+    file.rename(paste0(pathTambahPendanaan, ".tmp"), pathTambahPendanaan)
+    file.rename(paste0(pathTambahPeningkatanPAD, ".tmp"), pathTambahPeningkatanPAD)
+    file.rename(paste0(pathTambahPeningkatanPerekonomian, ".tmp"), pathTambahPeningkatanPerekonomian)
+    file.rename(paste0(pathTambahPeningkatanProgramWisata, ".tmp"), pathTambahPeningkatanProgramWisata)
+    
+    render_server_karakteristik()
+    render_server_pendanaan()
+    render_server_peningkatan_PAD()
+    render_server_peningkatan_perekonomian()
+    render_server_peningkatan_wisata()
+    render_server_potensi_desa()
+    
+    removeModal()
+    
+    showModal(modalDialog(
+      title = "Success",
+      "Data berhasil dihapus.",
+      easyClose = TRUE,
+      footer = NULL
+    ))
+
+  } else {
+    unlink(paste0(pathTambahKarakteristik, ".tmp"))
+    unlink(paste0(pathTambahPotensiDesa, ".tmp"))
+    unlink(paste0(pathTambahPendanaan, ".tmp"))
+    unlink(paste0(pathTambahPeningkatanPAD, ".tmp"))
+    unlink(paste0(pathTambahPeningkatanPerekonomian, ".tmp"))
+    unlink(paste0(pathTambahPeningkatanProgramWisata, ".tmp"))
+
+    showModal(modalDialog(
+      title = "Error",
+      "Gagal menghapus data.",
+      easyClose = TRUE,
+      footer = NULL
+    ))
+  }
+
 })

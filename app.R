@@ -65,18 +65,19 @@ ui <- dashboardPage(
       tabItemPeningkatanProgramWisata,
       tabItemPotensiDesa,
       tabItemTambahData
-    )
-  ),
-  tags$script(HTML("
+    ),
+    tags$script(HTML("
     $(document).on('click', '.update-btn', function() {
       var id = $(this).data('id');
       Shiny.setInputValue('update_id', id);
+      Shiny.setInputValue('form_update', true);
     });
     $(document).on('click', '.delete-btn', function() {
       var id = $(this).data('id');
       Shiny.setInputValue('delete_id', id);
     });
   "))
+  )
 )
 
 
@@ -88,9 +89,18 @@ server <- function(input, output, session) {
   source("pages/sikd/server_peningkatanPAD.R", local=TRUE)
   source("pages/sikd/server_peningkatanPerekonomian.R", local=TRUE)
   source("pages/sikd/server_peningkatanProgramWisata.R", local=TRUE)
-  source("pages/sikd/server_tambah_data.R", local=TRUE)
   source("pages/sikd/server_potensiDesa.R", local=TRUE)
+  source("pages/sikd/server_tambah_data.R", local=TRUE)
+  source("pages/sikd/server_hapus_data.R", local=TRUE)
   
+  observeEvent(input$cancel, {
+    showModal(modalDialog(
+      title = "Success",
+      "Data berhasil dihapus.",
+      easyClose = TRUE,
+      footer = NULL
+    ))
+  })
 }
 
 shinyApp(ui, server)

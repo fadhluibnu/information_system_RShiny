@@ -81,6 +81,17 @@ render_server_pendanaan <- function() {
       )
     
     
+    action_buttons <- paste0(
+      '<button class="update-btn" data-id="', data_pendanaan_tabel$No, '">Update</button>',
+      '<button class="delete-btn" data-id="', data_pendanaan_tabel$No, '">Delete</button>'
+    )
+    data_pendanaan_tabel$Actions <- action_buttons
+    
+    data_pendanaan_tabel <- data_pendanaan_tabel%>%
+      rename(
+        ID = No
+      )
+    
     datatable(data_pendanaan_tabel, options = list(
       headerCallback = JS(
         "function(thead, data, start, end, display){",
@@ -156,12 +167,17 @@ render_server_pendanaan <- function() {
         "}"
       ),
       columnDefs = list(
-        list(orderable = FALSE, className = 'select-checkbox-pendanaan', targets = 0)
+        list(orderable = FALSE, className = 'select-checkbox-pendanaan', targets = 0),
+        list(targets = 0, visible = TRUE),
+        list(targets = ncol(data_pendanaan_tabel), orderable = FALSE, searchable = FALSE)
       ),
       select = list(style = 'multi', selector = 'td:first-child'),
-      scrollX = TRUE, 
-      autoWidth = TRUE
-    ), selection = 'none', rownames = FALSE)
+      scrollX = TRUE
+    ), selection = 'none', escape = FALSE, rownames = TRUE, colnames = c('No' = 1))%>%
+      formatStyle(
+        columns = c('Actions'),
+        cursor = 'pointer'
+      )
   })
   
   

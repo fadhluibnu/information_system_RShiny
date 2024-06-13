@@ -41,8 +41,62 @@ tabItemKarakteristik <- tabItem(tabName = "karakteristik",
                                         plotOutput("pie_chart_skala_usaha"))
                                   )
                                 ),
+                                
+                                conditionalPanel(
+                                  condition = "input.form_update == true",
+                                  fluidRow(
+                                    box(
+                                      title = h3(tags$b("Tambah Data")),
+                                      status = "primary",
+                                      width = 12,
+                                      solidHeader = TRUE,
+                                      
+                                      # karakteristik
+                                      box(
+                                        status = "primary",
+                                        width = 12,
+                                        h4(tags$b("Karakteristik")),
+                                        textInput("Nama", "Nama"),
+                                        selectInput("jenis.kelamin", "Jenis Kelamin :",
+                                                    c(
+                                                      "Perempuan"="1",
+                                                      "Laki-laki"="2"
+                                                    ),
+                                        ),
+                                        textInput("Usia", "Usia"),
+                                        selectInput("Pendidikan", "Pendidikan :",
+                                                    c(
+                                                      "SD"="1",
+                                                      "SMP"="2",
+                                                      "SMA"="3",
+                                                      "Diploma"="4",
+                                                      "S1"="5",
+                                                      "S2"="6",
+                                                      "S3"="7"
+                                                    ),
+                                        ),
+                                        textInput("Pekerjaan.Utama", "Pekerjaan Utama"),
+                                        textInput("Pekerjaan.Sampingan", "Pekerjaan Sampingan"),
+                                        textInput("Memulai.Usaha", "Memulai Usaha"),
+                                        textInput("Jenis.Usaha", "Jenis Usaha"),
+                                        selectInput("skala.usaha", "Skala Usaha :",
+                                                    c(
+                                                      "Mikro/home industry"="1",
+                                                      "Kecil"="2",
+                                                      "Menengah"="3",
+                                                      "Besar"="4"
+                                                    ),
+                                        ),
+                                      ),
+                                      actionButton("update", "Update"),
+                                      actionButton("cancel", "Cancel")
+                                    )
+                                  )
+                                ),
+                                
                                 fluidRow(
                                   box(title = "Karakteristik Desa", width = 12, 
-                                      DTOutput("data_table"))
+                                      DTOutput("data_table")
+                                  )
                                 )
 )

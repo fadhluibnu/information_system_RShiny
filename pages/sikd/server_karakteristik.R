@@ -15,12 +15,23 @@ render_server_karakteristik <- function() {
                                 `2` = "Kecil",
                                 `3` = "Menengah",
                                 `4` = "Besar"))
-  
+
   output$data_table <- renderDT({
     data_display <- data %>%
       rename(
         `Jenis Kelamin` = jenis.kelamin, 
         `Skala Usaha` = skala.usaha) 
+    
+    action_buttons <- paste0(
+      '<button class="update-btn" data-id="', data_display$No, '">Update</button>',
+      '<button class="delete-btn" data-id="', data_display$No, '">Delete</button>'
+    )
+    data_display$Actions <- action_buttons
+    
+    data_display <- data_display%>%
+      rename(
+        ID = No
+      )
     
     datatable(data_display, options = list(
       headerCallback = JS(
@@ -58,6 +69,8 @@ render_server_karakteristik <- function() {
         <th style=\"border: none; padding: 0px 10px 0px 14px;\">
           <input style=\"transform: scale(1.2);\" type=\"checkbox\" id=\"skala-usaha\">
         </th>
+        <th style=\"border: none; padding: 0px 10px 0px 14px;\">
+        </th> 
       </tr>`);",
         "  $('#toggle-age-chart').on('click', function(){",
         "    Shiny.setInputValue('show_age_chart', this.checked);",
@@ -86,9 +99,18 @@ render_server_karakteristik <- function() {
         "  }",
         "}"
       ),
-      columnDefs = list(list(orderable = FALSE, className = 'select-checkbox-katakteristik', targets = 0)),
-      select = list(style = 'multi', selector = 'td:first-child')
-    ), selection = 'none', escape = FALSE)
+      columnDefs = list(
+        list(orderable = FALSE, className = 'select-checkbox-katakteristik', targets = 0),
+        list(targets = 0, visible = TRUE),
+        list(targets = ncol(data_display), orderable = FALSE, searchable = FALSE)
+        ),
+      select = list(style = 'multi', selector = 'td:first-child'),
+      scrollX = TRUE
+    ), selection = 'none', escape = FALSE, rownames = TRUE, colnames = c('No' = 1))%>%
+      formatStyle(
+        columns = c('Actions'),
+        cursor = 'pointer'
+      )
   })
   
   
@@ -211,6 +233,28 @@ render_server_karakteristik <- function() {
       labs(x = "Jenis Usaha", y = "Jumlah", title = "Jenis Usaha") +
       theme(legend.position = "none") # Remove legend
   })
+  
+  selected_id <- reactiveVal(NULL)
+  
+  observeEvent(input$update_id, {
+    id <- as.integer(input$update_id)
+    data_karakteristik <- loadDataKarakteristik()
+    data_karakteristik <- data_karakteristik[data_karakteristik$No == id, ]
+    
+    updateTextInput(session, "Nama", value = data_karakteristik$Nama)
+    updateSelectInput(session, "jenis.kelamin", selected  = data_karakteristik$jenis.kelamin)
+    updateTextInput(session, "Usia", value = data_karakteristik$Usia)
+    updateSelectInput(session, "Pendidikan", selected  = data_karakteristik$Pendidikan)
+    updateTextInput(session, "Pekerjaan.Utama", value = data_karakteristik$Pekerjaan.Utama)
+    updateTextInput(session, "Pekerjaan.Sampingan", value = data_karakteristik$Pekerjaan.Sampingan)
+    updateTextInput(session, "Memulai.Usaha", value = data_karakteristik$Memulai.Usaha)
+    updateTextInput(session, "Jenis.Usaha", value = data_karakteristik$Jenis.Usaha)
+    updateSelectInput(session, "skala.usaha", selected  = data_karakteristik$skala.usaha)
+    
+    selected_id(id)
+    
+  })
+  
 }
 
 render_server_karakteristik()
