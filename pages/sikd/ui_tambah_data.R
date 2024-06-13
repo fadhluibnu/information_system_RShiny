@@ -178,7 +178,7 @@ tabItemTambahData <- tabItem(
         )
       ),
       
-      # peningkatan PAD
+      # peningkatan Perekonomian
       box(
         status = "danger",
         width = 12,h4(tags$b("Peningkatan Perekonomian")),

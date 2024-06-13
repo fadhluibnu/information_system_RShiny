@@ -1,4 +1,6 @@
-render_server_peningkatan_perekonomian <- function() {
+render_server_peningkatan_perekonomian <- function(params) {
+  
+  pathTambahPeningkatanPerekonomian <- "data/PeningkatanPerekonomianDesa.csv"
   pathPerekonomian <- read_csv("data/PeningkatanPerekonomianDesa.csv")
   
   output$data_table_PeningkatanPerekonomian <- renderDT({
@@ -64,6 +66,8 @@ render_server_peningkatan_perekonomian <- function() {
         "  if (!$('#peningkatanPerekonomian-checkbox').length) {",
         "  $(thead).closest('thead').prepend(`
       <tr id=\"peningkatanPerekonomian-checkbox\" style=\"position: relative;top: 10px;\"> 
+        <th style=\"border: none; padding: 0px 10px 0px 14px;\">
+        </th> 
         <th style=\"border: none; padding: 0px 10px 0px 14px;\">
         </th> 
         <th style=\"border: none; padding: 0px 10px 0px 14px;\">
@@ -634,6 +638,86 @@ render_server_peningkatan_perekonomian <- function() {
     
     return(analysis_text)
   })
+  
+  observeEvent(input$update_id, {
+    id <- as.integer(input$update_id)
+    data_peningkatanPerekonomian <- loadDataPeningkatanPerekonomian()
+    data_peningkatanPerekonomian <- data_peningkatanPerekonomian[data_peningkatanPerekonomian$No == id, ]
+    
+    updateSelectInput(session,"Terbukanya.usaha.ekonomi.rakyat.karena.adanya.dana.desa", selected = data_peningkatanPerekonomian$Terbukanya.usaha.ekonomi.rakyat.karena.adanya.dana.desa)
+    updateSelectInput(session,"Dana.desa.menambah.penghasilan.masyarakat", selected = data_peningkatanPerekonomian$Dana.desa.menambah.penghasilan.masyarakat)	
+    updateSelectInput(session,"Adanya.Dana.desa.membantu.mengembangkan.modal.untuk.rakyat", selected = data_peningkatanPerekonomian$Adanya.Dana.desa.membantu.mengembangkan.modal.untuk.rakyat)
+    updateSelectInput(session,"Terbukanya.usaha.ekonomi.rakyat.karena.adanya.dana.CSR", selected = data_peningkatanPerekonomian$Terbukanya.usaha.ekonomi.rakyat.karena.adanya.dana.CSR)
+    updateSelectInput(session,"Dana.CSR.menambah.penghasilan.masyarakat", selected = data_peningkatanPerekonomian$Dana.CSR.menambah.penghasilan.masyarakat)	
+    updateSelectInput(session,"Adanya.Dana.CSR.membantu.mengembangkan.modal.untuk.rakyat", selected = data_peningkatanPerekonomian$Adanya.Dana.CSR.membantu.mengembangkan.modal.untuk.rakyat)
+    
+    session$sendCustomMessage("selected_id_handler", id)
+    
+  })
+  
+  observeEvent(input$cancelPeningkatanPerekonomian, {
+    session$sendCustomMessage("form_update_false", "0")
+  })
+  
+  observeEvent(input$updatePeningkatanPerekonomian, {
+    
+    if (params == TRUE){
+      showModal(modalDialog(
+        title = "Loading...",
+        "Proses Update Data",
+        easyClose = FALSE,
+        footer = NULL
+      ))
+      
+      data_peningkatanPerekonomian <- loadDataPeningkatanPerekonomian()
+      data_peningkatanPerekonomian[data_peningkatanPerekonomian$No == input$selected_id, ] <- data.frame(
+        No = input$selected_id,
+        Terbukanya.usaha.ekonomi.rakyat.karena.adanya.dana.desa = input$Terbukanya.usaha.ekonomi.rakyat.karena.adanya.dana.desa, 
+        Dana.desa.menambah.penghasilan.masyarakat =
+          input$Dana.desa.menambah.penghasilan.masyarakat, 
+        Adanya.Dana.desa.membantu.mengembangkan.modal.untuk.rakyat =
+          input$Adanya.Dana.desa.membantu.mengembangkan.modal.untuk.rakyat, 
+        Terbukanya.usaha.ekonomi.rakyat.karena.adanya.dana.CSR =
+          input$Terbukanya.usaha.ekonomi.rakyat.karena.adanya.dana.CSR, 
+        Dana.CSR.menambah.penghasilan.masyarakat =
+          input$Dana.CSR.menambah.penghasilan.masyarakat, 
+        Adanya.Dana.CSR.membantu.mengembangkan.modal.untuk.rakyat =
+          input$Adanya.Dana.CSR.membantu.mengembangkan.modal.untuk.rakyat,
+        stringsAsFactors = FALSE
+      )
+      
+      successPeningkatanPerekonomian <- safeWriteCSV(data_peningkatanPerekonomian, paste0(pathTambahPeningkatanPerekonomian, ".tmp"))
+      
+      
+      if (successPeningkatanPerekonomian){
+        file.rename(paste0(pathTambahPeningkatanPerekonomian, ".tmp"), pathTambahPeningkatanPerekonomian)
+        
+        resetInputs()
+        render_server_peningkatan_perekonomian(FALSE)
+        
+        session$sendCustomMessage("form_update_false", "0")
+        
+        showModal(modalDialog(
+          title = "Success",
+          "Data berhasil diperbarui",
+          easyClose = TRUE,
+          footer = NULL
+        ))
+      }else {
+        unlink(paste0(pathTambahPeningkatanPerekonomian, ".tmp"))
+        
+        removeModal()
+        
+        showModal(modalDialog(
+          title = "Error",
+          "Gagal menambahkan data.",
+          easyClose = TRUE,
+          footer = NULL
+        ))
+      }
+    }
+    params = TRUE
+  })
 }
 
-render_server_peningkatan_perekonomian()
+render_server_peningkatan_perekonomian(TRUE)

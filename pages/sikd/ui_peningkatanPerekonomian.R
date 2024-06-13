@@ -68,6 +68,97 @@ tabItemPeningkatanPerekonomian <- tabItem(
       )
     )
   ),
+  tags$script(
+    HTML(
+      "
+      Shiny.addCustomMessageHandler('form_update_false', function(message) {
+        Shiny.setInputValue('form_update', '0');
+      });
+      Shiny.addCustomMessageHandler('selected_id_handler', function(message) {
+        Shiny.setInputValue('selected_id', message);
+      });
+    "
+    )
+  ), 
+  conditionalPanel(
+    condition = "input.form_update == '1'", 
+    fluidRow(
+      box(
+        title = h3(tags$b("Update Data")),
+        status = "primary",
+        width = 12,
+        solidHeader = TRUE,
+        box(
+          status = "success",
+          width = 12,
+          h4(tags$b("Peningkatan Perekonomian")),
+          
+          selectInput(
+            "Terbukanya.usaha.ekonomi.rakyat.karena.adanya.dana.desa",
+            "Terbukanya usaha ekonomi rakyat, karena adanya dana desa :"
+            ,
+            c(
+              "Berperan" = "3",
+              "Cukup berperan" = "2",
+              "Kurang berperan" = "1"
+            ),
+          ), 
+          selectInput(
+            "Dana.desa.menambah.penghasilan.masyarakat",
+            "Dana desa menambah penghasilan masyarakat :"
+            ,
+            c(
+              "Berperan" = "3",
+              "Cukup berperan" = "2",
+              "Kurang berperan" = "1"
+            ),
+          ), 
+          selectInput(
+            "Adanya.Dana.desa.membantu.mengembangkan.modal.untuk.rakyat",
+            "Adanya Dana desa membantu mengembangkan modal untuk rakyat :"
+            ,
+            c(
+              "Berperan" = "3",
+              "Cukup berperan" = "2",
+              "Kurang berperan" = "1"
+            ),
+          ), 
+          selectInput(
+            "Terbukanya.usaha.ekonomi.rakyat.karena.adanya.dana.CSR",
+            "Terbukanya usaha ekonomi rakyat, karena adanya dana CSR :"
+            ,
+            c(
+              "Berperan" = "3",
+              "Cukup berperan" = "2",
+              "Kurang berperan" = "1"
+            ),
+          ), 
+          selectInput(
+            "Dana.CSR.menambah.penghasilan.masyarakat",
+            "Dana CSR menambah penghasilan masyarakat :"
+            ,
+            c(
+              "Berperan" = "3",
+              "Cukup berperan" = "2",
+              "Kurang berperan" = "1"
+            ),
+          ), 
+          selectInput(
+            "Adanya.Dana.CSR.membantu.mengembangkan.modal.untuk.rakyat",
+            "Adanya Dana CSR membantu mengembangkan modal untuk rakyat :"
+            ,
+            c(
+              "Berperan" = "3",
+              "Cukup berperan" = "2",
+              "Kurang berperan" = "1"
+            ),
+          )
+        ),
+        actionButton("updatePeningkatanPerekonomian", "Update"),
+        actionButton("cancelPeningkatanPerekonomian", "Cancel")
+      )
+    )
+  ),
   fluidRow(
     box(title = "Peningkatan Perekonomian Desa", width = 12, 
         DTOutput("data_table_PeningkatanPerekonomian"))

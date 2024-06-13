@@ -1,4 +1,5 @@
-render_server_peningkatan_wisata <- function() {
+render_server_peningkatan_wisata <- function(params) {
+  pathTambahPeningkatanProgramWisata <- "data/PeningkatanProgramWisata.csv"
   pathPeningkatanProgramWisata <- read_csv("data/PeningkatanProgramWisata.csv")
   
   output$data_table_PeningkatanProgramWisata <- renderDT({
@@ -39,6 +40,8 @@ render_server_peningkatan_wisata <- function() {
         "  if (!$('#peningkatanProgramWisata-checkbox').length) {",
         "  $(thead).closest('thead').prepend(`
       <tr id=\"peningkatanProgramWisata-checkbox\" style=\"position: relative;top: 10px;\"> 
+        <th style=\"border: none; padding: 0px 10px 0px 14px;\">
+        </th> 
         <th style=\"border: none; padding: 0px 10px 0px 14px;\">
         </th> 
         <th style=\"border: none; padding: 0px 10px 0px 14px;\">
@@ -252,6 +255,72 @@ render_server_peningkatan_wisata <- function() {
     
     return(analysis_text)
   })
+  
+  observeEvent(input$update_id, {
+    id <- as.integer(input$update_id)
+    data_peningkatanProgramWisata <- loadDataPeningkatanProgramWisata()
+    data_peningkatanProgramWisata <- data_peningkatanProgramWisata[data_peningkatanProgramWisata$No == id, ]
+    
+    updateSelectInput(session,"Terdapat.tempat.wisata.yang.dikelola.dengan.menggunakan.dana.desa", selected = data_peningkatanProgramWisata$Terdapat.tempat.wisata.yang.dikelola.dengan.menggunakan.dana.desa)
+    updateSelectInput(session,"Terdapat.tempat.wisata.yang.dikelola.dengan.menggunakan.dana.CSR", selected = data_peningkatanProgramWisata$Terdapat.tempat.wisata.yang.dikelola.dengan.menggunakan.dana.CSR)
+    
+    session$sendCustomMessage("selected_id_handler", id)
+    
+  })
+  
+  observeEvent(input$cancelPeningkatanWisata, {
+    session$sendCustomMessage("form_update_false", "0")
+  })
+  
+  observeEvent(input$updatePeningkatanWisata, {
+    
+    if (params == TRUE){
+      showModal(modalDialog(
+        title = "Loading...",
+        "Proses Update Data",
+        easyClose = FALSE,
+        footer = NULL
+      ))
+      
+      data_peningkatanProgramWisata <- loadDataPeningkatanProgramWisata()
+      data_peningkatanProgramWisata[data_peningkatanProgramWisata$No == input$selected_id, ] <- data.frame(
+        No = input$selected_id,
+        Terdapat.tempat.wisata.yang.dikelola.dengan.menggunakan.dana.desa=input$Terdapat.tempat.wisata.yang.dikelola.dengan.menggunakan.dana.desa,	
+        Terdapat.tempat.wisata.yang.dikelola.dengan.menggunakan.dana.CSR=input$Terdapat.tempat.wisata.yang.dikelola.dengan.menggunakan.dana.CSR,
+        stringsAsFactors = FALSE
+      )
+      
+      successPeningkatanProgramWisata <- safeWriteCSV(data_peningkatanProgramWisata, paste0(pathTambahPeningkatanProgramWisata, ".tmp"))
+      
+      if (successPeningkatanProgramWisata){
+        file.rename(paste0(pathTambahPeningkatanProgramWisata, ".tmp"), pathTambahPeningkatanProgramWisata)
+        
+        resetInputs()
+        render_server_peningkatan_wisata(FALSE)
+        
+        session$sendCustomMessage("form_update_false", "0")
+        
+        showModal(modalDialog(
+          title = "Success",
+          "Data berhasil diperbarui",
+          easyClose = TRUE,
+          footer = NULL
+        ))
+      }else {
+        unlink(paste0(pathTambahPeningkatanProgramWisata, ".tmp"))
+        
+        removeModal()
+        
+        showModal(modalDialog(
+          title = "Error",
+          "Gagal menambahkan data.",
+          easyClose = TRUE,
+          footer = NULL
+        ))
+      }
+    }
+    params = TRUE
+  })
 }
 
-render_server_peningkatan_wisata()
+render_server_peningkatan_wisata(TRUE)
