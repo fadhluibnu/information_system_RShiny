@@ -68,6 +68,78 @@ tabItemPeningkatanPAD <- tabItem(
       )
     )
   ),
+  tags$script(
+    HTML(
+      "
+      Shiny.addCustomMessageHandler('form_update_false', function(message) {
+        Shiny.setInputValue('form_update', '0');
+      });
+      Shiny.addCustomMessageHandler('selected_id_handler', function(message) {
+        Shiny.setInputValue('selected_id', message);
+      });
+    "
+    )
+  ), 
+  conditionalPanel(
+    condition = "input.form_update == '1'", 
+    fluidRow(
+      box(
+        title = h3(tags$b("Update Data")),
+        status = "primary",
+        width = 12,
+        solidHeader = TRUE,
+        box(
+          status = "success",
+          width = 12,
+          h4(tags$b("Peningkata PAD")),
+          selectInput("Dana.desa.digunakan.untuk.membentuk.kegiatan.pembangunan.desa.termasuk.membangun.usaha", "Dana desa digunakan untuk membentuk kegiatan pembangunan desa (termasuk membangun usaha) :",
+                      c(
+                        "Berperan"="3",
+                        "Cukup berperan"="2",
+                        "Kurang berperan"="1"
+                      ),
+          ),
+          selectInput("Dana.desa.digunakan.untuk.membangun.Infrastruktur.desa.misalnya.jalan", "Dana desa digunakan untuk membangun Infrastruktur desa (misalnya : jalan)  :",
+                      c(
+                        "Berperan"="3",
+                        "Cukup berperan"="2",
+                        "Kurang berperan"="1"
+                      ),
+          ),
+          selectInput("Dana.desa.membantu.permodalan.bagi.kegiatan.BUMDes", "Dana desa membantu permodalan bagi kegiatan BUMDes :",
+                      c(
+                        "Berperan"="3",
+                        "Cukup berperan"="2",
+                        "Kurang berperan"="1"
+                      ),
+          ),
+          selectInput("Dana.CSR.digunakan.untuk.membentuk.kegiatan.pembangunan.desa", "Dana CSR digunakan untuk membentuk kegiatan pembangunan desa :",
+                      c(
+                        "Berperan"="3",
+                        "Cukup berperan"="2",
+                        "Kurang berperan"="1"
+                      ),
+          ),
+          selectInput("Dana.CSR.digunakan.untuk.membangun.Infrastruktur.desa.misalnya.jalan", "Dana CSR digunakan untuk membangun Infrastruktur desa (misalnya : jalan)  :",
+                      c(
+                        "Berperan"="3",
+                        "Cukup berperan"="2",
+                        "Kurang berperan"="1"
+                      ),
+          ),
+          selectInput("Dana.CSR.membantu.permodalan.bagi.kegiatan.BUMDes", "Dana CSR membantu permodalan bagi kegiatan BUMDes :",
+                      c(
+                        "Berperan"="3",
+                        "Cukup berperan"="2",
+                        "Kurang berperan"="1"
+                      ),
+          )
+        ),
+        actionButton("updatePeningkatanPAD", "Update"),
+        actionButton("cancelPeningkatanPAD", "Cancel")
+      )
+    )
+  ),
   fluidRow(
     box(title = "Peningkatan PAD", width = 12, 
         DTOutput("data_table_PeningkatanPAD"))

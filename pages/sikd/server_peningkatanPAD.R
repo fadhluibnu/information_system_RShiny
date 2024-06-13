@@ -1,4 +1,5 @@
-render_server_peningkatan_PAD <- function() {
+render_server_peningkatan_PAD <- function(params) {
+  pathTambahPeningkatanPAD <- "data/PeningkatanPAD.csv"
   pathPAD <- read_csv("data/PeningkatanPAD.csv")
   
   output$data_table_PeningkatanPAD <- renderDT({
@@ -65,6 +66,8 @@ render_server_peningkatan_PAD <- function() {
         "  if (!$('#peningkatanPAD-checkbox').length) {",
         "  $(thead).closest('thead').prepend(`
       <tr id=\"peningkatanPAD-checkbox\" style=\"position: relative;top: 10px;\"> 
+        <th style=\"border: none; padding: 0px 10px 0px 14px;\">
+        </th> 
         <th style=\"border: none; padding: 0px 10px 0px 14px;\">
         </th> 
         <th style=\"border: none; padding: 0px 10px 0px 14px;\">
@@ -634,6 +637,80 @@ render_server_peningkatan_PAD <- function() {
     
     return(analysis_text)
   })
+  observeEvent(input$update_id, {
+    id <- as.integer(input$update_id)
+    data_peningkatanPAD <- loadDataPeningkatanPAD()
+    data_peningkatanPAD <- data_peningkatanPAD[data_peningkatanPAD$No == id, ]
+    
+    updateSelectInput(session, "Dana.desa.digunakan.untuk.membentuk.kegiatan.pembangunan.desa.termasuk.membangun.usaha", selected = data_peningkatanPAD$Dana.desa.digunakan.untuk.membentuk.kegiatan.pembangunan.desa.termasuk.membangun.usaha)
+    updateSelectInput(session, "Dana.desa.digunakan.untuk.membangun.Infrastruktur.desa.misalnya.jalan", selected = data_peningkatanPAD$Dana.desa.digunakan.untuk.membangun.Infrastruktur.desa.misalnya.jalan)
+    updateSelectInput(session, "Dana.desa.membantu.permodalan.bagi.kegiatan.BUMDes", selected = data_peningkatanPAD$Dana.desa.membantu.permodalan.bagi.kegiatan.BUMDes)
+    updateSelectInput(session, "Dana.CSR.digunakan.untuk.membentuk.kegiatan.pembangunan.desa", selected = data_peningkatanPAD$Dana.CSR.digunakan.untuk.membentuk.kegiatan.pembangunan.desa)
+    updateSelectInput(session, "Dana.CSR.digunakan.untuk.membangun.Infrastruktur.desa.misalnya.jalan", selected = data_peningkatanPAD$Dana.CSR.digunakan.untuk.membangun.Infrastruktur.desa.misalnya.jalan)
+    updateSelectInput(session, "Dana.CSR.membantu.permodalan.bagi.kegiatan.BUMDes", selected = data_peningkatanPAD$Dana.CSR.membantu.permodalan.bagi.kegiatan.BUMDes)
+    
+    
+    session$sendCustomMessage("selected_id_handler", id)
+    
+  })
+  
+  observeEvent(input$cancelPeningkatanPAD, {
+    session$sendCustomMessage("form_update_false", "0")
+  })
+  
+  observeEvent(input$updatePeningkatanPAD, {
+    
+    if (params == TRUE){
+      showModal(modalDialog(
+        title = "Loading...",
+        "Proses Update Data",
+        easyClose = FALSE,
+        footer = NULL
+      ))
+      
+      data_peningkatanPAD <- loadDataPeningkatanPAD()
+      data_peningkatanPAD[data_peningkatanPAD$No == input$selected_id, ] <- data.frame(
+        No = input$selected_id,
+        Dana.desa.digunakan.untuk.membentuk.kegiatan.pembangunan.desa.termasuk.membangun.usaha =
+          input$Dana.desa.digunakan.untuk.membentuk.kegiatan.pembangunan.desa.termasuk.membangun.usaha, Dana.desa.digunakan.untuk.membangun.Infrastruktur.desa.misalnya.jalan =
+          input$Dana.desa.digunakan.untuk.membangun.Infrastruktur.desa.misalnya.jalan, Dana.desa.membantu.permodalan.bagi.kegiatan.BUMDes =
+          input$Dana.desa.membantu.permodalan.bagi.kegiatan.BUMDes, Dana.CSR.digunakan.untuk.membentuk.kegiatan.pembangunan.desa =
+          input$Dana.CSR.digunakan.untuk.membentuk.kegiatan.pembangunan.desa, Dana.CSR.digunakan.untuk.membangun.Infrastruktur.desa.misalnya.jalan =
+          input$Dana.CSR.digunakan.untuk.membangun.Infrastruktur.desa.misalnya.jalan, Dana.CSR.membantu.permodalan.bagi.kegiatan.BUMDes =
+          input$Dana.CSR.membantu.permodalan.bagi.kegiatan.BUMDes, 
+        stringsAsFactors = FALSE
+      )
+      
+      successPeningkatanPAD <- safeWriteCSV(data_peningkatanPAD, paste0(pathTambahPeningkatanPAD, ".tmp"))
+      if (successPeningkatanPAD){
+        file.rename(paste0(pathTambahPeningkatanPAD, ".tmp"), pathTambahPeningkatanPAD)
+        
+        resetInputs()
+        render_server_peningkatan_PAD(FALSE)
+        
+        session$sendCustomMessage("form_update_false", "0")
+        
+        showModal(modalDialog(
+          title = "Success",
+          "Data berhasil diperbarui",
+          easyClose = TRUE,
+          footer = NULL
+        ))
+      }else {        
+        unlink(paste0(pathTambahPeningkatanPAD, ".tmp"))
+
+        removeModal()
+        
+        showModal(modalDialog(
+          title = "Error",
+          "Gagal menambahkan data.",
+          easyClose = TRUE,
+          footer = NULL
+        ))
+      }
+    }
+    params = TRUE
+  })
 }
 
-render_server_peningkatan_PAD()
+render_server_peningkatan_PAD(TRUE)
