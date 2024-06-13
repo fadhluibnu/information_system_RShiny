@@ -1,4 +1,5 @@
-render_server_karakteristik <- function() {
+render_server_karakteristik <- function(params) {
+  pathTambahKarakteristik <- "data/Karakteristik.csv"
   data <- read_csv("data/Karakteristik.csv")
   data <- data %>%
     mutate(jenis.kelamin = ifelse(jenis.kelamin == 1, "Perempuan", "Laki-Laki"),
@@ -20,6 +21,10 @@ render_server_karakteristik <- function() {
     data_display <- data %>%
       rename(
         `Jenis Kelamin` = jenis.kelamin, 
+        `Pekerjaan Utama` = Pekerjaan.Utama,
+        `Pekerjaan Sampingan` = Pekerjaan.Sampingan,
+        `Memulai Usaha` = Memulai.Usaha,
+        `Jenis Usaha` = Jenis.Usaha,
         `Skala Usaha` = skala.usaha) 
     
     action_buttons <- paste0(
@@ -251,10 +256,70 @@ render_server_karakteristik <- function() {
     updateTextInput(session, "Jenis.Usaha", value = data_karakteristik$Jenis.Usaha)
     updateSelectInput(session, "skala.usaha", selected  = data_karakteristik$skala.usaha)
     
-    selected_id(id)
+    session$sendCustomMessage("selected_id_handler", id)
     
   })
   
+  observeEvent(input$cancelKarakteristik, {
+    session$sendCustomMessage("form_update_false", "0")
+  })
+  
+  observeEvent(input$updateKarakteristik, {
+    
+    if (params == TRUE){
+      showModal(modalDialog(
+        title = "Loading...",
+        "Proses Penambahan Data",
+        easyClose = FALSE,
+        footer = NULL
+      ))
+      
+      data_karakteristik <- loadDataKarakteristik()
+      data_karakteristik[data_karakteristik$No == input$selected_id, ] <- data.frame(
+        No = input$selected_id,
+        Nama = input$Nama,
+        jenis.kelamin = input$jenis.kelamin,
+        Usia = input$Usia,
+        Pendidikan = input$Pendidikan,
+        Pekerjaan.Utama = input$Pekerjaan.Utama,
+        Pekerjaan.Sampingan = input$Pekerjaan.Sampingan,
+        Memulai.Usaha = input$Memulai.Usaha,
+        Jenis.Usaha = input$Jenis.Usaha,
+        skala.usaha = input$skala.usaha,
+        stringsAsFactors = FALSE
+      )
+      successKarakteristik <- safeWriteCSV(data_karakteristik, paste0(pathTambahKarakteristik, ".tmp"))
+      if (successKarakteristik) {
+        file.rename(paste0(pathTambahKarakteristik, ".tmp"), pathTambahKarakteristik)
+        
+        resetInputs()
+          render_server_karakteristik(FALSE)
+        
+        removeModal()
+        
+        session$sendCustomMessage("form_update_false", "0")
+        
+        showModal(modalDialog(
+          title = "Success",
+          "Data berhasil ditambahkan.",
+          easyClose = TRUE,
+          footer = NULL
+        ))
+      } else {
+        unlink(paste0(pathTambahKarakteristik, ".tmp"))
+        
+        removeModal()
+        
+        showModal(modalDialog(
+          title = "Error",
+          "Gagal menambahkan data.",
+          easyClose = TRUE,
+          footer = NULL
+        ))
+      }
+    }
+    params = TRUE
+  })
 }
 
-render_server_karakteristik()
+render_server_karakteristik(TRUE)

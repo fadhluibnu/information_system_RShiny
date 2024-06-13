@@ -70,11 +70,14 @@ ui <- dashboardPage(
     $(document).on('click', '.update-btn', function() {
       var id = $(this).data('id');
       Shiny.setInputValue('update_id', id);
-      Shiny.setInputValue('form_update', true);
+      Shiny.setInputValue('form_update', '1');
     });
     $(document).on('click', '.delete-btn', function() {
       var id = $(this).data('id');
       Shiny.setInputValue('delete_id', id);
+    });
+    Shiny.addCustomMessageHandler('form_update_false', function(message) {
+      Shiny.setInputValue('form_update', '0');
     });
   "))
   )
@@ -93,14 +96,6 @@ server <- function(input, output, session) {
   source("pages/sikd/server_tambah_data.R", local=TRUE)
   source("pages/sikd/server_hapus_data.R", local=TRUE)
   
-  observeEvent(input$cancel, {
-    showModal(modalDialog(
-      title = "Success",
-      "Data berhasil dihapus.",
-      easyClose = TRUE,
-      footer = NULL
-    ))
-  })
 }
 
 shinyApp(ui, server)

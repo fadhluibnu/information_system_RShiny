@@ -41,9 +41,16 @@ tabItemKarakteristik <- tabItem(tabName = "karakteristik",
                                         plotOutput("pie_chart_skala_usaha"))
                                   )
                                 ),
-                                
+                                tags$script(HTML("
+                                  Shiny.addCustomMessageHandler('form_update_false', function(message) {
+                                    Shiny.setInputValue('form_update', '0');
+                                  });
+                                  Shiny.addCustomMessageHandler('selected_id_handler', function(message) {
+                                    Shiny.setInputValue('selected_id', message);
+                                  });
+                                ")),
                                 conditionalPanel(
-                                  condition = "input.form_update == true",
+                                  condition = "input.form_update == '1'",
                                   fluidRow(
                                     box(
                                       title = h3(tags$b("Tambah Data")),
@@ -88,8 +95,8 @@ tabItemKarakteristik <- tabItem(tabName = "karakteristik",
                                                     ),
                                         ),
                                       ),
-                                      actionButton("update", "Update"),
-                                      actionButton("cancel", "Cancel")
+                                      actionButton("updateKarakteristik", "Update"),
+                                      actionButton("cancelKarakteristik", "Cancel")
                                     )
                                   )
                                 ),

@@ -429,7 +429,7 @@ observeEvent(input$add, {
     file.rename(paste0(pathTambahPeningkatanProgramWisata, ".tmp"), pathTambahPeningkatanProgramWisata)
     
     resetInputs()
-    render_server_karakteristik()
+    render_server_karakteristik(TRUE)
     render_server_pendanaan()
     render_server_peningkatan_PAD()
     render_server_peningkatan_perekonomian()
@@ -507,7 +507,7 @@ observeEvent(input$delete_id, {
     file.rename(paste0(pathTambahPeningkatanPerekonomian, ".tmp"), pathTambahPeningkatanPerekonomian)
     file.rename(paste0(pathTambahPeningkatanProgramWisata, ".tmp"), pathTambahPeningkatanProgramWisata)
     
-    render_server_karakteristik()
+    render_server_karakteristik(TRUE)
     render_server_pendanaan()
     render_server_peningkatan_PAD()
     render_server_peningkatan_perekonomian()
