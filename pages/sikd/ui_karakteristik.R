@@ -53,7 +53,7 @@ tabItemKarakteristik <- tabItem(tabName = "karakteristik",
                                   condition = "input.form_update == '1'",
                                   fluidRow(
                                     box(
-                                      title = h3(tags$b("Tambah Data")),
+                                      title = h3(tags$b("Update Data")),
                                       status = "primary",
                                       width = 12,
                                       solidHeader = TRUE,

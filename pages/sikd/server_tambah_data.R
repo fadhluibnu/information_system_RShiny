@@ -114,25 +114,6 @@ loadDataKarakteristik <- function() {
       )
     }
 }
-  
-# reactive({
-#   if (file.exists(pathTambahKarakteristik)) {
-#     read.csv(pathTambahKarakteristik)
-#   } else {
-#     data.frame(
-#       No = character(),
-#       Nama = character(),
-#       jenis.kelamin = character(),
-#       Usia = character(),
-#       Pendidikan = character(),
-#       Pekerjaan.Utama = character(),
-#       Pekerjaan.Sampingan = character(),
-#       Memulai.Usaha = character(),
-#       Jenis.Usaha = character(),
-#       skala.usaha = character()
-#     )
-#   }
-# })
 
 # Potensi Desa
 loadDataPotensiDesa <- function(){
@@ -147,19 +128,6 @@ loadDataPotensiDesa <- function(){
       )
     }
 }
-  
-# reactive({
-#   if (file.exists(pathTambahPotensiDesa)) {
-#     read.csv(pathTambahPotensiDesa)
-#   } else {
-#     data.frame(
-#       No = integer(),
-#       Jenis.potensi=character(),	
-#       Bidang=character(),	
-#       Jumlah.satuan=character()
-#     )
-#   }
-# })
 
 # Pendanaan
 loadDataPendanaan <- function(){
@@ -430,11 +398,11 @@ observeEvent(input$add, {
     
     resetInputs()
     render_server_karakteristik(TRUE)
-    render_server_pendanaan()
-    render_server_peningkatan_PAD()
-    render_server_peningkatan_perekonomian()
-    render_server_peningkatan_wisata()
-    render_server_potensi_desa()
+    render_server_pendanaan(TRUE)
+    render_server_peningkatan_PAD(TRUE)
+    render_server_peningkatan_perekonomian(TRUE)
+    render_server_peningkatan_wisata(TRUE)
+    render_server_potensi_desa(TRUE)
     
     removeModal()
     
@@ -508,11 +476,11 @@ observeEvent(input$delete_id, {
     file.rename(paste0(pathTambahPeningkatanProgramWisata, ".tmp"), pathTambahPeningkatanProgramWisata)
     
     render_server_karakteristik(TRUE)
-    render_server_pendanaan()
-    render_server_peningkatan_PAD()
-    render_server_peningkatan_perekonomian()
-    render_server_peningkatan_wisata()
-    render_server_potensi_desa()
+    render_server_pendanaan(TRUE)
+    render_server_peningkatan_PAD(TRUE)
+    render_server_peningkatan_perekonomian(TRUE)
+    render_server_peningkatan_wisata(TRUE)
+    render_server_potensi_desa(TRUE)
     
     removeModal()
     

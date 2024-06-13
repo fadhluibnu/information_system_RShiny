@@ -1,4 +1,7 @@
-render_server_potensi_desa <- function() {
+render_server_potensi_desa <- function(params) {
+  
+  pathTambahPotensiDesa <- "data/PotensiDesa.csv"
+  
   pathPotensiDesa <- read_csv("data/PotensiDesa.csv")
   output$data_table_PotensiDesa <- renderDT({
     data <- pathPotensiDesa%>%
@@ -24,6 +27,8 @@ render_server_potensi_desa <- function() {
         "  if (!$('#potensiDesa-checkbox').length) {",
         "  $(thead).closest('thead').prepend(`
       <tr id=\"potensiDesa-checkbox\" style=\"position: relative;top: 10px;\"> 
+        <th style=\"border: none; padding: 0px 10px 0px 14px;\">
+        </th> 
         <th style=\"border: none; padding: 0px 10px 0px 14px;\">
         </th> 
         <th style=\"border: none; padding: 0px 10px 0px 14px;\">
@@ -77,6 +82,74 @@ render_server_potensi_desa <- function() {
              hovermode = 'closest')
     # 'text+percent'
   })
+  
+  observeEvent(input$update_id, {
+    id <- as.integer(input$update_id)
+    data_potensi_desa <- loadDataPotensiDesa()
+    data_potensi_desa <- data_potensi_desa[data_potensi_desa$No == id, ]
+    
+    
+    updateTextInput(session,"Jenis.potensi", value = data_potensi_desa$Jenis.potensi)	
+    updateTextInput(session,"Bidang", value = data_potensi_desa$Bidang)	
+    updateTextInput(session,"Jumlah.satuan", value = data_potensi_desa$Jumlah.satuan)
+    
+    session$sendCustomMessage("selected_id_handler", id)
+    
+  })
+  
+  observeEvent(input$cancelPotensiDesa, {
+    session$sendCustomMessage("form_update_false", "0")
+  })
+  
+  observeEvent(input$updatePotensiDesa, {
+    
+    if (params == TRUE){
+      showModal(modalDialog(
+        title = "Loading...",
+        "Proses Update Data",
+        easyClose = FALSE,
+        footer = NULL
+      ))
+      
+      data_potensi_desa <- loadDataPotensiDesa()
+      data_potensi_desa[data_potensi_desa$No == input$selected_id, ] <- data.frame(
+        No = input$selected_id,
+        Jenis.potensi=input$Jenis.potensi,	
+        Bidang=input$Bidang,	
+        Jumlah.satuan=input$Jumlah.satuan,
+        stringsAsFactors = FALSE
+      )
+      
+      successPotensiDesa <- safeWriteCSV(data_potensi_desa, paste0(pathTambahPotensiDesa, ".tmp"))
+      if (successPotensiDesa){
+        file.rename(paste0(pathTambahPotensiDesa, ".tmp"), pathTambahPotensiDesa)
+        resetInputs()
+        render_server_potensi_desa(FALSE)
+        
+        session$sendCustomMessage("form_update_false", "0")
+        
+        showModal(modalDialog(
+          title = "Success",
+          "Data berhasil diperbarui",
+          easyClose = TRUE,
+          footer = NULL
+        ))
+      }else {
+        
+        unlink(paste0(pathTambahPotensiDesa, ".tmp"))
+        
+        removeModal()
+        
+        showModal(modalDialog(
+          title = "Error",
+          "Gagal menambahkan data.",
+          easyClose = TRUE,
+          footer = NULL
+        ))
+      }
+    }
+    params = TRUE
+  })
 }
 
-render_server_potensi_desa()
+render_server_potensi_desa(TRUE)

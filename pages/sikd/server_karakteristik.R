@@ -239,8 +239,6 @@ render_server_karakteristik <- function(params) {
       theme(legend.position = "none") # Remove legend
   })
   
-  selected_id <- reactiveVal(NULL)
-  
   observeEvent(input$update_id, {
     id <- as.integer(input$update_id)
     data_karakteristik <- loadDataKarakteristik()
@@ -269,7 +267,7 @@ render_server_karakteristik <- function(params) {
     if (params == TRUE){
       showModal(modalDialog(
         title = "Loading...",
-        "Proses Penambahan Data",
+        "Proses Update Data",
         easyClose = FALSE,
         footer = NULL
       ))
@@ -293,7 +291,7 @@ render_server_karakteristik <- function(params) {
         file.rename(paste0(pathTambahKarakteristik, ".tmp"), pathTambahKarakteristik)
         
         resetInputs()
-          render_server_karakteristik(FALSE)
+        render_server_karakteristik(FALSE)
         
         removeModal()
         
@@ -301,7 +299,7 @@ render_server_karakteristik <- function(params) {
         
         showModal(modalDialog(
           title = "Success",
-          "Data berhasil ditambahkan.",
+          "Data berhasil diperbarui",
           easyClose = TRUE,
           footer = NULL
         ))
@@ -312,7 +310,7 @@ render_server_karakteristik <- function(params) {
         
         showModal(modalDialog(
           title = "Error",
-          "Gagal menambahkan data.",
+          "Gagal memperbrui data.",
           easyClose = TRUE,
           footer = NULL
         ))
