@@ -1,5 +1,5 @@
-render_server_pendanaan <- function() {
-  
+render_server_pendanaan <- function(params) {
+  pathTambahPendanaan <- "data/Pendanaan.csv"
   data_pendanaan <- read_csv("data/Pendanaan.csv")
   
   output$data_table_pendanaan <- renderDT({
@@ -98,6 +98,8 @@ render_server_pendanaan <- function() {
         "  if (!$('#pendanaan-checkbox').length) {",
         "  $(thead).closest('thead').prepend(`
       <tr id=\"pendanaan-checkbox\" style=\"position: relative;top: 10px;\"> 
+        <th style=\"border: none; padding: 0px 10px 0px 14px;\">
+        </th> 
         <th style=\"border: none; padding: 0px 10px 0px 14px;\">
         </th> 
         <th style=\"border: none; padding: 0px 10px 0px 14px;\">
@@ -649,6 +651,96 @@ render_server_pendanaan <- function() {
     analysisTextBantuanDesa <- "Masyarakat Desa Mekarsari mengharapkan bantuan dari Pemerintahan Desa berupa BLT setiap bulan, sembako, koperasi untuk modal usaha, pelatihan untuk menambah keterampilan, pembangunan infrastruktur, serta subsidi harga pupuk dan bibit."
     analysisTextBantuanDesa
   })
+  
+  
+  
+  observeEvent(input$update_id, {
+    id <- as.integer(input$update_id)
+    data_pendanaan <- loadDataPendanaan()
+    data_pendanaan <- data_pendanaan[data_pendanaan$No == id, ]
+    
+    updateSelectInput(session,"Apakah.BapakIbu.tahu.mengenai.pendanaan.untuk.mengembangkan.usaha", selected = data_pendanaan$Apakah.BapakIbu.tahu.mengenai.pendanaan.untuk.mengembangkan.usaha)
+    updateSelectInput(session,"Apakah.Bapak.Ibu.tahu.yang.dimaksud.dengan.dana.desa", selected = data_pendanaan$Apakah.Bapak.Ibu.tahu.yang.dimaksud.dengan.dana.desa)
+    updateSelectInput(session,"Apakah.Bapak.Ibu.tahu.yang.dimaksud.dengan.dana.CSR.Coorporate.Social.Responsibility", selected = data_pendanaan$Apakah.Bapak.Ibu.tahu.yang.dimaksud.dengan.dana.CSR.Coorporate.Social.Responsibility)
+    updateSelectInput(session, "Modal.Usaha.Bapak.Ibu.diperoleh.dari", selected = data_pendanaan$Modal.Usaha.Bapak.Ibu.diperoleh.dari)
+    updateTextInput(session, "Modal.awal", value = data_pendanaan$Modal.awal)
+    updateSelectInput(session,"Apakah.Bapak.Ibu.mengetahui.adanya.perusahaan.listrik", selected = data_pendanaan$Apakah.Bapak.Ibu.mengetahui.adanya.perusahaan.listrik)
+    updateTextInput(session,"Jika.tahu.sudah.berapa.lama.perusahaan.beraktifitas.tahun",value = data_pendanaan$Jika.tahu.sudah.berapa.lama.perusahaan.beraktifitas.tahun)
+    updateSelectInput(session,"Apakah.perusahaan.memberikan.bantuan.buat.masyarakat.desa", selected = data_pendanaan$Apakah.perusahaan.memberikan.bantuan.buat.masyarakat.desa)
+    updateSelectInput(session, "dalam.bentuk", selected = data_pendanaan$dalam.bentuk)
+    updateSelectInput(session,"Apakah.pemerintah.desa.memberikan.bantuan.buat.masyarakat", selected = data_pendanaan$Apakah.pemerintah.desa.memberikan.bantuan.buat.masyarakat)
+    updateSelectInput(session, "Jika.ya.dalam.bentuk", selected = data_pendanaan$Jika.ya.dalam.bentuk)
+    
+    session$sendCustomMessage("selected_id_handler", id)
+    
+  })
+  
+  observeEvent(input$cancelPendanaan, {
+    session$sendCustomMessage("form_update_false", "0")
+  })
+  
+  observeEvent(input$updatePendanaan, {
+    
+    if (params == TRUE){
+      showModal(modalDialog(
+        title = "Loading...",
+        "Proses Update Data",
+        easyClose = FALSE,
+        footer = NULL
+      ))
+      
+      data_pendanaan <- loadDataPendanaan()
+      data_pendanaan[data_pendanaan$No == input$selected_id, ] <- data.frame(
+        No = input$selected_id,
+        Apakah.BapakIbu.tahu.mengenai.pendanaan.untuk.mengembangkan.usaha = input$Apakah.BapakIbu.tahu.mengenai.pendanaan.untuk.mengembangkan.usaha,
+        Apakah.Bapak.Ibu.tahu.yang.dimaksud.dengan.dana.desa = input$Apakah.Bapak.Ibu.tahu.yang.dimaksud.dengan.dana.desa,
+        Apakah.Bapak.Ibu.tahu.yang.dimaksud.dengan.dana.CSR.Coorporate.Social.Responsibility =
+          input$Apakah.Bapak.Ibu.tahu.yang.dimaksud.dengan.dana.CSR.Coorporate.Social.Responsibility,
+        Modal.Usaha.Bapak.Ibu.diperoleh.dari = input$Modal.Usaha.Bapak.Ibu.diperoleh.dari,
+        Modal.awal = input$Modal.awal,
+        Apakah.Bapak.Ibu.mengetahui.adanya.perusahaan.listrik = input$Apakah.Bapak.Ibu.mengetahui.adanya.perusahaan.listrik,
+        Jika.tahu.sudah.berapa.lama.perusahaan.beraktifitas.tahun = input$Jika.tahu.sudah.berapa.lama.perusahaan.beraktifitas.tahun,
+        Apakah.perusahaan.memberikan.bantuan.buat.masyarakat.desa = input$Apakah.perusahaan.memberikan.bantuan.buat.masyarakat.desa,
+        dalam.bentuk = input$dalam.bentuk,
+        Apakah.pemerintah.desa.memberikan.bantuan.buat.masyarakat = input$Apakah.pemerintah.desa.memberikan.bantuan.buat.masyarakat,
+        Jika.ya.dalam.bentuk = input$Jika.ya.dalam.bentuk,
+        stringsAsFactors = FALSE
+      )
+      
+      successPendanaan <- safeWriteCSV(data_pendanaan, paste0(pathTambahPendanaan, ".tmp"))
+      
+      if(successPendanaan){
+        file.rename(paste0(pathTambahPendanaan, ".tmp"), pathTambahPendanaan)
+        
+        resetInputs()
+        render_server_pendanaan(FALSE)
+        
+        session$sendCustomMessage("form_update_false", "0")
+        
+        showModal(modalDialog(
+          title = "Success",
+          "Data berhasil diperbarui",
+          easyClose = TRUE,
+          footer = NULL
+        ))
+        
+      }else{
+        unlink(paste0(pathTambahPendanaan, ".tmp"))
+        
+        removeModal()
+        
+        showModal(modalDialog(
+          title = "Error",
+          "Gagal menambahkan data.",
+          easyClose = TRUE,
+          footer = NULL
+        ))
+      }
+      
+    }
+    
+    params = TRUE
+  })
 }
 
-render_server_pendanaan()
+render_server_pendanaan(TRUE)
