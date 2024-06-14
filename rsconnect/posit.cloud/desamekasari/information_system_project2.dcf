@@ -1,0 +1,12 @@
+name: information_system_project2
+title: information_system_project
+username: desamekasari
+account: desamekasari
+server: posit.cloud
+hostUrl: https://api.posit.cloud/v1
+appId: 8336573
+bundleId: 8742017
+url: https://posit.cloud/content/8336573
+version: 1
+asMultiple: FALSE
+asStatic: FALSE

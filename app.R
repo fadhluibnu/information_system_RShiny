@@ -14,6 +14,9 @@ library(tidytext)
 library(wordcloud2)
 library(plotly)
 
+library(rsconnect)
+
+
 source("pages/sikd/ui_karakteristik.R")
 source("pages/sikd/ui_pendanaan.R")
 source("pages/profil/ui_profilDesa.R")
@@ -22,6 +25,7 @@ source("pages/sikd/ui_peningkatanPerekonomian.R")
 source("pages/sikd/ui_peningkatanProgramWisata.R")
 source("pages/sikd/ui_potensiDesa.R")
 source("pages/sikd/ui_tambah_data.R")
+source("pages/aspek/ui_identitas.R")
 
 ui <- dashboardPage(
   skin = "black",
@@ -51,7 +55,19 @@ ui <- dashboardPage(
                  menuSubItem("Peningkatan PAD", tabName = "PeningkatanPAD", icon = icon("money-bill-trend-up")),
                menuSubItem("Peningkatan Perekonomian", tabName = "PeningkatanPerekonomian", icon = icon("arrow-up-right-dots")),
                menuSubItem("Peningkatan Program Wisata", tabName = "programwisata", icon = icon("arrow-up-from-water-pump"))
-      )
+      ),
+      menuItem('Aspek', icon = icon('list'),
+               menuSubItem(
+                 'Tambah Data', 
+                 tabName = 'tambahData',
+                 icon = icon('file-circle-plus')
+              ),
+               menuSubItem(
+                 'Idensitas', 
+                 tabName = 'identitas', 
+                 icon = icon('users')
+              )
+    )
     )
   ),
   dashboardBody(
@@ -64,7 +80,8 @@ ui <- dashboardPage(
       tabItemPeningkatanPerekonomian,
       tabItemPeningkatanProgramWisata,
       tabItemPotensiDesa,
-      tabItemTambahData
+      tabItemTambahData,
+      tabItemIdentitas
     ),
     tags$script(HTML("
     $(document).on('click', '.update-btn', function() {
@@ -76,6 +93,17 @@ ui <- dashboardPage(
       var id = $(this).data('id');
       Shiny.setInputValue('delete_id', id);
     });
+    
+    $(document).on('click', '.update-btn-aspek', function() {
+      var id = $(this).data('id');
+      Shiny.setInputValue('update_aspek_id', id);
+      Shiny.setInputValue('form_update_aspek', '1');
+    });
+    $(document).on('click', '.delete-btn-aspek', function() {
+      var id = $(this).data('id');
+      Shiny.setInputValue('delete_aspek_id', id);
+    });
+    
     Shiny.addCustomMessageHandler('form_update_false', function(message) {
       Shiny.setInputValue('form_update', '0');
     });
@@ -95,6 +123,7 @@ server <- function(input, output, session) {
   source("pages/sikd/server_potensiDesa.R", local=TRUE)
   source("pages/sikd/server_tambah_data.R", local=TRUE)
   source("pages/sikd/server_hapus_data.R", local=TRUE)
+  source("pages/aspek/server_identitas.R", local=TRUE)
   
 }
 

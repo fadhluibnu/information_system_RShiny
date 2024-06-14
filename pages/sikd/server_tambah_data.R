@@ -1,3 +1,4 @@
+pathTambahProfilDesa <- "data/profil_desa.csv"
 pathTambahKarakteristik <- "data/Karakteristik.csv"
 pathTambahPotensiDesa <- "data/PotensiDesa.csv"
 pathTambahPendanaan <- "data/Pendanaan.csv"
