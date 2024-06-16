@@ -26,6 +26,8 @@ source("pages/sikd/ui_peningkatanProgramWisata.R")
 source("pages/sikd/ui_potensiDesa.R")
 source("pages/sikd/ui_tambah_data.R")
 source("pages/aspek/ui_identitas.R")
+source("pages/aspek/ui_aspekEkonomi.R")
+source("pages/aspek/ui_aspekSosial.R")
 
 ui <- dashboardPage(
   skin = "black",
@@ -66,6 +68,16 @@ ui <- dashboardPage(
                  'Idensitas', 
                  tabName = 'identitas', 
                  icon = icon('users')
+              ),
+              menuSubItem(
+                'Aspek Ekonomi', 
+                tabName = 'aspekEkonomi', 
+                icon = icon('magnifying-glass-dollar')
+              ),
+              menuSubItem(
+                'Aspek Sosial', 
+                tabName = 'aspekSosial', 
+                icon = icon('user-group')
               )
     )
     )
@@ -81,7 +93,9 @@ ui <- dashboardPage(
       tabItemPeningkatanProgramWisata,
       tabItemPotensiDesa,
       tabItemTambahData,
-      tabItemIdentitas
+      tabItemIdentitas,
+      tabItemAspekEkonomi,
+      tabItemAspekSosial
     ),
     tags$script(HTML("
     $(document).on('click', '.update-btn', function() {
@@ -123,8 +137,9 @@ server <- function(input, output, session) {
   # source("pages/sikd/server_potensiDesa.R", local=TRUE)
   # source("pages/sikd/server_tambah_data.R", local=TRUE)
   # source("pages/sikd/server_hapus_data.R", local=TRUE)
-  source("pages/aspek/server_identitas.R", local=TRUE)
-  
+  # source("pages/aspek/server_identitas.R", local=TRUE)
+  # source("pages/aspek/server_aspekEkonomi.R", local=TRUE)
+  source("pages/aspek/server_aspekSosial.R", local=TRUE)
 }
 
 shinyApp(ui, server)

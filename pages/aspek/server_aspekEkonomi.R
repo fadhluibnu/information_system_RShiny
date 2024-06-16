@@ -203,7 +203,7 @@ render_server_aspek_ekonomi <- function(params) {
     session$sendCustomMessage("form_update_aspek", "0")
   })
   
-  observeEvent(input$updateAspekEkonomi, {
+  observeEvent(input$update_aspek_id, {
     id <- as.integer(input$update_aspek_id)
     data <- loadDataAspekEkonomi()
     data <- data[data$No == id, ]
