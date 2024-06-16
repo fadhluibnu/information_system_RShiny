@@ -1,6 +1,60 @@
 tabItemIdentitas <- tabItem(
   tabName = "identitas",
-  
+  fluidRow(
+    conditionalPanel(
+      condition = "input.jenis_kelamin == true",
+      box(title = "Jenis Kelamin", width = 6, 
+          plotOutput("pie_chart_jenis_kelamin_identitas"))
+    ),
+    conditionalPanel(
+      condition = "input.pendidikan == true",
+      box( title = "Pendidikan", width = 6, 
+           plotOutput("pie_chart_pendidikan_identitas"))
+    ),
+    conditionalPanel(
+      condition = "input.usia == true",
+      box(id = "age_bar_chart_box", title = "Distribusi Usia", width = 12, 
+          plotOutput("usia_identitas_bar_chart"))
+    ),
+    conditionalPanel(
+      condition = "input.status_perkawinan == true || input.apakah_memiliki_anak == true || input.jumlah_anak == true",
+      box(title = "Status Perkawinan dan Kepemilikan Ana",
+          width = 12,
+          fluidRow(
+            box(title = "Status Perkawinan dan Kepemilikan Anak", 
+                status = "primary", solidHeader = TRUE, 
+                width = 12,
+                h5(tags$b("Status perkawinan dan Apakah memiliki anak?")),
+                plotOutput("barChartPerkawinanKepemilikanAnak"),
+                box(
+                  title = "Hasil Analisis",
+                  width = 12,
+                  textOutput("analysisTextPerkawinanKepemilikanAnak")
+                ),
+            ),
+          ),
+      ),
+    ),
+    conditionalPanel(
+      condition = "input.apakah_bekerja == true || input.pekerjaan == true",
+      box(title = "Pekerjaan",
+          width = 12,
+          fluidRow(
+            box(title = "Pekerjaan", 
+                status = "primary", solidHeader = TRUE, 
+                width = 12,
+                h5(tags$b("Apakah anda bekerja saat ini? Jika bekerja, apa pekerjaan anda saat ini?")),
+                plotOutput("barChartPekerjaanIdentitas"),
+                box(
+                  title = "Hasil Analisis",
+                  width = 12,
+                  textOutput("analysisTextPekerjaanIdentitas")
+                ),
+            ),
+          ),
+      ),
+    )
+  ),
   tags$script(HTML("
                   Shiny.addCustomMessageHandler('form_update_aspek', function(message) {
                     Shiny.setInputValue('form_update_aspek', '0');

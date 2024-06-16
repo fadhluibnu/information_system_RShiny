@@ -114,15 +114,15 @@ ui <- dashboardPage(
 
 server <- function(input, output, session) {
   
-  source("pages/profil/server_profilDesa.R", local=TRUE)
-  source("pages/sikd/server_karakteristik.R", local=TRUE)
-  source("pages/sikd/server_pendanaan.R", local=TRUE)
-  source("pages/sikd/server_peningkatanPAD.R", local=TRUE)
-  source("pages/sikd/server_peningkatanPerekonomian.R", local=TRUE)
-  source("pages/sikd/server_peningkatanProgramWisata.R", local=TRUE)
-  source("pages/sikd/server_potensiDesa.R", local=TRUE)
-  source("pages/sikd/server_tambah_data.R", local=TRUE)
-  source("pages/sikd/server_hapus_data.R", local=TRUE)
+  # source("pages/profil/server_profilDesa.R", local=TRUE)
+  # source("pages/sikd/server_karakteristik.R", local=TRUE)
+  # source("pages/sikd/server_pendanaan.R", local=TRUE)
+  # source("pages/sikd/server_peningkatanPAD.R", local=TRUE)
+  # source("pages/sikd/server_peningkatanPerekonomian.R", local=TRUE)
+  # source("pages/sikd/server_peningkatanProgramWisata.R", local=TRUE)
+  # source("pages/sikd/server_potensiDesa.R", local=TRUE)
+  # source("pages/sikd/server_tambah_data.R", local=TRUE)
+  # source("pages/sikd/server_hapus_data.R", local=TRUE)
   source("pages/aspek/server_identitas.R", local=TRUE)
   
 }
