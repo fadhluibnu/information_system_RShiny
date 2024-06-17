@@ -29,6 +29,7 @@ source("pages/aspek/ui_identitas.R")
 source("pages/aspek/ui_aspekEkonomi.R")
 source("pages/aspek/ui_aspekSosial.R")
 source("pages/aspek/ui_aspekTemporal.R")
+source("pages/aspek/ui_aspekSpatial.R")
 
 ui <- dashboardPage(
   title = "SISTEM INFORMASI KETERBUKAAN DESA MEKARSARI",
@@ -85,6 +86,11 @@ ui <- dashboardPage(
                 'Aspek Temporal', 
                 tabName = 'aspekTemporal', 
                 icon = icon('user-clock')
+              ),
+              menuSubItem(
+                'Aspek Spatial', 
+                tabName = 'aspekSpatial', 
+                icon = icon('house-medical')
               )
     )
     )
@@ -103,7 +109,8 @@ ui <- dashboardPage(
       tabItemIdentitas,
       tabItemAspekEkonomi,
       tabItemAspekSosial,
-      tabItemAspekTemporal
+      tabItemAspekTemporal,
+      tabItemAspekSpatial
     ),
     tags$style(HTML("
     .main-sidebar{
@@ -161,7 +168,8 @@ server <- function(input, output, session) {
   # source("pages/aspek/server_identitas.R", local=TRUE)
   # source("pages/aspek/server_aspekEkonomi.R", local=TRUE)
   # source("pages/aspek/server_aspekSosial.R", local=TRUE)
-  source("pages/aspek/server_aspekTemporal.R", local=TRUE)
+  # source("pages/aspek/server_aspekTemporal.R", local=TRUE)
+  source("pages/aspek/server_aspekSpatial.R", local=TRUE)
 }
 
 shinyApp(ui, server)

@@ -44,9 +44,9 @@ render_server_aspek_temporal <- function(params) {
       options = list(
         headerCallback = JS(
           "function(thead, data, start, end, display){",
-          "  if (!$('#aspekEkonomi-checkbox').length) {",
+          "  if (!$('#aspekTemporal-checkbox').length) {",
           "  $(thead).closest('thead').prepend(` 
-      <tr id=\"aspekEkonomi-checkbox\" style=\"position: relative;top: 10px;\"> 
+      <tr id=\"aspekTemporal-checkbox\" style=\"position: relative;top: 10px;\"> 
         <th style=\"border: none; padding: 0px 10px 0px 14px;\">
         </th>  
         <th style=\"border: none; padding: 0px 10px 0px 14px;\">
