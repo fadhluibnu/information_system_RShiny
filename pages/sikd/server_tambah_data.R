@@ -413,6 +413,7 @@ observeEvent(input$add, {
       easyClose = TRUE,
       footer = NULL
     ))
+    # session$reload()
   } else {
     unlink(paste0(pathTambahKarakteristik, ".tmp"))
     unlink(paste0(pathTambahPotensiDesa, ".tmp"))

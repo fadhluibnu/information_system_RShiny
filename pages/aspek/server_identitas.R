@@ -232,6 +232,7 @@ render_server_identitas <- function (params) {
       if(saveData(data, temp)){
         file.rename(temp, pathIdentitasResponden)
         render_server_identitas(FALSE)
+        
         removeModal()
         
         session$sendCustomMessage("form_update_aspek", "0")

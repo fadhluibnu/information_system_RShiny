@@ -18,11 +18,11 @@ tabItemAspekSpatial <- tabItem(
         width = 12,
         solidHeader = TRUE,
         
-        # Identitas
+        # Spatial
         box(
           status = "primary",
           width = 12,
-          h4(tags$b("Aspek Temporal")),
+          h4(tags$b("Aspek Spatial")),
           numericInput(
             'Seberapa.jauh.rumah.Anda.dari.pusat.desa.atau.kota.terdekat.Kec.Sagaranten.KM', 'Seberapa jauh rumah Anda dari pusat desa atau kota terdekat? (Kec. Sagaranten) .... KM',
             value = 0

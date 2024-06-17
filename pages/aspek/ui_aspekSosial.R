@@ -17,7 +17,7 @@ tabItemAspekSosial <- tabItem(
         width = 12,
         solidHeader = TRUE,
         
-        # Identitas
+        # Sosial
         box(
           status = "primary",
           width = 12,

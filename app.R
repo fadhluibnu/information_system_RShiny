@@ -30,6 +30,7 @@ source("pages/aspek/ui_aspekEkonomi.R")
 source("pages/aspek/ui_aspekSosial.R")
 source("pages/aspek/ui_aspekTemporal.R")
 source("pages/aspek/ui_aspekSpatial.R")
+source("pages/aspek/ui_tambah_hapus.R")
 
 ui <- dashboardPage(
   title = "SISTEM INFORMASI KETERBUKAAN DESA MEKARSARI",
@@ -62,11 +63,7 @@ ui <- dashboardPage(
                menuSubItem("Peningkatan Program Wisata", tabName = "programwisata", icon = icon("arrow-up-from-water-pump"))
       ),
       menuItem('Aspek', icon = icon('list'),
-               menuSubItem(
-                 'Tambah Data', 
-                 tabName = 'tambahData',
-                 icon = icon('file-circle-plus')
-              ),
+               menuSubItem("Tambah Data Aspek", tabName = "tambahdataAspek", icon = icon("file-circle-plus")),
                menuSubItem(
                  'Idensitas', 
                  tabName = 'identitas', 
@@ -98,6 +95,7 @@ ui <- dashboardPage(
   dashboardBody(
     useShinyjs(),
     tabItems(
+      tabItemTambahData,
       tabItemKarakteristik,
       tabItemPendanaan,
       tabItemProfilDesa,
@@ -105,7 +103,7 @@ ui <- dashboardPage(
       tabItemPeningkatanPerekonomian,
       tabItemPeningkatanProgramWisata,
       tabItemPotensiDesa,
-      tabItemTambahData,
+      tabItemTambahHapusAspek,
       tabItemIdentitas,
       tabItemAspekEkonomi,
       tabItemAspekSosial,
@@ -126,6 +124,7 @@ ui <- dashboardPage(
     }
     ")),
     tags$script(HTML("
+    
     $(document).on('click', '.update-btn', function() {
       var id = $(this).data('id');
       Shiny.setInputValue('update_id', id);
@@ -156,19 +155,20 @@ ui <- dashboardPage(
 
 server <- function(input, output, session) {
   
-  # source("pages/profil/server_profilDesa.R", local=TRUE)
-  # source("pages/sikd/server_karakteristik.R", local=TRUE)
-  # source("pages/sikd/server_pendanaan.R", local=TRUE)
-  # source("pages/sikd/server_peningkatanPAD.R", local=TRUE)
-  # source("pages/sikd/server_peningkatanPerekonomian.R", local=TRUE)
-  # source("pages/sikd/server_peningkatanProgramWisata.R", local=TRUE)
-  # source("pages/sikd/server_potensiDesa.R", local=TRUE)
-  # source("pages/sikd/server_tambah_data.R", local=TRUE)
+  source("pages/profil/server_profilDesa.R", local=TRUE)
+  source("pages/sikd/server_tambah_data.R", local=TRUE)
+  source("pages/sikd/server_karakteristik.R", local=TRUE)
+  source("pages/sikd/server_pendanaan.R", local=TRUE)
+  source("pages/sikd/server_peningkatanPAD.R", local=TRUE)
+  source("pages/sikd/server_peningkatanPerekonomian.R", local=TRUE)
+  source("pages/sikd/server_peningkatanProgramWisata.R", local=TRUE)
+  source("pages/sikd/server_potensiDesa.R", local=TRUE)
   # source("pages/sikd/server_hapus_data.R", local=TRUE)
-  # source("pages/aspek/server_identitas.R", local=TRUE)
-  # source("pages/aspek/server_aspekEkonomi.R", local=TRUE)
-  # source("pages/aspek/server_aspekSosial.R", local=TRUE)
-  # source("pages/aspek/server_aspekTemporal.R", local=TRUE)
+  source("pages/aspek/server_tambah_hapus.R", local=TRUE)
+  source("pages/aspek/server_identitas.R", local=TRUE)
+  source("pages/aspek/server_aspekEkonomi.R", local=TRUE)
+  source("pages/aspek/server_aspekSosial.R", local=TRUE)
+  source("pages/aspek/server_aspekTemporal.R", local=TRUE)
   source("pages/aspek/server_aspekSpatial.R", local=TRUE)
 }
 

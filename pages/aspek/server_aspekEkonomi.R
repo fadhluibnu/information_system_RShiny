@@ -294,6 +294,7 @@ render_server_aspek_ekonomi <- function(params) {
       if(saveData(data, temp)){
         file.rename(temp, pathTambahAspekEkonomi)
         render_server_aspek_ekonomi(FALSE)
+        
         removeModal()
         
         session$sendCustomMessage("form_update_aspek", "0")

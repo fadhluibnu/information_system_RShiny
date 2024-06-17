@@ -17,7 +17,7 @@ tabItemAspekEkonomi <- tabItem(
         width = 12,
         solidHeader = TRUE,
         
-        # Identitas
+        # Ekonomi
         box(
           status = "primary",
           width = 12,
