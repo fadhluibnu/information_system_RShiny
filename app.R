@@ -28,8 +28,10 @@ source("pages/sikd/ui_tambah_data.R")
 source("pages/aspek/ui_identitas.R")
 source("pages/aspek/ui_aspekEkonomi.R")
 source("pages/aspek/ui_aspekSosial.R")
+source("pages/aspek/ui_aspekTemporal.R")
 
 ui <- dashboardPage(
+  title = "SISTEM INFORMASI KETERBUKAAN DESA MEKARSARI",
   skin = "black",
   dashboardHeader(
     title = tags$div(
@@ -78,6 +80,11 @@ ui <- dashboardPage(
                 'Aspek Sosial', 
                 tabName = 'aspekSosial', 
                 icon = icon('user-group')
+              ),
+              menuSubItem(
+                'Aspek Temporal', 
+                tabName = 'aspekTemporal', 
+                icon = icon('user-clock')
               )
     )
     )
@@ -95,8 +102,22 @@ ui <- dashboardPage(
       tabItemTambahData,
       tabItemIdentitas,
       tabItemAspekEkonomi,
-      tabItemAspekSosial
+      tabItemAspekSosial,
+      tabItemAspekTemporal
     ),
+    tags$style(HTML("
+    .main-sidebar{
+      position: fixed;
+    }
+    .main-header{
+      position: fixed;
+      width: 100%;
+    }
+    .content-wrapper{
+    min-height: 307px;
+    margin-top: 50px;
+    }
+    ")),
     tags$script(HTML("
     $(document).on('click', '.update-btn', function() {
       var id = $(this).data('id');
@@ -139,7 +160,8 @@ server <- function(input, output, session) {
   # source("pages/sikd/server_hapus_data.R", local=TRUE)
   # source("pages/aspek/server_identitas.R", local=TRUE)
   # source("pages/aspek/server_aspekEkonomi.R", local=TRUE)
-  source("pages/aspek/server_aspekSosial.R", local=TRUE)
+  # source("pages/aspek/server_aspekSosial.R", local=TRUE)
+  source("pages/aspek/server_aspekTemporal.R", local=TRUE)
 }
 
 shinyApp(ui, server)
