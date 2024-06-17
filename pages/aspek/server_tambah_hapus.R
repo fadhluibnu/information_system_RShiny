@@ -383,3 +383,76 @@ observeEvent(input$addAspek, {
   }
   
 })
+
+
+# Delete data
+observeEvent(input$delete_aspek_id, {
+  
+  showModal(modalDialog(
+    title = "Loading...",
+    "Proses Penghapusan Data",
+    easyClose = FALSE,
+    footer = NULL
+  ))
+  
+  No <- as.integer(input$delete_aspek_id)
+  
+  dataIdentitasResponden <- loadDataIdentitasResponden()
+  dataAspekEkonomi <- loadDataAspekEkonomi()
+  dataAspekSosial <- loadDataAspekSosial()
+  dataAspekTemporal <- loadDataAspekTemporal()
+  dataAspekSpatial <- loadDataAspekSpatial()
+  
+  dataIdentitasResponden <- dataIdentitasResponden[dataIdentitasResponden$No != No, ]
+  dataAspekEkonomi <- dataAspekEkonomi[dataAspekEkonomi$No != No, ]
+  dataAspekSosial <- dataAspekSosial[dataAspekSosial$No != No, ]
+  dataAspekTemporal <- dataAspekTemporal[dataAspekTemporal$No != No, ]
+  dataAspekSpatial <- dataAspekSpatial[dataAspekSpatial$No != No, ]
+  
+  
+  saveIdentitas <- safeWriteCSV(dataIdentitasResponden, paste0(pathIdentitasResponden, ".tmp"))
+  saveEkonomi <- safeWriteCSV(dataAspekEkonomi, paste0(pathTambahAspekEkonomi, ".tmp"))
+  saveSosial <- safeWriteCSV(dataAspekSosial, paste0(pathTambahAspekSosial, ".tmp"))
+  saveTemporal <- safeWriteCSV(dataAspekTemporal, paste0(pathTambahAspekTemporal, ".tmp"))
+  saveSpatial <- safeWriteCSV(dataAspekSpatial, paste0(pathTambahAspekSpatial, ".tmp"))
+  
+  if(saveIdentitas && saveEkonomi && saveSosial && saveTemporal && saveSpatial){
+    
+    file.rename(paste0(pathIdentitasResponden, ".tmp"), pathIdentitasResponden)
+    file.rename(paste0(pathTambahAspekEkonomi, ".tmp"), pathTambahAspekEkonomi)
+    file.rename(paste0(pathTambahAspekSosial, ".tmp"), pathTambahAspekSosial)
+    file.rename(paste0(pathTambahAspekTemporal, ".tmp"), pathTambahAspekTemporal)
+    file.rename(paste0(pathTambahAspekSpatial, ".tmp"), pathTambahAspekSpatial)
+    
+    render_server_identitas(TRUE)
+    render_server_aspek_ekonomi(TRUE)
+    render_server_aspek_sosial(TRUE)
+    render_server_aspek_temporal(TRUE)
+    render_server_aspek_spatial(TRUE)
+    
+    removeModal()
+    
+    showModal(modalDialog(
+      title = "Success",
+      "Data berhasil dihapus",
+      easyClose = TRUE,
+      footer = NULL
+    ))
+    
+  } else {
+    unlink(paste0(pathIdentitasResponden, ".tmp"))
+    unlink(paste0(pathTambahAspekEkonomi, ".tmp"))
+    unlink(paste0(pathTambahAspekSosial, ".tmp"))
+    unlink(paste0(pathTambahAspekTemporal, ".tmp"))
+    unlink(paste0(pathTambahAspekSpatial, ".tmp"))
+    
+    removeModal()
+    
+    showModal(modalDialog(
+      title = "Error",
+      "Gagal menghapus data.",
+      easyClose = TRUE,
+      footer = NULL
+    ))
+  }
+})
