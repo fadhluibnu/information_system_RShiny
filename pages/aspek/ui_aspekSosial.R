@@ -70,7 +70,61 @@ tabItemAspekSosial <- tabItem(
       ),
     )
   ),
-  
+  conditionalPanel(
+    condition = "input.tinggal_didesa == true || input.asal_tempat == true",
+    box(title = "Asal Tinggal",
+        width = 12,
+        fluidRow(
+          box(title = "Tinggal didesa sejak kapan", 
+              status = "primary", solidHeader = TRUE, 
+              width = 12,
+              h5(tags$b("Apakakah tinggal di desa ini sejak lahir? jika tidak sebutkan?")),
+              plotlyOutput("barChartTinggalDidesa"),
+              box(
+                title = "Hasil Analisis",
+                width = 12,
+                textOutput("analysisTextTinggalDidesa")
+              ),
+          ),
+        ),
+    ),
+  ),
+  conditionalPanel(
+    condition = "input.kegiatan_masyarakat == true",
+    box(title = "Aktif Kegiatan Kemasyarakatan", status = "primary", solidHeader = TRUE, 
+        width = 4,
+        h5("Apakah Anda aktif dalam kegiatan sosial kemasyarakatan di desa ini?"),
+        plotOutput("pieChartKegiatanKemasyrakatan"),
+        box(title = "Analisis Kegiatan Kemasyarakatan", 
+            status = "primary", 
+            solidHeader = TRUE, 
+            width = 12, 
+            textOutput("analysisKegiatanKemasyrakatan"))),
+  ),
+  conditionalPanel(
+    condition = "input.pertemuan_masyarakat == true",
+    box(title = "Mengikuti Pertemuan Desa", status = "primary", solidHeader = TRUE, 
+        width = 4,
+        h5("Seberapa sering Anda berpartisipasi dalam pertemuan warga atau komunitas di desa?"),
+        plotOutput("pieChartPertemuanDesa"),
+        box(title = "Analisis Mengikuti Pertemuan Desa", 
+            status = "primary", 
+            solidHeader = TRUE, 
+            width = 12, 
+            textOutput("analysisPertemuanDesa"))),
+  ),
+  conditionalPanel(
+    condition = "input.dukungan_sosial == true",
+    box(title = "Dukungan Sosial", status = "primary", solidHeader = TRUE, 
+        width = 4,
+        h5("Apakah anda merasa adanya dukungan sosial yang memadai di desa ini?"),
+        plotOutput("pieChartDukunganSOsial"),
+        box(title = "Analisis Dukungan Sosial", 
+            status = "primary", 
+            solidHeader = TRUE, 
+            width = 12, 
+            textOutput("analysisDukunganSOsial"))),
+  ),
   fluidRow(
     box(title = "Aspek Sosial", width = 12, 
         DTOutput("data_table_apekSosial"))

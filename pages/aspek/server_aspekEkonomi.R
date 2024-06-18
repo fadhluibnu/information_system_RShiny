@@ -420,24 +420,47 @@ render_server_aspek_ekonomi <- function(params) {
   })
   
   output$barChartBantuanSosial <- renderPlotly({
-    data <- read_csv(pathTambahAspekEkonomi)%>%
+    data <- read_csv(pathTambahAspekEkonomi) %>%
       mutate(
-        Apakah.Anda.atau.anggota.keluarga.Anda.menerima.bantuan.sosial= recode(
+        Apakah.Anda.atau.anggota.keluarga.Anda.menerima.bantuan.sosial = recode(
           Apakah.Anda.atau.anggota.keluarga.Anda.menerima.bantuan.sosial,
-          `1`='Ya',
-          `2`='Tidak',
-          `3`='Belum tahu'
-        ),
-        Jika.ya.sebutkan.aspek.ekonomi = recode(
-          Jika.ya.sebutkan.aspek.ekonomi,
-          ".missing" = "",
+          `1` = 'Ya',
+          `2` = 'Tidak',
+          `3` = 'Belum tahu'
         )
       )
     
+    # Pisahkan data yang 'Ya' untuk mengelola NA di 'Jika.ya.sebutkan.aspek.ekonomi'
+    data_ya <- data %>%
+      filter(Apakah.Anda.atau.anggota.keluarga.Anda.menerima.bantuan.sosial == "Ya" & !is.na(Jika.ya.sebutkan.aspek.ekonomi))
+    
+    # Gabungkan kembali data yang sudah di-filter
+    data <- bind_rows(
+      data_ya,
+      data %>% filter(Apakah.Anda.atau.anggota.keluarga.Anda.menerima.bantuan.sosial != "Ya")
+    )
+    
+    # Custom function to collapse strings with <br> every two items
+    collapse_with_br <- function(vec) {
+      n <- length(vec)
+      if (n == 0) return("")
+      collapsed <- c()
+      for (i in seq(1, n, by = 2)) {
+        if (i + 1 <= n) {
+          collapsed <- c(collapsed, paste(vec[i], vec[i + 1], sep = ", "))
+        } else {
+          collapsed <- c(collapsed, vec[i])
+        }
+      }
+      return(paste(collapsed, collapse = "<br>"))
+    }
+    
     data_summary <- data %>%
       group_by(Apakah.Anda.atau.anggota.keluarga.Anda.menerima.bantuan.sosial) %>%
-      summarise(count = n(),
-                Jika.ya.sebutkan.aspek.ekonomi = paste(Jika.ya.sebutkan.aspek.ekonomi, collapse = "<br>"))
+      summarise(
+        count = n(),
+        Jika.ya.sebutkan.aspek.ekonomi = collapse_with_br(na.omit(Jika.ya.sebutkan.aspek.ekonomi))
+      )
     
     plot_ly(data_summary, labels = ~Apakah.Anda.atau.anggota.keluarga.Anda.menerima.bantuan.sosial, values = ~count, type = 'pie',
             hovertext = ~Jika.ya.sebutkan.aspek.ekonomi, hoverinfo = 'text+label+percent',
@@ -445,7 +468,7 @@ render_server_aspek_ekonomi <- function(params) {
       layout(title = 'Persentase Setiap Sektor Bidang',
              hovermode = 'closest')
   })
-  
+
   output$analysisTextBantuanSosial <- renderText({
     modal_combined_data <- read_csv(pathTambahAspekEkonomi) %>%
       mutate(

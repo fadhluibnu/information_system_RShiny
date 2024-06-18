@@ -237,9 +237,9 @@ server <- function(input, output, session) {
   # source("pages/sikd/server_potensiDesa.R", local=TRUE)
   # # source("pages/sikd/server_hapus_data.R", local=TRUE)
   # source("pages/aspek/server_tambah_hapus.R", local=TRUE)
-  source("pages/aspek/server_identitas.R", local=TRUE)
+  # source("pages/aspek/server_identitas.R", local=TRUE)
   source("pages/aspek/server_aspekEkonomi.R", local=TRUE)
-  # source("pages/aspek/server_aspekSosial.R", local=TRUE)
+  source("pages/aspek/server_aspekSosial.R", local=TRUE)
   # source("pages/aspek/server_aspekTemporal.R", local=TRUE)
   # source("pages/aspek/server_aspekSpatial.R", local=TRUE)
   
