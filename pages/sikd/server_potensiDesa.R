@@ -84,7 +84,6 @@ render_server_potensi_desa <- function(params) {
             textinfo = 'label+percent') %>%
       layout(title = 'Persentase Setiap Sektor Bidang',
              hovermode = 'closest')
-    # 'text+percent'
   })
   
   observeEvent(input$update_id, {

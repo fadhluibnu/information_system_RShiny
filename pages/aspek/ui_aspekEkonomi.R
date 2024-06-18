@@ -109,6 +109,99 @@ tabItemAspekEkonomi <- tabItem(
       )
     )
   ),
+  conditionalPanel(
+    condition = "input.memiliki_usaha == true || input.pendapatan_bulanan == true",
+    box(title = "Usaha dan Pendapatan",
+        width = 12,
+        fluidRow(
+          box(title = "Kepemilikan Usaha dan Pendapatan Perbulan", 
+              status = "primary", solidHeader = TRUE, 
+              width = 12,
+              h5(tags$b("Apakah Anda atau anggota keluarga Anda memiliki usaha dan Berapa pendapatan bulanan Anda?")),
+              plotOutput("barChartUsahaPendapatan"),
+              box(
+                title = "Hasil Analisis",
+                width = 12,
+                textOutput("analysisTextUsahaPendapatan")
+              ),
+          ),
+        ),
+    ),
+  ),
+  conditionalPanel(
+    condition = "input.bantuan_sosial == true || input.sebutkan_bantuan == true",
+    box(title = "Bantuan",
+        width = 12,
+        fluidRow(
+          box(title = "Bantuan dan Jenis Bantuan", 
+              status = "primary", solidHeader = TRUE, 
+              width = 12,
+              h5(tags$b("Apakah keluarga Anda menerima bantuan sosial? Jika ya, sebutkan")),
+              plotlyOutput("barChartBantuanSosial"),
+              box(
+                title = "Hasil Analisis",
+                width = 12,
+                textOutput("analysisTextBantuanSosial")
+              ),
+          ),
+        ),
+    ),
+  ),
+  conditionalPanel(
+    condition = "input.stabilitas_harga == true || input.simpanan_investasi == true",
+    box(title = "Stabilitas Harga",
+        width = 12,
+        fluidRow(
+          box(title = "Stabilitas dan Investasi", 
+              status = "primary", solidHeader = TRUE, 
+              width = 12,
+              h5(tags$b("Bagaimana Anda menilai stabilitas harga dan Apakah Anda memiliki simpanan atau investasi?")),
+              plotOutput("barChartStabilitasInvestasi"),
+              box(
+                title = "Hasil Analisis",
+                width = 12,
+                htmlOutput("analysisStabilitasInvestasi")
+              ),
+          ),
+        ),
+    ),
+  ),
+  conditionalPanel(
+    condition = "input.peluang_ekonomi == true",
+    box(title = "Peluang ekonomi di Desa Mekasari", status = "primary", solidHeader = TRUE, 
+        width = 4,
+        h5("Apakah Anda merasa terdapat peluang ekonomi yang cukup di desa ini?"),
+        plotOutput("pieChartPeluangEkonomi"),
+        box(title = "Analisis Peluang Ekonomi", 
+            status = "primary", 
+            solidHeader = TRUE, 
+            width = 12, 
+            textOutput("analysisPeluangEkonomi"))),
+  ),
+  conditionalPanel(
+    condition = "input.ketersedian_pekerjaan == true",
+    box(title = "Ketersediaan Lapangan Pekerjaan", status = "primary", solidHeader = TRUE, 
+        width = 4,
+        h5("Bagaimana Anda menilai aksesibilitas dan ketersediaan lapangan pekerjaan di desa ini?"),
+        plotOutput("pieChartLapanganPekerjaan"),
+        box(title = "Analisis Lapangan Pekerjaan", 
+            status = "primary", 
+            solidHeader = TRUE, 
+            width = 12, 
+            textOutput("analysisLapanganPekerjaan"))),
+  ),
+  conditionalPanel(
+    condition = "input.kesenjangan_ekonomi == true",
+    box(title = "Kesenjangan Ekonomi", status = "primary", solidHeader = TRUE, 
+        width = 4,
+        h5("Apakah Anda merasa terdapat kesenjangan ekonomi di antara penduduk di desa ini?"),
+        plotOutput("pieChartKesenjanganEkonomiAspekEkonomi"),
+        box(title = "Analisis Kesenjangan Ekonomi", 
+            status = "primary", 
+            solidHeader = TRUE, 
+            width = 12, 
+            textOutput("analysisKesenjanganEkonomiAspekEkonomi"))),
+  ),
   fluidRow(
     box(title = "Aspek Ekonomi", width = 12, 
         DTOutput("data_table_apekEkonomi"))
