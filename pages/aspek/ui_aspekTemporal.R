@@ -55,6 +55,34 @@ tabItemAspekTemporal <- tabItem(
       )
     )
   ),
+  conditionalPanel(
+    condition = "input.tahun_tinggal == true",
+      fluidRow(
+        box(title = "Tinggal Berapa Lama", 
+            status = "primary", solidHeader = TRUE, 
+            width = 12,
+            h5(tags$b("Berapa lama Anda sudah tinggal di desa ini? (tahun)")),
+            plotOutput("barChartTinggalBerapaLama"),
+        ),
+      )
+  ),
+  
+  conditionalPanel(
+    condition = "input.pindah_tempat == true",
+    box(title = "Pindah Tempat", status = "primary", solidHeader = TRUE, 
+        width = 6,
+        h5("Apakah Anda berencana untuk tinggal di desa ini dalam jangka waktu yang lama?"),
+        plotOutput("pieChartPindahTempat"),
+    ),
+  ),
+  conditionalPanel(
+    condition = "input.perubahan_ekonomi == true",
+    box(title = "Perubahan Ekonomi", status = "primary", solidHeader = TRUE, 
+        width = 6,
+        h5("Apakah Anda melihat perubahan signifikan dalam kondisi ekonomi dan sosial desa dalam beberapa tahun terakhir?"),
+        plotOutput("pieChartPerubahanEkonomi"),
+    ),
+  ),
   fluidRow(
     box(title = "Aspek Sosial", width = 12, 
         DTOutput("data_table_apekTemporal"))

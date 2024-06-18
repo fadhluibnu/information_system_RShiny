@@ -240,7 +240,7 @@ server <- function(input, output, session) {
   # source("pages/aspek/server_identitas.R", local=TRUE)
   source("pages/aspek/server_aspekEkonomi.R", local=TRUE)
   source("pages/aspek/server_aspekSosial.R", local=TRUE)
-  # source("pages/aspek/server_aspekTemporal.R", local=TRUE)
+  source("pages/aspek/server_aspekTemporal.R", local=TRUE)
   # source("pages/aspek/server_aspekSpatial.R", local=TRUE)
   
   

@@ -210,7 +210,77 @@ render_server_aspek_temporal <- function(params) {
     }
     params = TRUE
   })
-   
+  
+  output$barChartTinggalBerapaLama <- renderPlot({
+    data <- read_csv(pathTambahAspekTemporal) %>%
+      count(Berapa.lama.Anda.sudah.tinggal.di.desa.ini.tahun)
+    
+    
+    custom_colors <- c("red", "green", "blue", "orange", "purple", "yellow", "pink", "brown", "cyan", "magenta")
+    
+    set.seed(42) 
+    shuffled_colors <- sample(custom_colors, length(unique(data$Berapa.lama.Anda.sudah.tinggal.di.desa.ini.tahun)), replace = TRUE)
+    
+    ggplot(data, aes(x = factor(Berapa.lama.Anda.sudah.tinggal.di.desa.ini.tahun), y = n, fill = factor(Berapa.lama.Anda.sudah.tinggal.di.desa.ini.tahun))) + 
+      geom_bar(stat = "identity") +
+      scale_fill_manual(values = shuffled_colors) + 
+      scale_y_continuous(breaks = seq(0, max(data$n), by = 1)) + 
+      theme_minimal() +
+      labs(x = "Tahun", y = "Jumlah", title = "") +
+      theme(legend.position = "none") 
+  })
+  
+  output$pieChartPindahTempat <- renderPlot({
+    
+    data <- read_csv(pathTambahAspekTemporal) %>%
+      mutate(
+        Apakah.Anda.berencana.untuk.tinggal.di.desa.ini.dalam.jangka.waktu.yang.lama= recode(
+          Apakah.Anda.berencana.untuk.tinggal.di.desa.ini.dalam.jangka.waktu.yang.lama,
+          `1`='Ya',
+          `2`='Tidak',
+          `3`='Belum tahu'
+        )
+      )
+    
+    data <- data %>%
+      count(Apakah.Anda.berencana.untuk.tinggal.di.desa.ini.dalam.jangka.waktu.yang.lama) %>%
+      mutate(percentage = n / sum(n) * 100,
+             label = paste0(Apakah.Anda.berencana.untuk.tinggal.di.desa.ini.dalam.jangka.waktu.yang.lama, "\n", round(percentage, 1), "%"))
+    
+    ggplot(data, aes(x = "", y = n, fill = Apakah.Anda.berencana.untuk.tinggal.di.desa.ini.dalam.jangka.waktu.yang.lama)) +
+      geom_bar(stat = "identity", width = 1) +
+      coord_polar(theta = "y") +
+      theme_void() +
+      geom_text(aes(label = label), position = position_stack(vjust = 0.5))+
+      theme(legend.position = "bottom") +
+      guides(fill = guide_legend(title = "Keterangan : "))
+  })
+  
+  output$pieChartPerubahanEkonomi <- renderPlot({
+    
+    data <- read_csv(pathTambahAspekTemporal) %>%
+      mutate(
+        Apakah.Anda.melihat.perubahan.signifikan.dalam.kondisi.ekonomi.dan.sosial.desa.dalam.beberapa.tahun.terakhir= recode(
+          Apakah.Anda.melihat.perubahan.signifikan.dalam.kondisi.ekonomi.dan.sosial.desa.dalam.beberapa.tahun.terakhir,
+          `1`='Ya',
+          `2`='Tidak',
+          `3`='Belum tahu'
+        )
+      )
+    
+    data <- data %>%
+      count(Apakah.Anda.melihat.perubahan.signifikan.dalam.kondisi.ekonomi.dan.sosial.desa.dalam.beberapa.tahun.terakhir) %>%
+      mutate(percentage = n / sum(n) * 100,
+             label = paste0(Apakah.Anda.melihat.perubahan.signifikan.dalam.kondisi.ekonomi.dan.sosial.desa.dalam.beberapa.tahun.terakhir, "\n", round(percentage, 1), "%"))
+    
+    ggplot(data, aes(x = "", y = n, fill = Apakah.Anda.melihat.perubahan.signifikan.dalam.kondisi.ekonomi.dan.sosial.desa.dalam.beberapa.tahun.terakhir)) +
+      geom_bar(stat = "identity", width = 1) +
+      coord_polar(theta = "y") +
+      theme_void() +
+      geom_text(aes(label = label), position = position_stack(vjust = 0.5))+
+      theme(legend.position = "bottom") +
+      guides(fill = guide_legend(title = "Keterangan : "))
+  })
 }
 
 render_server_aspek_temporal(TRUE)
