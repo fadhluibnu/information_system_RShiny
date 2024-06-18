@@ -81,10 +81,15 @@ render_server_pendanaan <- function(params) {
       )
     
     
-    action_buttons <- paste0(
-      '<button class="update-btn" data-id="', data_pendanaan_tabel$No, '">Update</button>',
-      '<button class="delete-btn" data-id="', data_pendanaan_tabel$No, '">Delete</button>'
-    )
+    action_buttons <- if (!is.null(input$stored_user)) {
+      paste0(
+        '<button class="update-btn" data-id="', data_pendanaan_tabel$No, '">Update</button>',
+        '<button class="delete-btn" data-id="', data_pendanaan_tabel$No, '">Delete</button>'
+      )
+    } else {
+      '<span></span>'
+    }
+    
     data_pendanaan_tabel$Actions <- action_buttons
     
     data_pendanaan_tabel <- data_pendanaan_tabel%>%

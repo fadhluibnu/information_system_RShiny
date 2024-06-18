@@ -49,10 +49,14 @@ render_server_peningkatan_perekonomian <- function(params) {
         `Adanya Dana CSR membantu mengembangkan modal untuk rakyat`=Adanya.Dana.CSR.membantu.mengembangkan.modal.untuk.rakyat,
       )
     
-    action_buttons <- paste0(
-      '<button class="update-btn" data-id="', data$No, '">Update</button>',
-      '<button class="delete-btn" data-id="', data$No, '">Delete</button>'
-    )
+    action_buttons <- if (!is.null(input$stored_user)) {
+      paste0(
+        '<button class="update-btn" data-id="', data$No, '">Update</button>',
+        '<button class="delete-btn" data-id="', data$No, '">Delete</button>'
+      )
+    } else {
+      '<span></span>'
+    }
     data$Actions <- action_buttons
     
     data <- data%>%

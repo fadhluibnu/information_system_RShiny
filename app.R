@@ -17,6 +17,7 @@ library(plotly)
 library(rsconnect)
 
 
+source("pages/auth/ui_login.R")
 source("pages/sikd/ui_karakteristik.R")
 source("pages/sikd/ui_pendanaan.R")
 source("pages/profil/ui_profilDesa.R")
@@ -54,7 +55,10 @@ ui <- dashboardPage(
       menuItem("Profil Desa", tabName = "dashboard" ,icon = icon("dashboard")),
       menuItem("SIKD", 
                icon = icon("database"),
-               menuSubItem("Tambah Data", tabName = "tambahdata", icon = icon("file-circle-plus")),
+               conditionalPanel(
+                 condition = "input.LOGINSTATUS == '1'",
+                 menuSubItem("Tambah Data", tabName = "tambahdata", icon = icon("file-circle-plus")),
+               ),
                menuSubItem("Karakteristik Desa", tabName = "karakteristik", icon = icon("people-group")),
                menuSubItem("Potensi Desa", tabName = "potensiDesa", icon = icon("magnifying-glass-chart")),
                menuSubItem("Pendanaan Desa", tabName = "pendanaan", icon = icon("sack-dollar")),
@@ -63,7 +67,14 @@ ui <- dashboardPage(
                menuSubItem("Peningkatan Program Wisata", tabName = "programwisata", icon = icon("arrow-up-from-water-pump"))
       ),
       menuItem('Aspek', icon = icon('list'),
-               menuSubItem("Tambah Data Aspek", tabName = "tambahdataAspek", icon = icon("file-circle-plus")),
+               conditionalPanel(
+                 condition = "input.LOGINSTATUS == '1'",
+                 menuSubItem(
+                   "Tambah Data Aspek", 
+                   tabName = "tambahdataAspek", 
+                   icon = icon("file-circle-plus")
+                   ),
+               ),
                menuSubItem(
                  'Idensitas', 
                  tabName = 'identitas', 
@@ -89,7 +100,11 @@ ui <- dashboardPage(
                 tabName = 'aspekSpatial', 
                 icon = icon('house-medical')
               )
-    )
+    ),
+    menuItem(
+      div(class="menu-login", tags$i(class="fa-solid fa-right-to-bracket"), uiOutput('loginTextOutput')),
+      tabName = "loginpage"
+      )
     )
   ),
   dashboardBody(
@@ -108,7 +123,8 @@ ui <- dashboardPage(
       tabItemAspekEkonomi,
       tabItemAspekSosial,
       tabItemAspekTemporal,
-      tabItemAspekSpatial
+      tabItemAspekSpatial,
+      tabItemLogin
     ),
     tags$style(HTML("
     .main-sidebar{
@@ -122,7 +138,29 @@ ui <- dashboardPage(
     min-height: 307px;
     margin-top: 50px;
     }
+    
+    .center-box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .center-content {
+      text-align: center;
+    }
+    .menu-login {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+    }
+    .sidebar-menu .treeview-menu .shiny-panel-conditional a {
+        color: #b8c7ce;
+        padding: 5px 5px 5px 15px;
+        display: block;
+        font-size: 14px;
+    }
     ")),
+    shinyjs::useShinyjs(),
     tags$script(HTML("
     
     $(document).on('click', '.update-btn', function() {
@@ -148,6 +186,28 @@ ui <- dashboardPage(
     Shiny.addCustomMessageHandler('form_update_false', function(message) {
       Shiny.setInputValue('form_update', '0');
     });
+    
+    // Check if the user is logged in when the app loads
+    Shiny.addCustomMessageHandler('checkLogin', function(message) {
+      var user = localStorage.getItem('user');
+      if (user) {
+        Shiny.setInputValue('stored_user', user);
+        Shiny.setInputValue('LOGINSTATUS', '1');
+      }else {
+        Shiny.setInputValue('LOGINSTATUS', '0');
+      }
+    });
+
+    // Store the user in local storage on login
+    Shiny.addCustomMessageHandler('storeLogin', function(message) {
+      localStorage.setItem('user', message);
+    });
+
+    // Clear the user from local storage on logout
+    Shiny.addCustomMessageHandler('clearLogin', function(message) {
+      localStorage.removeItem('user');
+    });
+    
   "))
   )
 )
@@ -155,6 +215,18 @@ ui <- dashboardPage(
 
 server <- function(input, output, session) {
   
+  showModal(modalDialog(
+    title = "Loading...",
+    "Memuat data aplikasi",
+    easyClose = FALSE,
+    footer = NULL
+  ))
+  
+  checkLogin <- function(){
+    session$sendCustomMessage("checkLogin", list())
+  }
+  checkLogin()
+  source("pages/auth/server_login.R", local=TRUE)
   source("pages/profil/server_profilDesa.R", local=TRUE)
   source("pages/sikd/server_tambah_data.R", local=TRUE)
   source("pages/sikd/server_karakteristik.R", local=TRUE)
@@ -163,13 +235,16 @@ server <- function(input, output, session) {
   source("pages/sikd/server_peningkatanPerekonomian.R", local=TRUE)
   source("pages/sikd/server_peningkatanProgramWisata.R", local=TRUE)
   source("pages/sikd/server_potensiDesa.R", local=TRUE)
-  # source("pages/sikd/server_hapus_data.R", local=TRUE)
+  # # source("pages/sikd/server_hapus_data.R", local=TRUE)
   source("pages/aspek/server_tambah_hapus.R", local=TRUE)
   source("pages/aspek/server_identitas.R", local=TRUE)
   source("pages/aspek/server_aspekEkonomi.R", local=TRUE)
   source("pages/aspek/server_aspekSosial.R", local=TRUE)
   source("pages/aspek/server_aspekTemporal.R", local=TRUE)
   source("pages/aspek/server_aspekSpatial.R", local=TRUE)
+  
+  
+  removeModal()
 }
 
 shinyApp(ui, server)

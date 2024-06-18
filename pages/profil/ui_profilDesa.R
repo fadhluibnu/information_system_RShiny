@@ -41,7 +41,7 @@ tabItemProfilDesa <- tabItem(tabName = "dashboard",
                                  )
                                )
                              ),
-                             actionButton("openFormProfilDesa", "Perbarui Profil Desa", style = "margin-bottom: 10px;"),
+                             actionButton("openFormProfilDesa", "Perbarui Profil Desa", style = "margin-bottom: 10px;display:none;"),
                              fluidRow(box(
                                solidHeader = TRUE,
                                status = "primary",

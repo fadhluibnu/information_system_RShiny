@@ -27,10 +27,14 @@ render_server_karakteristik <- function(params) {
         `Jenis Usaha` = Jenis.Usaha,
         `Skala Usaha` = skala.usaha) 
     
-    action_buttons <- paste0(
+    action_buttons <- if (!is.null(input$stored_user)) {
+      paste0(
       '<button class="update-btn" data-id="', data_display$No, '">Update</button>',
       '<button class="delete-btn" data-id="', data_display$No, '">Delete</button>'
-    )
+      )
+    } else {
+      '<span></span>'
+    }
     data_display$Actions <- action_buttons
     
     data_display <- data_display%>%

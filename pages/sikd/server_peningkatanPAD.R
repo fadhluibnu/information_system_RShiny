@@ -49,10 +49,14 @@ render_server_peningkatan_PAD <- function(params) {
         `Dana CSR membantu permodalan bagi kegiatan BUMDes` = Dana.CSR.membantu.permodalan.bagi.kegiatan.BUMDes
       )
     
-    action_buttons <- paste0(
-      '<button class="update-btn" data-id="', data$No, '">Update</button>',
-      '<button class="delete-btn" data-id="', data$No, '">Delete</button>'
-    )
+    action_buttons <- if (!is.null(input$stored_user)) {
+      paste0(
+        '<button class="update-btn" data-id="', data$No, '">Update</button>',
+        '<button class="delete-btn" data-id="', data$No, '">Delete</button>'
+      )
+    } else {
+      '<span></span>'
+    }
     data$Actions <- action_buttons
     
     data <- data%>%
