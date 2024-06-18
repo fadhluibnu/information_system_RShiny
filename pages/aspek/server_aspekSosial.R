@@ -34,8 +34,8 @@ render_server_aspek_sosial <- function(params) {
     
     action_buttons <- if (!is.null(input$stored_user)) {
       paste0(
-        '<button class="update-btn" data-id="', data$No, '">Update</button>',
-        '<button class="delete-btn" data-id="', data$No, '">Delete</button>'
+        '<button class="update-btn-aspek" data-id="', data$No, '">Update</button>',
+        '<button class="delete-btn-aspek" data-id="', data$No, '">Delete</button>'
       )
     } else {
       '<span></span>'
@@ -145,27 +145,27 @@ render_server_aspek_sosial <- function(params) {
     
     updateSelectInput(
       session,
-      'Apakah.Anda.tinggal.di.desa.ini.sejak.lahir',
+      'Apakah.Anda.tinggal.di.desa.ini.sejak.lahir.edit',
       selected = data$Apakah.Anda.tinggal.di.desa.ini.sejak.lahir
     )	
     updateTextInput(
       session,
-      'Jika.tidak.sebutkan.asal.tempat',
+      'Jika.tidak.sebutkan.asal.tempat.edit',
       value = data$Jika.tidak.sebutkan.asal.tempat
     )	
     updateSelectInput(
       session,
-      'Apakah.Anda.aktif.dalam.kegiatan.sosial.kemasyarakatan.di.desa.ini',
+      'Apakah.Anda.aktif.dalam.kegiatan.sosial.kemasyarakatan.di.desa.ini.edit',
       selected = data$Apakah.Anda.aktif.dalam.kegiatan.sosial.kemasyarakatan.di.desa.ini
     )	
     updateSelectInput(
       session,
-      'Seberapa.sering.Anda.berpartisipasi.dalam.pertemuan.warga.atau.komunitas.di.desa',
+      'Seberapa.sering.Anda.berpartisipasi.dalam.pertemuan.warga.atau.komunitas.di.desa.edit',
       selected = data$Seberapa.sering.Anda.berpartisipasi.dalam.pertemuan.warga.atau.komunitas.di.desa
     )	
     updateSelectInput(
       session,
-      'Apakah.anda.merasa.adanya.dukungan.sosial.yang.memadai.di.desa.ini',
+      'Apakah.anda.merasa.adanya.dukungan.sosial.yang.memadai.di.desa.ini.edit',
       selected = data$Apakah.anda.merasa.adanya.dukungan.sosial.yang.memadai.di.desa.ini
     )
     
@@ -186,11 +186,15 @@ render_server_aspek_sosial <- function(params) {
       
       data[data$No == input$selected_id_aspek, ] <- data.frame(
         No = input$selected_id_aspek,
-        Apakah.Anda.tinggal.di.desa.ini.sejak.lahir = input$Apakah.Anda.tinggal.di.desa.ini.sejak.lahir, Jika.tidak.sebutkan.asal.tempat =
-          input$Jika.tidak.sebutkan.asal.tempat, Apakah.Anda.aktif.dalam.kegiatan.sosial.kemasyarakatan.di.desa.ini =
-          input$Apakah.Anda.aktif.dalam.kegiatan.sosial.kemasyarakatan.di.desa.ini, Seberapa.sering.Anda.berpartisipasi.dalam.pertemuan.warga.atau.komunitas.di.desa =
-          input$Seberapa.sering.Anda.berpartisipasi.dalam.pertemuan.warga.atau.komunitas.di.desa, Apakah.anda.merasa.adanya.dukungan.sosial.yang.memadai.di.desa.ini =
-          input$Apakah.anda.merasa.adanya.dukungan.sosial.yang.memadai.di.desa.ini, 
+        Apakah.Anda.tinggal.di.desa.ini.sejak.lahir = input$Apakah.Anda.tinggal.di.desa.ini.sejak.lahir.edit, 
+        Jika.tidak.sebutkan.asal.tempat =
+          input$Jika.tidak.sebutkan.asal.tempat.edit, 
+        Apakah.Anda.aktif.dalam.kegiatan.sosial.kemasyarakatan.di.desa.ini =
+          input$Apakah.Anda.aktif.dalam.kegiatan.sosial.kemasyarakatan.di.desa.ini.edit, 
+        Seberapa.sering.Anda.berpartisipasi.dalam.pertemuan.warga.atau.komunitas.di.desa =
+          input$Seberapa.sering.Anda.berpartisipasi.dalam.pertemuan.warga.atau.komunitas.di.desa.edit, 
+        Apakah.anda.merasa.adanya.dukungan.sosial.yang.memadai.di.desa.ini =
+          input$Apakah.anda.merasa.adanya.dukungan.sosial.yang.memadai.di.desa.ini.edit, 
         stringsAsFactors = FALSE
       )
       

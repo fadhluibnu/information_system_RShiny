@@ -23,7 +23,7 @@ tabItemAspekEkonomi <- tabItem(
           width = 12,
           h4(tags$b("Aspek Ekonomi")),
           selectInput(
-            "Apakah.Anda.atau.anggota.keluarga.Anda.memiliki.usaha.sendiri.di.desa.ini", 
+            "Apakah.Anda.atau.anggota.keluarga.Anda.memiliki.usaha.sendiri.di.desa.ini.edit", 
             "Apakah Anda atau anggota keluarga Anda memiliki usaha sendiri di desa ini? ",
             c(
               "Ya"="1",
@@ -32,7 +32,7 @@ tabItemAspekEkonomi <- tabItem(
             )
           ),
           selectInput(
-            "Berapa.pendapatan.bulanan.Anda.atau.anggota.keluarga.Anda.secara.keseluruhan.Kisaran.jumlah", 
+            "Berapa.pendapatan.bulanan.Anda.atau.anggota.keluarga.Anda.secara.keseluruhan.Kisaran.jumlah.edit", 
             "Berapa pendapatan bulanan Anda atau anggota keluarga Anda secara keseluruhan? (Kisaran jumlah)",
             c(
               "500.000 - 1.500.000"="1",
@@ -43,7 +43,7 @@ tabItemAspekEkonomi <- tabItem(
           )
           ,
           selectInput(
-            "Apakah.Anda.atau.anggota.keluarga.Anda.menerima.bantuan.sosial", 
+            "Apakah.Anda.atau.anggota.keluarga.Anda.menerima.bantuan.sosial.edit", 
             "Apakah Anda atau anggota keluarga Anda menerima bantuan sosial?",
             c(
               "Ya"="1",
@@ -52,11 +52,11 @@ tabItemAspekEkonomi <- tabItem(
             )
           ),
           textInput(
-            "Jika.ya.sebutkan.aspek.ekonomi", 
+            "Jika.ya.sebutkan.aspek.ekonomi.edit", 
             "Jika ya, sebutkan"
           ),
           selectInput(
-            "Bagaimana.Anda.menilai.stabilitas.harga.pangan.saat.ini", 
+            "Bagaimana.Anda.menilai.stabilitas.harga.pangan.saat.ini.edit", 
             "Bagaimana Anda menilai stabilitas harga pangan saat ini?",
             c(
               "Sangat stabil"="4",
@@ -66,7 +66,7 @@ tabItemAspekEkonomi <- tabItem(
             )
           ),
           selectInput(
-            "Apakah.Anda.memiliki.simpanan.atau.investasi.di.luar.penghasilan.bulanan.Anda", 
+            "Apakah.Anda.memiliki.simpanan.atau.investasi.di.luar.penghasilan.bulanan.Anda.edit", 
             "Apakah Anda memiliki simpanan atau investasi di luar penghasilan bulanan Anda?",
             c(
               "Ya"="1",
@@ -75,7 +75,7 @@ tabItemAspekEkonomi <- tabItem(
             )
           ),
           selectInput(
-            "Apakah.Anda.merasa.terdapat.peluang.ekonomi.yang.cukup.di.desa.ini", 
+            "Apakah.Anda.merasa.terdapat.peluang.ekonomi.yang.cukup.di.desa.ini.edit", 
             "Apakah Anda merasa terdapat peluang ekonomi yang cukup di desa ini?",
             c(
               "Ya"="1",
@@ -84,7 +84,7 @@ tabItemAspekEkonomi <- tabItem(
             )
           ),
           selectInput(
-            "Bagaimana.Anda.menilai.aksesibilitas.dan.ketersediaan.lapangan.pekerjaan.di.desa.ini", 
+            "Bagaimana.Anda.menilai.aksesibilitas.dan.ketersediaan.lapangan.pekerjaan.di.desa.ini.edit", 
             "Bagaimana Anda menilai aksesibilitas dan ketersediaan lapangan pekerjaan di desa ini?",
             c(
               "Sangat terbuka"="4",
@@ -94,7 +94,7 @@ tabItemAspekEkonomi <- tabItem(
             )
           ),
           selectInput(
-            "Apakah.Anda.merasa.terdapat.kesenjangan.ekonomi.di.antara.penduduk.di.desa.ini", 
+            "Apakah.Anda.merasa.terdapat.kesenjangan.ekonomi.di.antara.penduduk.di.desa.ini.edit", 
             "Apakah Anda merasa terdapat kesenjangan ekonomi di antara penduduk di desa ini?",
             c(
               "Sangat terasa"="4",

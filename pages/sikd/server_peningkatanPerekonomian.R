@@ -648,12 +648,12 @@ render_server_peningkatan_perekonomian <- function(params) {
     data_peningkatanPerekonomian <- loadDataPeningkatanPerekonomian()
     data_peningkatanPerekonomian <- data_peningkatanPerekonomian[data_peningkatanPerekonomian$No == id, ]
     
-    updateSelectInput(session,"Terbukanya.usaha.ekonomi.rakyat.karena.adanya.dana.desa", selected = data_peningkatanPerekonomian$Terbukanya.usaha.ekonomi.rakyat.karena.adanya.dana.desa)
-    updateSelectInput(session,"Dana.desa.menambah.penghasilan.masyarakat", selected = data_peningkatanPerekonomian$Dana.desa.menambah.penghasilan.masyarakat)	
-    updateSelectInput(session,"Adanya.Dana.desa.membantu.mengembangkan.modal.untuk.rakyat", selected = data_peningkatanPerekonomian$Adanya.Dana.desa.membantu.mengembangkan.modal.untuk.rakyat)
-    updateSelectInput(session,"Terbukanya.usaha.ekonomi.rakyat.karena.adanya.dana.CSR", selected = data_peningkatanPerekonomian$Terbukanya.usaha.ekonomi.rakyat.karena.adanya.dana.CSR)
-    updateSelectInput(session,"Dana.CSR.menambah.penghasilan.masyarakat", selected = data_peningkatanPerekonomian$Dana.CSR.menambah.penghasilan.masyarakat)	
-    updateSelectInput(session,"Adanya.Dana.CSR.membantu.mengembangkan.modal.untuk.rakyat", selected = data_peningkatanPerekonomian$Adanya.Dana.CSR.membantu.mengembangkan.modal.untuk.rakyat)
+    updateSelectInput(session,"Terbukanya.usaha.ekonomi.rakyat.karena.adanya.dana.desa.edit", selected = data_peningkatanPerekonomian$Terbukanya.usaha.ekonomi.rakyat.karena.adanya.dana.desa)
+    updateSelectInput(session,"Dana.desa.menambah.penghasilan.masyarakat.edit", selected = data_peningkatanPerekonomian$Dana.desa.menambah.penghasilan.masyarakat)	
+    updateSelectInput(session,"Adanya.Dana.desa.membantu.mengembangkan.modal.untuk.rakyat.edit", selected = data_peningkatanPerekonomian$Adanya.Dana.desa.membantu.mengembangkan.modal.untuk.rakyat)
+    updateSelectInput(session,"Terbukanya.usaha.ekonomi.rakyat.karena.adanya.dana.CSR.edit", selected = data_peningkatanPerekonomian$Terbukanya.usaha.ekonomi.rakyat.karena.adanya.dana.CSR)
+    updateSelectInput(session,"Dana.CSR.menambah.penghasilan.masyarakat.edit", selected = data_peningkatanPerekonomian$Dana.CSR.menambah.penghasilan.masyarakat)	
+    updateSelectInput(session,"Adanya.Dana.CSR.membantu.mengembangkan.modal.untuk.rakyat.edit", selected = data_peningkatanPerekonomian$Adanya.Dana.CSR.membantu.mengembangkan.modal.untuk.rakyat)
     
     session$sendCustomMessage("selected_id_handler", id)
     
@@ -676,17 +676,17 @@ render_server_peningkatan_perekonomian <- function(params) {
       data_peningkatanPerekonomian <- loadDataPeningkatanPerekonomian()
       data_peningkatanPerekonomian[data_peningkatanPerekonomian$No == input$selected_id, ] <- data.frame(
         No = input$selected_id,
-        Terbukanya.usaha.ekonomi.rakyat.karena.adanya.dana.desa = input$Terbukanya.usaha.ekonomi.rakyat.karena.adanya.dana.desa, 
+        Terbukanya.usaha.ekonomi.rakyat.karena.adanya.dana.desa = input$Terbukanya.usaha.ekonomi.rakyat.karena.adanya.dana.desa.edit, 
         Dana.desa.menambah.penghasilan.masyarakat =
-          input$Dana.desa.menambah.penghasilan.masyarakat, 
+          input$Dana.desa.menambah.penghasilan.masyarakat.edit, 
         Adanya.Dana.desa.membantu.mengembangkan.modal.untuk.rakyat =
-          input$Adanya.Dana.desa.membantu.mengembangkan.modal.untuk.rakyat, 
+          input$Adanya.Dana.desa.membantu.mengembangkan.modal.untuk.rakyat.edit, 
         Terbukanya.usaha.ekonomi.rakyat.karena.adanya.dana.CSR =
-          input$Terbukanya.usaha.ekonomi.rakyat.karena.adanya.dana.CSR, 
+          input$Terbukanya.usaha.ekonomi.rakyat.karena.adanya.dana.CSR.edit, 
         Dana.CSR.menambah.penghasilan.masyarakat =
-          input$Dana.CSR.menambah.penghasilan.masyarakat, 
+          input$Dana.CSR.menambah.penghasilan.masyarakat.edit, 
         Adanya.Dana.CSR.membantu.mengembangkan.modal.untuk.rakyat =
-          input$Adanya.Dana.CSR.membantu.mengembangkan.modal.untuk.rakyat,
+          input$Adanya.Dana.CSR.membantu.mengembangkan.modal.untuk.rakyat.edit,
         stringsAsFactors = FALSE
       )
       

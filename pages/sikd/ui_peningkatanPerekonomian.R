@@ -94,7 +94,7 @@ tabItemPeningkatanPerekonomian <- tabItem(
           h4(tags$b("Peningkatan Perekonomian")),
           
           selectInput(
-            "Terbukanya.usaha.ekonomi.rakyat.karena.adanya.dana.desa",
+            "Terbukanya.usaha.ekonomi.rakyat.karena.adanya.dana.desa.edit",
             "Terbukanya usaha ekonomi rakyat, karena adanya dana desa :"
             ,
             c(
@@ -104,7 +104,7 @@ tabItemPeningkatanPerekonomian <- tabItem(
             ),
           ), 
           selectInput(
-            "Dana.desa.menambah.penghasilan.masyarakat",
+            "Dana.desa.menambah.penghasilan.masyarakat.edit",
             "Dana desa menambah penghasilan masyarakat :"
             ,
             c(
@@ -114,7 +114,7 @@ tabItemPeningkatanPerekonomian <- tabItem(
             ),
           ), 
           selectInput(
-            "Adanya.Dana.desa.membantu.mengembangkan.modal.untuk.rakyat",
+            "Adanya.Dana.desa.membantu.mengembangkan.modal.untuk.rakyat.edit",
             "Adanya Dana desa membantu mengembangkan modal untuk rakyat :"
             ,
             c(
@@ -124,7 +124,7 @@ tabItemPeningkatanPerekonomian <- tabItem(
             ),
           ), 
           selectInput(
-            "Terbukanya.usaha.ekonomi.rakyat.karena.adanya.dana.CSR",
+            "Terbukanya.usaha.ekonomi.rakyat.karena.adanya.dana.CSR.edit",
             "Terbukanya usaha ekonomi rakyat, karena adanya dana CSR :"
             ,
             c(
@@ -134,7 +134,7 @@ tabItemPeningkatanPerekonomian <- tabItem(
             ),
           ), 
           selectInput(
-            "Dana.CSR.menambah.penghasilan.masyarakat",
+            "Dana.CSR.menambah.penghasilan.masyarakat.edit",
             "Dana CSR menambah penghasilan masyarakat :"
             ,
             c(
@@ -144,7 +144,7 @@ tabItemPeningkatanPerekonomian <- tabItem(
             ),
           ), 
           selectInput(
-            "Adanya.Dana.CSR.membantu.mengembangkan.modal.untuk.rakyat",
+            "Adanya.Dana.CSR.membantu.mengembangkan.modal.untuk.rakyat.edit",
             "Adanya Dana CSR membantu mengembangkan modal untuk rakyat :"
             ,
             c(

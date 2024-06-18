@@ -78,23 +78,23 @@ tabItemIdentitas <- tabItem(
           width = 12,
           h4(tags$b("Identitas Responden")),
           textInput(
-            "Nama_Identitas", "Nama"
+            "Nama_Identitas.edit", "Nama"
             
           ),
           selectInput(
-            "Jenis.kelamin", "Jenis kelamin",
+            "Jenis.kelamin.edit", "Jenis kelamin",
             c(
               "Perempuan"="1",
               "Laki-laki"="2"
             ),
           ),
           numericInput(
-            "Usia.tahun", "Usia (tahun)",
+            "Usia.tahun.edit", "Usia (tahun)",
             value = 0
             
           ),
           selectInput(
-            "Status.perkawinan", "Status perkawinan",
+            "Status.perkawinan.edit", "Status perkawinan",
             c(
               'Belum Menikah'='1',
               'Menikah'='2',
@@ -103,7 +103,7 @@ tabItemIdentitas <- tabItem(
             )
           ),
           selectInput(
-            "Apakah.memiliki.anak", "Apakah memiliki anak?",
+            "Apakah.memiliki.anak.edit", "Apakah memiliki anak?",
             c(
               'Ya'='1',
               'Tidak'='2',
@@ -111,12 +111,12 @@ tabItemIdentitas <- tabItem(
             )
           ),
           numericInput(
-            "Jumlah.anak.orang", "Jumlah anak (orang)",
+            "Jumlah.anak.orang.edit", "Jumlah anak (orang)",
             value = 0
             
           ),
           selectInput(
-            "Tingkat.pendidikan", "Tingkat pendidikan ",
+            "Tingkat.pendidikan.edit", "Tingkat pendidikan ",
             c(
               'Tidak lulus SD'='1',
               'SD'='2',
@@ -129,7 +129,7 @@ tabItemIdentitas <- tabItem(
             )
           ),
           selectInput(
-            "Apakah.anda.bekerja.saat.ini", "Apakah anda bekerja saat ini?",
+            "Apakah.anda.bekerja.saat.ini.edit", "Apakah anda bekerja saat ini?",
             c(
               'Ya'='1',
               'Tidak'='2',
@@ -137,7 +137,7 @@ tabItemIdentitas <- tabItem(
             )
           ),
           textInput(
-            "Jika.bekerja.apa.pekerjaan.anda.saat.ini", "Jika bekerja, apa pekerjaan anda saat ini?"
+            "Jika.bekerja.apa.pekerjaan.anda.saat.ini.edit", "Jika bekerja, apa pekerjaan anda saat ini?"
             
           )
         ),

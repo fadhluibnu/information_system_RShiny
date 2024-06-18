@@ -248,15 +248,15 @@ render_server_karakteristik <- function(params) {
     data_karakteristik <- loadDataKarakteristik()
     data_karakteristik <- data_karakteristik[data_karakteristik$No == id, ]
     
-    updateTextInput(session, "Nama", value = data_karakteristik$Nama)
-    updateSelectInput(session, "jenis.kelamin", selected  = data_karakteristik$jenis.kelamin)
-    updateTextInput(session, "Usia", value = data_karakteristik$Usia)
-    updateSelectInput(session, "Pendidikan", selected  = data_karakteristik$Pendidikan)
-    updateTextInput(session, "Pekerjaan.Utama", value = data_karakteristik$Pekerjaan.Utama)
-    updateTextInput(session, "Pekerjaan.Sampingan", value = data_karakteristik$Pekerjaan.Sampingan)
-    updateTextInput(session, "Memulai.Usaha", value = data_karakteristik$Memulai.Usaha)
-    updateTextInput(session, "Jenis.Usaha", value = data_karakteristik$Jenis.Usaha)
-    updateSelectInput(session, "skala.usaha", selected  = data_karakteristik$skala.usaha)
+    updateTextInput(session, "Nama.edit", value = data_karakteristik$Nama)
+    updateSelectInput(session, "jenis.kelamin.edit", selected  = data_karakteristik$jenis.kelamin)
+    updateTextInput(session, "Usia.edit", value = data_karakteristik$Usia)
+    updateSelectInput(session, "Pendidikan.edit", selected  = data_karakteristik$Pendidikan)
+    updateTextInput(session, "Pekerjaan.Utama.edit", value = data_karakteristik$Pekerjaan.Utama)
+    updateTextInput(session, "Pekerjaan.Sampingan.edit", value = data_karakteristik$Pekerjaan.Sampingan)
+    updateTextInput(session, "Memulai.Usaha.edit", value = data_karakteristik$Memulai.Usaha)
+    updateTextInput(session, "Jenis.Usaha.edit", value = data_karakteristik$Jenis.Usaha)
+    updateSelectInput(session, "skala.usaha.edit", selected  = data_karakteristik$skala.usaha)
     
     session$sendCustomMessage("selected_id_handler", id)
     
@@ -279,22 +279,21 @@ render_server_karakteristik <- function(params) {
       data_karakteristik <- loadDataKarakteristik()
       data_karakteristik[data_karakteristik$No == input$selected_id, ] <- data.frame(
         No = input$selected_id,
-        Nama = input$Nama,
-        jenis.kelamin = input$jenis.kelamin,
-        Usia = input$Usia,
-        Pendidikan = input$Pendidikan,
-        Pekerjaan.Utama = input$Pekerjaan.Utama,
-        Pekerjaan.Sampingan = input$Pekerjaan.Sampingan,
-        Memulai.Usaha = input$Memulai.Usaha,
-        Jenis.Usaha = input$Jenis.Usaha,
-        skala.usaha = input$skala.usaha,
+        Nama = input$Nama.edit,
+        jenis.kelamin = input$jenis.kelamin.edit,
+        Usia = input$Usia.edit,
+        Pendidikan = input$Pendidikan.edit,
+        Pekerjaan.Utama = input$Pekerjaan.Utama.edit,
+        Pekerjaan.Sampingan = input$Pekerjaan.Sampingan.edit,
+        Memulai.Usaha = input$Memulai.Usaha.edit,
+        Jenis.Usaha = input$Jenis.Usaha.edit,
+        skala.usaha = input$skala.usaha.edit,
         stringsAsFactors = FALSE
       )
       successKarakteristik <- safeWriteCSV(data_karakteristik, paste0(pathTambahKarakteristik, ".tmp"))
       if (successKarakteristik) {
         file.rename(paste0(pathTambahKarakteristik, ".tmp"), pathTambahKarakteristik)
         
-        resetInputs()
         render_server_karakteristik(FALSE)
         
         removeModal()

@@ -265,8 +265,8 @@ render_server_peningkatan_wisata <- function(params) {
     data_peningkatanProgramWisata <- loadDataPeningkatanProgramWisata()
     data_peningkatanProgramWisata <- data_peningkatanProgramWisata[data_peningkatanProgramWisata$No == id, ]
     
-    updateSelectInput(session,"Terdapat.tempat.wisata.yang.dikelola.dengan.menggunakan.dana.desa", selected = data_peningkatanProgramWisata$Terdapat.tempat.wisata.yang.dikelola.dengan.menggunakan.dana.desa)
-    updateSelectInput(session,"Terdapat.tempat.wisata.yang.dikelola.dengan.menggunakan.dana.CSR", selected = data_peningkatanProgramWisata$Terdapat.tempat.wisata.yang.dikelola.dengan.menggunakan.dana.CSR)
+    updateSelectInput(session,"Terdapat.tempat.wisata.yang.dikelola.dengan.menggunakan.dana.desa.edit", selected = data_peningkatanProgramWisata$Terdapat.tempat.wisata.yang.dikelola.dengan.menggunakan.dana.desa)
+    updateSelectInput(session,"Terdapat.tempat.wisata.yang.dikelola.dengan.menggunakan.dana.CSR.edit", selected = data_peningkatanProgramWisata$Terdapat.tempat.wisata.yang.dikelola.dengan.menggunakan.dana.CSR)
     
     session$sendCustomMessage("selected_id_handler", id)
     
@@ -289,8 +289,8 @@ render_server_peningkatan_wisata <- function(params) {
       data_peningkatanProgramWisata <- loadDataPeningkatanProgramWisata()
       data_peningkatanProgramWisata[data_peningkatanProgramWisata$No == input$selected_id, ] <- data.frame(
         No = input$selected_id,
-        Terdapat.tempat.wisata.yang.dikelola.dengan.menggunakan.dana.desa=input$Terdapat.tempat.wisata.yang.dikelola.dengan.menggunakan.dana.desa,	
-        Terdapat.tempat.wisata.yang.dikelola.dengan.menggunakan.dana.CSR=input$Terdapat.tempat.wisata.yang.dikelola.dengan.menggunakan.dana.CSR,
+        Terdapat.tempat.wisata.yang.dikelola.dengan.menggunakan.dana.desa=input$Terdapat.tempat.wisata.yang.dikelola.dengan.menggunakan.dana.desa.edit,	
+        Terdapat.tempat.wisata.yang.dikelola.dengan.menggunakan.dana.CSR=input$Terdapat.tempat.wisata.yang.dikelola.dengan.menggunakan.dana.CSR.edit,
         stringsAsFactors = FALSE
       )
       

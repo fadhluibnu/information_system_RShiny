@@ -58,6 +58,18 @@ observeEvent(input$loginBtn, {
 
 
 observeEvent(input$logoutBtn, {
+  showModal(modalDialog(
+    title = "Loading...",
+    "Proses logout",
+    easyClose = FALSE,
+    footer = NULL
+  ))
   session$sendCustomMessage("clearLogin", list())
+  showModal(modalDialog(
+    title = "Success",
+    "Logout berhasil",
+    easyClose = TRUE,
+    footer = NULL
+  ))
   session$reload()
 })

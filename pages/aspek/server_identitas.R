@@ -46,8 +46,8 @@ render_server_identitas <- function (params) {
     
     action_buttons <- if (!is.null(input$stored_user)) {
       paste0(
-        '<button class="update-btn" data-id="', data$No, '">Update</button>',
-        '<button class="delete-btn" data-id="', data$No, '">Delete</button>'
+        '<button class="update-btn-aspek" data-id="', data$No, '">Update</button>',
+        '<button class="delete-btn-aspek" data-id="', data$No, '">Delete</button>'
       )
     } else {
       '<span></span>'
@@ -183,15 +183,15 @@ render_server_identitas <- function (params) {
     data <- loadDataIdentitasResponden()
     data <- data[data$No == id, ]
     
-    updateSelectInput(session, 'Jenis.kelamin', selected =data$Jenis.kelamin)
-    updateNumericInput(session, 'Usia.tahun', value=data$Usia.tahun)
-    updateSelectInput(session, 'Status.perkawinan', selected=data$Status.perkawinan)
-    updateSelectInput(session, 'Apakah.memiliki.anak', selected=data$Apakah.memiliki.anak)
-    updateNumericInput(session, 'Jumlah.anak.orang', value=data$Jumlah.anak.orang)
-    updateSelectInput(session, 'Tingkat.pendidikan', selected=data$Tingkat.pendidikan)
-    updateSelectInput(session, 'Apakah.anda.bekerja.saat.ini', selected=data$Apakah.anda.bekerja.saat.ini)
-    updateTextInput(session, 'Jika.bekerja.apa.pekerjaan.anda.saat.ini', value=data$Jika.bekerja.apa.pekerjaan.anda.saat.ini)
-    updateTextInput(session, 'Nama_Identitas', value=data$Nama)
+    updateSelectInput(session, 'Jenis.kelamin.edit', selected =data$Jenis.kelamin)
+    updateNumericInput(session, 'Usia.tahun.edit', value=data$Usia.tahun)
+    updateSelectInput(session, 'Status.perkawinan.edit', selected=data$Status.perkawinan)
+    updateSelectInput(session, 'Apakah.memiliki.anak.edit', selected=data$Apakah.memiliki.anak)
+    updateNumericInput(session, 'Jumlah.anak.orang.edit', value=data$Jumlah.anak.orang)
+    updateSelectInput(session, 'Tingkat.pendidikan.edit', selected=data$Tingkat.pendidikan)
+    updateSelectInput(session, 'Apakah.anda.bekerja.saat.ini.edit', selected=data$Apakah.anda.bekerja.saat.ini)
+    updateTextInput(session, 'Jika.bekerja.apa.pekerjaan.anda.saat.ini.edit', value=data$Jika.bekerja.apa.pekerjaan.anda.saat.ini)
+    updateTextInput(session, 'Nama_Identitas.edit', value=data$Nama)
     
     session$sendCustomMessage("selected_id_aspek", id)
   })
@@ -210,15 +210,15 @@ render_server_identitas <- function (params) {
       
       data[data$No == input$selected_id_aspek, ] <- data.frame(
         No = input$selected_id_aspek,
-        Nama=input$Nama_Identitas,	
-        Jenis.kelamin=input$Jenis.kelamin,	
-        Usia.tahun=input$Usia.tahun,	
-        Status.perkawinan=input$Status.perkawinan,	
-        Apakah.memiliki.anak=input$Apakah.memiliki.anak,	
-        Jumlah.anak.orang=input$Jumlah.anak.orang,	
-        Tingkat.pendidikan=input$Tingkat.pendidikan,	
-        Apakah.anda.bekerja.saat.ini=input$Apakah.anda.bekerja.saat.ini,	
-        Jika.bekerja.apa.pekerjaan.anda.saat.ini=input$Jika.bekerja.apa.pekerjaan.anda.saat.ini,
+        Nama=input$Nama_Identitas.edit,	
+        Jenis.kelamin=input$Jenis.kelamin.edit,	
+        Usia.tahun=input$Usia.tahun.edit,	
+        Status.perkawinan=input$Status.perkawinan.edit,	
+        Apakah.memiliki.anak=input$Apakah.memiliki.anak.edit,	
+        Jumlah.anak.orang=input$Jumlah.anak.orang.edit,	
+        Tingkat.pendidikan=input$Tingkat.pendidikan.edit,	
+        Apakah.anda.bekerja.saat.ini=input$Apakah.anda.bekerja.saat.ini.edit,	
+        Jika.bekerja.apa.pekerjaan.anda.saat.ini=input$Jika.bekerja.apa.pekerjaan.anda.saat.ini.edit,
         stringsAsFactors = FALSE
       )
       

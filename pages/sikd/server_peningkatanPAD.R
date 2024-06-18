@@ -646,12 +646,12 @@ render_server_peningkatan_PAD <- function(params) {
     data_peningkatanPAD <- loadDataPeningkatanPAD()
     data_peningkatanPAD <- data_peningkatanPAD[data_peningkatanPAD$No == id, ]
     
-    updateSelectInput(session, "Dana.desa.digunakan.untuk.membentuk.kegiatan.pembangunan.desa.termasuk.membangun.usaha", selected = data_peningkatanPAD$Dana.desa.digunakan.untuk.membentuk.kegiatan.pembangunan.desa.termasuk.membangun.usaha)
-    updateSelectInput(session, "Dana.desa.digunakan.untuk.membangun.Infrastruktur.desa.misalnya.jalan", selected = data_peningkatanPAD$Dana.desa.digunakan.untuk.membangun.Infrastruktur.desa.misalnya.jalan)
-    updateSelectInput(session, "Dana.desa.membantu.permodalan.bagi.kegiatan.BUMDes", selected = data_peningkatanPAD$Dana.desa.membantu.permodalan.bagi.kegiatan.BUMDes)
-    updateSelectInput(session, "Dana.CSR.digunakan.untuk.membentuk.kegiatan.pembangunan.desa", selected = data_peningkatanPAD$Dana.CSR.digunakan.untuk.membentuk.kegiatan.pembangunan.desa)
-    updateSelectInput(session, "Dana.CSR.digunakan.untuk.membangun.Infrastruktur.desa.misalnya.jalan", selected = data_peningkatanPAD$Dana.CSR.digunakan.untuk.membangun.Infrastruktur.desa.misalnya.jalan)
-    updateSelectInput(session, "Dana.CSR.membantu.permodalan.bagi.kegiatan.BUMDes", selected = data_peningkatanPAD$Dana.CSR.membantu.permodalan.bagi.kegiatan.BUMDes)
+    updateSelectInput(session, "Dana.desa.digunakan.untuk.membentuk.kegiatan.pembangunan.desa.termasuk.membangun.usaha.edit", selected = data_peningkatanPAD$Dana.desa.digunakan.untuk.membentuk.kegiatan.pembangunan.desa.termasuk.membangun.usaha)
+    updateSelectInput(session, "Dana.desa.digunakan.untuk.membangun.Infrastruktur.desa.misalnya.jalan.edit", selected = data_peningkatanPAD$Dana.desa.digunakan.untuk.membangun.Infrastruktur.desa.misalnya.jalan)
+    updateSelectInput(session, "Dana.desa.membantu.permodalan.bagi.kegiatan.BUMDes.edit", selected = data_peningkatanPAD$Dana.desa.membantu.permodalan.bagi.kegiatan.BUMDes)
+    updateSelectInput(session, "Dana.CSR.digunakan.untuk.membentuk.kegiatan.pembangunan.desa.edit", selected = data_peningkatanPAD$Dana.CSR.digunakan.untuk.membentuk.kegiatan.pembangunan.desa)
+    updateSelectInput(session, "Dana.CSR.digunakan.untuk.membangun.Infrastruktur.desa.misalnya.jalan.edit", selected = data_peningkatanPAD$Dana.CSR.digunakan.untuk.membangun.Infrastruktur.desa.misalnya.jalan)
+    updateSelectInput(session, "Dana.CSR.membantu.permodalan.bagi.kegiatan.BUMDes.edit", selected = data_peningkatanPAD$Dana.CSR.membantu.permodalan.bagi.kegiatan.BUMDes)
     
     
     session$sendCustomMessage("selected_id_handler", id)
@@ -676,12 +676,17 @@ render_server_peningkatan_PAD <- function(params) {
       data_peningkatanPAD[data_peningkatanPAD$No == input$selected_id, ] <- data.frame(
         No = input$selected_id,
         Dana.desa.digunakan.untuk.membentuk.kegiatan.pembangunan.desa.termasuk.membangun.usaha =
-          input$Dana.desa.digunakan.untuk.membentuk.kegiatan.pembangunan.desa.termasuk.membangun.usaha, Dana.desa.digunakan.untuk.membangun.Infrastruktur.desa.misalnya.jalan =
-          input$Dana.desa.digunakan.untuk.membangun.Infrastruktur.desa.misalnya.jalan, Dana.desa.membantu.permodalan.bagi.kegiatan.BUMDes =
-          input$Dana.desa.membantu.permodalan.bagi.kegiatan.BUMDes, Dana.CSR.digunakan.untuk.membentuk.kegiatan.pembangunan.desa =
-          input$Dana.CSR.digunakan.untuk.membentuk.kegiatan.pembangunan.desa, Dana.CSR.digunakan.untuk.membangun.Infrastruktur.desa.misalnya.jalan =
-          input$Dana.CSR.digunakan.untuk.membangun.Infrastruktur.desa.misalnya.jalan, Dana.CSR.membantu.permodalan.bagi.kegiatan.BUMDes =
-          input$Dana.CSR.membantu.permodalan.bagi.kegiatan.BUMDes, 
+          input$Dana.desa.digunakan.untuk.membentuk.kegiatan.pembangunan.desa.termasuk.membangun.usaha.edit, 
+        Dana.desa.digunakan.untuk.membangun.Infrastruktur.desa.misalnya.jalan =
+          input$Dana.desa.digunakan.untuk.membangun.Infrastruktur.desa.misalnya.jalan.edit, 
+        Dana.desa.membantu.permodalan.bagi.kegiatan.BUMDes =
+          input$Dana.desa.membantu.permodalan.bagi.kegiatan.BUMDes.edit, 
+        Dana.CSR.digunakan.untuk.membentuk.kegiatan.pembangunan.desa =
+          input$Dana.CSR.digunakan.untuk.membentuk.kegiatan.pembangunan.desa.edit, 
+        Dana.CSR.digunakan.untuk.membangun.Infrastruktur.desa.misalnya.jalan =
+          input$Dana.CSR.digunakan.untuk.membangun.Infrastruktur.desa.misalnya.jalan.edit, 
+        Dana.CSR.membantu.permodalan.bagi.kegiatan.BUMDes =
+          input$Dana.CSR.membantu.permodalan.bagi.kegiatan.BUMDes.edit, 
         stringsAsFactors = FALSE
       )
       

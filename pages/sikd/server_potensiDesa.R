@@ -93,9 +93,9 @@ render_server_potensi_desa <- function(params) {
     data_potensi_desa <- data_potensi_desa[data_potensi_desa$No == id, ]
     
     
-    updateTextInput(session,"Jenis.potensi", value = data_potensi_desa$Jenis.potensi)	
-    updateTextInput(session,"Bidang", value = data_potensi_desa$Bidang)	
-    updateTextInput(session,"Jumlah.satuan", value = data_potensi_desa$Jumlah.satuan)
+    updateTextInput(session,"Jenis.potensi.edit", value = data_potensi_desa$Jenis.potensi)	
+    updateTextInput(session,"Bidang.edit", value = data_potensi_desa$Bidang)	
+    updateTextInput(session,"Jumlah.satuan.edit", value = data_potensi_desa$Jumlah.satuan)
     
     session$sendCustomMessage("selected_id_handler", id)
     
@@ -118,9 +118,9 @@ render_server_potensi_desa <- function(params) {
       data_potensi_desa <- loadDataPotensiDesa()
       data_potensi_desa[data_potensi_desa$No == input$selected_id, ] <- data.frame(
         No = input$selected_id,
-        Jenis.potensi=input$Jenis.potensi,	
-        Bidang=input$Bidang,	
-        Jumlah.satuan=input$Jumlah.satuan,
+        Jenis.potensi=input$Jenis.potensi.edit,	
+        Bidang=input$Bidang.edit,	
+        Jumlah.satuan=input$Jumlah.satuan.edit,
         stringsAsFactors = FALSE
       )
       

@@ -664,17 +664,17 @@ render_server_pendanaan <- function(params) {
     data_pendanaan <- loadDataPendanaan()
     data_pendanaan <- data_pendanaan[data_pendanaan$No == id, ]
     
-    updateSelectInput(session,"Apakah.BapakIbu.tahu.mengenai.pendanaan.untuk.mengembangkan.usaha", selected = data_pendanaan$Apakah.BapakIbu.tahu.mengenai.pendanaan.untuk.mengembangkan.usaha)
-    updateSelectInput(session,"Apakah.Bapak.Ibu.tahu.yang.dimaksud.dengan.dana.desa", selected = data_pendanaan$Apakah.Bapak.Ibu.tahu.yang.dimaksud.dengan.dana.desa)
-    updateSelectInput(session,"Apakah.Bapak.Ibu.tahu.yang.dimaksud.dengan.dana.CSR.Coorporate.Social.Responsibility", selected = data_pendanaan$Apakah.Bapak.Ibu.tahu.yang.dimaksud.dengan.dana.CSR.Coorporate.Social.Responsibility)
-    updateSelectInput(session, "Modal.Usaha.Bapak.Ibu.diperoleh.dari", selected = data_pendanaan$Modal.Usaha.Bapak.Ibu.diperoleh.dari)
-    updateTextInput(session, "Modal.awal", value = data_pendanaan$Modal.awal)
-    updateSelectInput(session,"Apakah.Bapak.Ibu.mengetahui.adanya.perusahaan.listrik", selected = data_pendanaan$Apakah.Bapak.Ibu.mengetahui.adanya.perusahaan.listrik)
-    updateTextInput(session,"Jika.tahu.sudah.berapa.lama.perusahaan.beraktifitas.tahun",value = data_pendanaan$Jika.tahu.sudah.berapa.lama.perusahaan.beraktifitas.tahun)
-    updateSelectInput(session,"Apakah.perusahaan.memberikan.bantuan.buat.masyarakat.desa", selected = data_pendanaan$Apakah.perusahaan.memberikan.bantuan.buat.masyarakat.desa)
+    updateSelectInput(session,"Apakah.BapakIbu.tahu.mengenai.pendanaan.untuk.mengembangkan.usaha.edit", selected = data_pendanaan$Apakah.BapakIbu.tahu.mengenai.pendanaan.untuk.mengembangkan.usaha)
+    updateSelectInput(session,"Apakah.Bapak.Ibu.tahu.yang.dimaksud.dengan.dana.desa.edit", selected = data_pendanaan$Apakah.Bapak.Ibu.tahu.yang.dimaksud.dengan.dana.desa)
+    updateSelectInput(session,"Apakah.Bapak.Ibu.tahu.yang.dimaksud.dengan.dana.CSR.Coorporate.Social.Responsibility.edit", selected = data_pendanaan$Apakah.Bapak.Ibu.tahu.yang.dimaksud.dengan.dana.CSR.Coorporate.Social.Responsibility)
+    updateSelectInput(session, "Modal.Usaha.Bapak.Ibu.diperoleh.dari.edit", selected = data_pendanaan$Modal.Usaha.Bapak.Ibu.diperoleh.dari)
+    updateTextInput(session, "Modal.awal.edit", value = data_pendanaan$Modal.awal)
+    updateSelectInput(session,"Apakah.Bapak.Ibu.mengetahui.adanya.perusahaan.listrik.edit", selected = data_pendanaan$Apakah.Bapak.Ibu.mengetahui.adanya.perusahaan.listrik)
+    updateTextInput(session,"Jika.tahu.sudah.berapa.lama.perusahaan.beraktifitas.tahun.edit",value = data_pendanaan$Jika.tahu.sudah.berapa.lama.perusahaan.beraktifitas.tahun)
+    updateSelectInput(session,"Apakah.perusahaan.memberikan.bantuan.buat.masyarakat.desa.edit", selected = data_pendanaan$Apakah.perusahaan.memberikan.bantuan.buat.masyarakat.desa)
     updateSelectInput(session, "dalam.bentuk", selected = data_pendanaan$dalam.bentuk)
-    updateSelectInput(session,"Apakah.pemerintah.desa.memberikan.bantuan.buat.masyarakat", selected = data_pendanaan$Apakah.pemerintah.desa.memberikan.bantuan.buat.masyarakat)
-    updateSelectInput(session, "Jika.ya.dalam.bentuk", selected = data_pendanaan$Jika.ya.dalam.bentuk)
+    updateSelectInput(session,"Apakah.pemerintah.desa.memberikan.bantuan.buat.masyarakat.edit", selected = data_pendanaan$Apakah.pemerintah.desa.memberikan.bantuan.buat.masyarakat)
+    updateSelectInput(session, "Jika.ya.dalam.bentuk.edit", selected = data_pendanaan$Jika.ya.dalam.bentuk)
     
     session$sendCustomMessage("selected_id_handler", id)
     
@@ -697,18 +697,18 @@ render_server_pendanaan <- function(params) {
       data_pendanaan <- loadDataPendanaan()
       data_pendanaan[data_pendanaan$No == input$selected_id, ] <- data.frame(
         No = input$selected_id,
-        Apakah.BapakIbu.tahu.mengenai.pendanaan.untuk.mengembangkan.usaha = input$Apakah.BapakIbu.tahu.mengenai.pendanaan.untuk.mengembangkan.usaha,
-        Apakah.Bapak.Ibu.tahu.yang.dimaksud.dengan.dana.desa = input$Apakah.Bapak.Ibu.tahu.yang.dimaksud.dengan.dana.desa,
+        Apakah.BapakIbu.tahu.mengenai.pendanaan.untuk.mengembangkan.usaha = input$Apakah.BapakIbu.tahu.mengenai.pendanaan.untuk.mengembangkan.usaha.edit,
+        Apakah.Bapak.Ibu.tahu.yang.dimaksud.dengan.dana.desa = input$Apakah.Bapak.Ibu.tahu.yang.dimaksud.dengan.dana.desa.edit,
         Apakah.Bapak.Ibu.tahu.yang.dimaksud.dengan.dana.CSR.Coorporate.Social.Responsibility =
-          input$Apakah.Bapak.Ibu.tahu.yang.dimaksud.dengan.dana.CSR.Coorporate.Social.Responsibility,
-        Modal.Usaha.Bapak.Ibu.diperoleh.dari = input$Modal.Usaha.Bapak.Ibu.diperoleh.dari,
-        Modal.awal = input$Modal.awal,
-        Apakah.Bapak.Ibu.mengetahui.adanya.perusahaan.listrik = input$Apakah.Bapak.Ibu.mengetahui.adanya.perusahaan.listrik,
-        Jika.tahu.sudah.berapa.lama.perusahaan.beraktifitas.tahun = input$Jika.tahu.sudah.berapa.lama.perusahaan.beraktifitas.tahun,
-        Apakah.perusahaan.memberikan.bantuan.buat.masyarakat.desa = input$Apakah.perusahaan.memberikan.bantuan.buat.masyarakat.desa,
-        dalam.bentuk = input$dalam.bentuk,
-        Apakah.pemerintah.desa.memberikan.bantuan.buat.masyarakat = input$Apakah.pemerintah.desa.memberikan.bantuan.buat.masyarakat,
-        Jika.ya.dalam.bentuk = input$Jika.ya.dalam.bentuk,
+          input$Apakah.Bapak.Ibu.tahu.yang.dimaksud.dengan.dana.CSR.Coorporate.Social.Responsibility.edit,
+        Modal.Usaha.Bapak.Ibu.diperoleh.dari = input$Modal.Usaha.Bapak.Ibu.diperoleh.dari.edit,
+        Modal.awal = input$Modal.awal.edit,
+        Apakah.Bapak.Ibu.mengetahui.adanya.perusahaan.listrik = input$Apakah.Bapak.Ibu.mengetahui.adanya.perusahaan.listrik.edit,
+        Jika.tahu.sudah.berapa.lama.perusahaan.beraktifitas.tahun = input$Jika.tahu.sudah.berapa.lama.perusahaan.beraktifitas.tahun.edit,
+        Apakah.perusahaan.memberikan.bantuan.buat.masyarakat.desa = input$Apakah.perusahaan.memberikan.bantuan.buat.masyarakat.desa.edit,
+        dalam.bentuk = input$dalam.bentuk.edit,
+        Apakah.pemerintah.desa.memberikan.bantuan.buat.masyarakat = input$Apakah.pemerintah.desa.memberikan.bantuan.buat.masyarakat.edit,
+        Jika.ya.dalam.bentuk = input$Jika.ya.dalam.bentuk.edit,
         stringsAsFactors = FALSE
       )
       

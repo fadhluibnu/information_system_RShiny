@@ -53,7 +53,7 @@ tabItemPeningkatanProgramWisata <- tabItem(
           h4(tags$b("Peningkatan Program Wisata")),
           
           selectInput(
-            "Terdapat.tempat.wisata.yang.dikelola.dengan.menggunakan.dana.desa",
+            "Terdapat.tempat.wisata.yang.dikelola.dengan.menggunakan.dana.desa.edit",
             "Terdapat tempat wisata yang dikelola dengan menggunakan dana desa :"
             ,
             c(
@@ -62,7 +62,7 @@ tabItemPeningkatanProgramWisata <- tabItem(
               "Kurang berperan" = "1"
             ),
           ), selectInput(
-            "Terdapat.tempat.wisata.yang.dikelola.dengan.menggunakan.dana.CSR",
+            "Terdapat.tempat.wisata.yang.dikelola.dengan.menggunakan.dana.CSR.edit",
             "Terdapat tempat wisata yang dikelola dengan menggunakan dana CSR :"
             ,
             c(

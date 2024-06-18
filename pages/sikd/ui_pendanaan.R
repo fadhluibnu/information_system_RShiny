@@ -148,25 +148,25 @@ tabItemPendanaan <- tabItem(tabName = "pendanaan",
                                     status = "success",
                                     width = 12,
                                     h4(tags$b("Pendanaan")),
-                                    selectInput("Apakah.BapakIbu.tahu.mengenai.pendanaan.untuk.mengembangkan.usaha", "Apakah Bapak/Ibu tahu mengenai pendanaan untuk mengembangkan usaha? :",
+                                    selectInput("Apakah.BapakIbu.tahu.mengenai.pendanaan.untuk.mengembangkan.usaha.edit", "Apakah Bapak/Ibu tahu mengenai pendanaan untuk mengembangkan usaha? :",
                                                 c(
                                                   "Tahu"="1",
                                                   "Tidak Tahu"="2"
                                                 ),
                                     ),
-                                    selectInput("Apakah.Bapak.Ibu.tahu.yang.dimaksud.dengan.dana.desa", "Apakah Bapak/Ibu tahu yang dimaksud dengan dana desa? :",
+                                    selectInput("Apakah.Bapak.Ibu.tahu.yang.dimaksud.dengan.dana.desa.edit", "Apakah Bapak/Ibu tahu yang dimaksud dengan dana desa? :",
                                                 c(
                                                   "Tahu"="1",
                                                   "Tidak Tahu"="2"
                                                 ),
                                     ),
-                                    selectInput("Apakah.Bapak.Ibu.tahu.yang.dimaksud.dengan.dana.CSR.Coorporate.Social.Responsibility", "Apakah Bapak/Ibu tahu yang dimaksud dengan dana CSR (Coorporate Social Responsibility)? :",
+                                    selectInput("Apakah.Bapak.Ibu.tahu.yang.dimaksud.dengan.dana.CSR.Coorporate.Social.Responsibility.edit", "Apakah Bapak/Ibu tahu yang dimaksud dengan dana CSR (Coorporate Social Responsibility)? :",
                                                 c(
                                                   "Tahu"="1",
                                                   "Tidak Tahu"="2"
                                                 ),
                                     ),
-                                    selectInput("Modal.Usaha.Bapak.Ibu.diperoleh.dari", "Modal Usaha Bapak/Ibu diperoleh dari :",
+                                    selectInput("Modal.Usaha.Bapak.Ibu.diperoleh.dari.edit", "Modal Usaha Bapak/Ibu diperoleh dari :",
                                                 c(
                                                   "Modal sendiri"="1",
                                                   "Pinjam saudara"="2",
@@ -176,21 +176,21 @@ tabItemPendanaan <- tabItem(tabName = "pendanaan",
                                                   "Lainnya"="6"
                                                 ),
                                     ),
-                                    textInput("Modal.awal", "Modal awal (Rp)"),
-                                    selectInput("Apakah.Bapak.Ibu.mengetahui.adanya.perusahaan.listrik", "Apakah Bapak/Ibu mengetahui adanya perusahaan listrik? :",
+                                    textInput("Modal.awal.edit", "Modal awal (Rp)"),
+                                    selectInput("Apakah.Bapak.Ibu.mengetahui.adanya.perusahaan.listrik.edit", "Apakah Bapak/Ibu mengetahui adanya perusahaan listrik? :",
                                                 c(
                                                   "Tahu"="1",
                                                   "Tidak Tahu"="2"
                                                 ),
                                     ),
-                                    textInput("Jika.tahu.sudah.berapa.lama.perusahaan.beraktifitas.tahun", "Jika tahu, sudah berapa lama perusahaan beraktifitas? (tahun)"),
-                                    selectInput("Apakah.perusahaan.memberikan.bantuan.buat.masyarakat.desa", "Apakah perusahaan memberikan bantuan buat masyarakat desa? :",
+                                    textInput("Jika.tahu.sudah.berapa.lama.perusahaan.beraktifitas.tahun.edit", "Jika tahu, sudah berapa lama perusahaan beraktifitas? (tahun)"),
+                                    selectInput("Apakah.perusahaan.memberikan.bantuan.buat.masyarakat.desa.edit", "Apakah perusahaan memberikan bantuan buat masyarakat desa? :",
                                                 c(
                                                   "Tahu"="1",
                                                   "Tidak Tahu"="2"
                                                 ),
                                     ),
-                                    selectInput("dalam.bentuk", "Jika ya, dalam bentuk :",
+                                    selectInput("dalam.bentuk.edit", "Jika ya, dalam bentuk :",
                                                 c(
                                                   "Modal sendiri"="1",
                                                   "Pinjam saudara"="2",
@@ -200,13 +200,13 @@ tabItemPendanaan <- tabItem(tabName = "pendanaan",
                                                   "Lainnya"="6"
                                                 ),
                                     ),
-                                    selectInput("Apakah.pemerintah.desa.memberikan.bantuan.buat.masyarakat", "Apakah pemerintah desa memberikan bantuan buat masyarakat? :",
+                                    selectInput("Apakah.pemerintah.desa.memberikan.bantuan.buat.masyarakat.edit", "Apakah pemerintah desa memberikan bantuan buat masyarakat? :",
                                                 c(
                                                   "Tahu"="1",
                                                   "Tidak Tahu"="2"
                                                 ),
                                     ),
-                                    selectInput("Jika.ya.dalam.bentuk", "Jika ya, dalam bentuk :",
+                                    selectInput("Jika.ya.dalam.bentuk.edit", "Jika ya, dalam bentuk :",
                                                 c(
                                                   "Modal sendiri"="1",
                                                   "Pinjam saudara"="2",

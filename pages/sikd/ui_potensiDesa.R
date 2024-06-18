@@ -35,9 +35,9 @@ tabItemPotensiDesa <- tabItem(
           width = 12,
           h4(tags$b("Potensi Desa")),
           
-          textInput("Jenis.potensi", "Jenis potensi"),	
-          textInput("Bidang", "Bidang"),	
-          textInput("Jumlah.satuan", "Jumlah satuan")
+          textInput("Jenis.potensi.edit", "Jenis potensi"),	
+          textInput("Bidang.edit", "Bidang"),	
+          textInput("Jumlah.satuan.edit", "Jumlah satuan")
         ),
         actionButton("updatePotensiDesa", "Update"),
         actionButton("cancelPotensiDesa", "Cancel")

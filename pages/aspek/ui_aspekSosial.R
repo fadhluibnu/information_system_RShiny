@@ -23,7 +23,7 @@ tabItemAspekSosial <- tabItem(
           width = 12,
           h4(tags$b("Aspek Sosial")),
           selectInput(
-            'Apakah.Anda.tinggal.di.desa.ini.sejak.lahir', 
+            'Apakah.Anda.tinggal.di.desa.ini.sejak.lahir.edit', 
             'Apakah Anda tinggal di desa ini sejak lahir?',
             
             c(
@@ -33,11 +33,11 @@ tabItemAspekSosial <- tabItem(
             )
           ),
           textInput(
-            'Jika.tidak.sebutkan.asal.tempat', 'Jika tidak, sebutkan asal tempat',
+            'Jika.tidak.sebutkan.asal.tempat.edit', 'Jika tidak, sebutkan asal tempat',
             
           ),
           selectInput(
-            'Apakah.Anda.aktif.dalam.kegiatan.sosial.kemasyarakatan.di.desa.ini', 'Apakah Anda aktif dalam kegiatan sosial kemasyarakatan di desa ini?',
+            'Apakah.Anda.aktif.dalam.kegiatan.sosial.kemasyarakatan.di.desa.ini.edit', 'Apakah Anda aktif dalam kegiatan sosial kemasyarakatan di desa ini?',
             
             c(
               "Ya"="1",
@@ -46,7 +46,7 @@ tabItemAspekSosial <- tabItem(
             )
           ),
           selectInput(
-            'Seberapa.sering.Anda.berpartisipasi.dalam.pertemuan.warga.atau.komunitas.di.desa', 'Seberapa sering Anda berpartisipasi dalam pertemuan warga atau komunitas di desa?',
+            'Seberapa.sering.Anda.berpartisipasi.dalam.pertemuan.warga.atau.komunitas.di.desa.edit', 'Seberapa sering Anda berpartisipasi dalam pertemuan warga atau komunitas di desa?',
             
             c(
               'Sering'='4',
@@ -56,7 +56,7 @@ tabItemAspekSosial <- tabItem(
             )
           ),
           selectInput(
-            'Apakah.anda.merasa.adanya.dukungan.sosial.yang.memadai.di.desa.ini', 'Apakah anda merasa adanya dukungan sosial yang memadai di desa ini?',
+            'Apakah.anda.merasa.adanya.dukungan.sosial.yang.memadai.di.desa.ini.edit', 'Apakah anda merasa adanya dukungan sosial yang memadai di desa ini?',
             
             c(
               "Ya"="1",

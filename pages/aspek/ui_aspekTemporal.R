@@ -24,11 +24,11 @@ tabItemAspekTemporal <- tabItem(
           width = 12,
           h4(tags$b("Aspek Temporal")),
           numericInput(
-            'Berapa.lama.Anda.sudah.tinggal.di.desa.ini.tahun', 'Berapa lama Anda sudah tinggal di desa ini? (tahun)',
+            'Berapa.lama.Anda.sudah.tinggal.di.desa.ini.tahun.edit', 'Berapa lama Anda sudah tinggal di desa ini? (tahun)',
             value = 0
           ),
           selectInput(
-            'Apakah.Anda.berencana.untuk.tinggal.di.desa.ini.dalam.jangka.waktu.yang.lama', 'Apakah Anda berencana untuk tinggal di desa ini dalam jangka waktu yang lama?',
+            'Apakah.Anda.berencana.untuk.tinggal.di.desa.ini.dalam.jangka.waktu.yang.lama.edit', 'Apakah Anda berencana untuk tinggal di desa ini dalam jangka waktu yang lama?',
             
             c(
               "Ya"="1",
@@ -37,7 +37,7 @@ tabItemAspekTemporal <- tabItem(
             )
           ),
           selectInput(
-            'Apakah.Anda.melihat.perubahan.signifikan.dalam.kondisi.ekonomi.dan.sosial.desa.dalam.beberapa.tahun.terakhir', 'Apakah Anda melihat perubahan signifikan dalam kondisi ekonomi dan sosial desa dalam beberapa tahun terakhir?',
+            'Apakah.Anda.melihat.perubahan.signifikan.dalam.kondisi.ekonomi.dan.sosial.desa.dalam.beberapa.tahun.terakhir.edit', 'Apakah Anda melihat perubahan signifikan dalam kondisi ekonomi dan sosial desa dalam beberapa tahun terakhir?',
             
             c(
               "Ya"="1",
@@ -46,7 +46,7 @@ tabItemAspekTemporal <- tabItem(
             )
           ),
           textAreaInput(
-            'Apakah.Anda.memiliki.saran.atau.masukan.untuk.meningkatkan.aspek.sosial.ekonomi.di.desa.ini', 'Apakah Anda memiliki saran atau masukan untuk meningkatkan aspek sosial-ekonomi di desa ini?',
+            'Apakah.Anda.memiliki.saran.atau.masukan.untuk.meningkatkan.aspek.sosial.ekonomi.di.desa.ini.edit', 'Apakah Anda memiliki saran atau masukan untuk meningkatkan aspek sosial-ekonomi di desa ini?',
             
           )
         ),

@@ -22,8 +22,8 @@ render_server_aspek_temporal <- function(params) {
     
     action_buttons <- if (!is.null(input$stored_user)) {
       paste0(
-        '<button class="update-btn" data-id="', data$No, '">Update</button>',
-        '<button class="delete-btn" data-id="', data$No, '">Delete</button>'
+        '<button class="update-btn-aspek" data-id="', data$No, '">Update</button>',
+        '<button class="delete-btn-aspek" data-id="', data$No, '">Delete</button>'
       )
     } else {
       '<span></span>'
@@ -125,22 +125,22 @@ render_server_aspek_temporal <- function(params) {
     
     updateTextInput(
       session,
-      'Berapa.lama.Anda.sudah.tinggal.di.desa.ini.tahun',
+      'Berapa.lama.Anda.sudah.tinggal.di.desa.ini.tahun.edit',
       value = data$Berapa.lama.Anda.sudah.tinggal.di.desa.ini.tahun
     )	
     updateSelectInput(
       session,
-      'Apakah.Anda.berencana.untuk.tinggal.di.desa.ini.dalam.jangka.waktu.yang.lama',
+      'Apakah.Anda.berencana.untuk.tinggal.di.desa.ini.dalam.jangka.waktu.yang.lama.edit',
       selected = data$Apakah.Anda.berencana.untuk.tinggal.di.desa.ini.dalam.jangka.waktu.yang.lama
     )	
     updateSelectInput(
       session,
-      'Apakah.Anda.melihat.perubahan.signifikan.dalam.kondisi.ekonomi.dan.sosial.desa.dalam.beberapa.tahun.terakhir',
+      'Apakah.Anda.melihat.perubahan.signifikan.dalam.kondisi.ekonomi.dan.sosial.desa.dalam.beberapa.tahun.terakhir.edit',
       selected = data$Apakah.Anda.melihat.perubahan.signifikan.dalam.kondisi.ekonomi.dan.sosial.desa.dalam.beberapa.tahun.terakhir
     )	
     updateTextAreaInput(
       session,
-      'Apakah.Anda.memiliki.saran.atau.masukan.untuk.meningkatkan.aspek.sosial.ekonomi.di.desa.ini',
+      'Apakah.Anda.memiliki.saran.atau.masukan.untuk.meningkatkan.aspek.sosial.ekonomi.di.desa.ini.edit',
       value = data$Apakah.Anda.memiliki.saran.atau.masukan.untuk.meningkatkan.aspek.sosial.ekonomi.di.desa.ini
     )
     
@@ -162,9 +162,12 @@ render_server_aspek_temporal <- function(params) {
       
       data[data$No == input$selected_id_aspek, ] <- data.frame(
         No = input$selected_id_aspek,
-        Berapa.lama.Anda.sudah.tinggal.di.desa.ini.tahun = input$Berapa.lama.Anda.sudah.tinggal.di.desa.ini.tahun, Apakah.Anda.berencana.untuk.tinggal.di.desa.ini.dalam.jangka.waktu.yang.lama =
-          input$Apakah.Anda.berencana.untuk.tinggal.di.desa.ini.dalam.jangka.waktu.yang.lama, Apakah.Anda.melihat.perubahan.signifikan.dalam.kondisi.ekonomi.dan.sosial.desa.dalam.beberapa.tahun.terakhir =
-          input$Apakah.Anda.melihat.perubahan.signifikan.dalam.kondisi.ekonomi.dan.sosial.desa.dalam.beberapa.tahun.terakhir, Apakah.Anda.memiliki.saran.atau.masukan.untuk.meningkatkan.aspek.sosial.ekonomi.di.desa.ini = input$Apakah.Anda.memiliki.saran.atau.masukan.untuk.meningkatkan.aspek.sosial.ekonomi.di.desa.ini, 
+        Berapa.lama.Anda.sudah.tinggal.di.desa.ini.tahun = input$Berapa.lama.Anda.sudah.tinggal.di.desa.ini.tahun.edit, 
+        Apakah.Anda.berencana.untuk.tinggal.di.desa.ini.dalam.jangka.waktu.yang.lama =
+          input$Apakah.Anda.berencana.untuk.tinggal.di.desa.ini.dalam.jangka.waktu.yang.lama.edit, 
+        Apakah.Anda.melihat.perubahan.signifikan.dalam.kondisi.ekonomi.dan.sosial.desa.dalam.beberapa.tahun.terakhir =
+          input$Apakah.Anda.melihat.perubahan.signifikan.dalam.kondisi.ekonomi.dan.sosial.desa.dalam.beberapa.tahun.terakhir.edit, 
+        Apakah.Anda.memiliki.saran.atau.masukan.untuk.meningkatkan.aspek.sosial.ekonomi.di.desa.ini = input$Apakah.Anda.memiliki.saran.atau.masukan.untuk.meningkatkan.aspek.sosial.ekonomi.di.desa.ini.edit, 
         stringsAsFactors = FALSE
       )
       

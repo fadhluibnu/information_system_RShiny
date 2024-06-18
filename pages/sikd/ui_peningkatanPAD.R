@@ -92,42 +92,42 @@ tabItemPeningkatanPAD <- tabItem(
           status = "success",
           width = 12,
           h4(tags$b("Peningkata PAD")),
-          selectInput("Dana.desa.digunakan.untuk.membentuk.kegiatan.pembangunan.desa.termasuk.membangun.usaha", "Dana desa digunakan untuk membentuk kegiatan pembangunan desa (termasuk membangun usaha) :",
+          selectInput("Dana.desa.digunakan.untuk.membentuk.kegiatan.pembangunan.desa.termasuk.membangun.usaha.edit", "Dana desa digunakan untuk membentuk kegiatan pembangunan desa (termasuk membangun usaha) :",
                       c(
                         "Berperan"="3",
                         "Cukup berperan"="2",
                         "Kurang berperan"="1"
                       ),
           ),
-          selectInput("Dana.desa.digunakan.untuk.membangun.Infrastruktur.desa.misalnya.jalan", "Dana desa digunakan untuk membangun Infrastruktur desa (misalnya : jalan)  :",
+          selectInput("Dana.desa.digunakan.untuk.membangun.Infrastruktur.desa.misalnya.jalan.edit", "Dana desa digunakan untuk membangun Infrastruktur desa (misalnya : jalan)  :",
                       c(
                         "Berperan"="3",
                         "Cukup berperan"="2",
                         "Kurang berperan"="1"
                       ),
           ),
-          selectInput("Dana.desa.membantu.permodalan.bagi.kegiatan.BUMDes", "Dana desa membantu permodalan bagi kegiatan BUMDes :",
+          selectInput("Dana.desa.membantu.permodalan.bagi.kegiatan.BUMDes.edit", "Dana desa membantu permodalan bagi kegiatan BUMDes :",
                       c(
                         "Berperan"="3",
                         "Cukup berperan"="2",
                         "Kurang berperan"="1"
                       ),
           ),
-          selectInput("Dana.CSR.digunakan.untuk.membentuk.kegiatan.pembangunan.desa", "Dana CSR digunakan untuk membentuk kegiatan pembangunan desa :",
+          selectInput("Dana.CSR.digunakan.untuk.membentuk.kegiatan.pembangunan.desa.edit", "Dana CSR digunakan untuk membentuk kegiatan pembangunan desa :",
                       c(
                         "Berperan"="3",
                         "Cukup berperan"="2",
                         "Kurang berperan"="1"
                       ),
           ),
-          selectInput("Dana.CSR.digunakan.untuk.membangun.Infrastruktur.desa.misalnya.jalan", "Dana CSR digunakan untuk membangun Infrastruktur desa (misalnya : jalan)  :",
+          selectInput("Dana.CSR.digunakan.untuk.membangun.Infrastruktur.desa.misalnya.jalan.edit", "Dana CSR digunakan untuk membangun Infrastruktur desa (misalnya : jalan)  :",
                       c(
                         "Berperan"="3",
                         "Cukup berperan"="2",
                         "Kurang berperan"="1"
                       ),
           ),
-          selectInput("Dana.CSR.membantu.permodalan.bagi.kegiatan.BUMDes", "Dana CSR membantu permodalan bagi kegiatan BUMDes :",
+          selectInput("Dana.CSR.membantu.permodalan.bagi.kegiatan.BUMDes.edit", "Dana CSR membantu permodalan bagi kegiatan BUMDes :",
                       c(
                         "Berperan"="3",
                         "Cukup berperan"="2",

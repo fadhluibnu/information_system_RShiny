@@ -24,11 +24,11 @@ tabItemAspekSpatial <- tabItem(
           width = 12,
           h4(tags$b("Aspek Spatial")),
           numericInput(
-            'Seberapa.jauh.rumah.Anda.dari.pusat.desa.atau.kota.terdekat.Kec.Sagaranten.KM', 'Seberapa jauh rumah Anda dari pusat desa atau kota terdekat? (Kec. Sagaranten) .... KM',
+            'Seberapa.jauh.rumah.Anda.dari.pusat.desa.atau.kota.terdekat.Kec.Sagaranten.KM.edit', 'Seberapa jauh rumah Anda dari pusat desa atau kota terdekat? (Kec. Sagaranten) .... KM',
             value = 0
           ),
           selectInput(
-            'Bagaimana.Anda.biasanya.mengakses.fasilitas.umum.seperti.pasar.sekolah.dan.rumah.sakit.di.desa.ini', 'Bagaimana Anda biasanya mengakses fasilitas umum seperti pasar, sekolah, dan rumah sakit di desa ini?',
+            'Bagaimana.Anda.biasanya.mengakses.fasilitas.umum.seperti.pasar.sekolah.dan.rumah.sakit.di.desa.ini.edit', 'Bagaimana Anda biasanya mengakses fasilitas umum seperti pasar, sekolah, dan rumah sakit di desa ini?',
             c(
               'Jalan Kaki'='1',
               'Sepeda'='2',
@@ -39,7 +39,7 @@ tabItemAspekSpatial <- tabItem(
             )
           ),
           selectInput(
-            'Apakah.transportasi.umum.cukup.memadai.di.desa.ini', 'Apakah transportasi umum cukup memadai di desa ini?',
+            'Apakah.transportasi.umum.cukup.memadai.di.desa.ini.edit', 'Apakah transportasi umum cukup memadai di desa ini?',
             c(
               'Sangat memadai'='4',
               'Cukup memadai'='3',
@@ -48,7 +48,7 @@ tabItemAspekSpatial <- tabItem(
             )
           ),
           selectInput(
-            'Bagaimana.kondisi.infrastruktur.jalan.di.desa.ini', 'Bagaimana kondisi infrastruktur jalan di desa ini? ',
+            'Bagaimana.kondisi.infrastruktur.jalan.di.desa.ini.edit', 'Bagaimana kondisi infrastruktur jalan di desa ini? ',
             c(
               'Baik'='4',
               'Cukup baik'='3',
@@ -57,7 +57,7 @@ tabItemAspekSpatial <- tabItem(
             )
           ),
           selectInput(
-            'Apakah.terdapat.masalah.terkait.sanitasi.di.desa.ini.seperti.akses.ke.fasilitas.toilet.yang.memadai.atau.masalah.limbah', 'Apakah terdapat masalah terkait sanitasi di desa ini, seperti akses ke fasilitas toilet yang memadai atau masalah limbah?',
+            'Apakah.terdapat.masalah.terkait.sanitasi.di.desa.ini.seperti.akses.ke.fasilitas.toilet.yang.memadai.atau.masalah.limbah.edit', 'Apakah terdapat masalah terkait sanitasi di desa ini, seperti akses ke fasilitas toilet yang memadai atau masalah limbah?',
             c(
               "Ya"="1",
               "Tidak"="2",
@@ -65,7 +65,7 @@ tabItemAspekSpatial <- tabItem(
             )
           ),
           selectInput(
-            'Bagaimana.pasokan.air.bersih.di.desa.ini', 'Bagaimana pasokan air bersih di desa ini? ',
+            'Bagaimana.pasokan.air.bersih.di.desa.ini.edit', 'Bagaimana pasokan air bersih di desa ini? ',
             c(
               'Baik'='4',
               'Cukup baik'='3',
@@ -74,7 +74,7 @@ tabItemAspekSpatial <- tabItem(
             )
           ),
           selectInput(
-            'Apakah.Anda.menghadapi.masalah.terkait.air.bersih', 'Apakah Anda menghadapi masalah terkait air bersih?',
+            'Apakah.Anda.menghadapi.masalah.terkait.air.bersih.edit', 'Apakah Anda menghadapi masalah terkait air bersih?',
             c(
               'Sering'='4',
               'Kadang-kadang'='3',
@@ -83,7 +83,7 @@ tabItemAspekSpatial <- tabItem(
             )
           ),
           selectInput(
-            'Apakah.terdapat.masalah.terkait.polusi.di.desa.ini.seperti.polusi.udara.atau.pencemaran.lingkungan.lainnya', 'Apakah terdapat masalah terkait polusi di desa ini, seperti polusi udara atau pencemaran lingkungan lainnya?',
+            'Apakah.terdapat.masalah.terkait.polusi.di.desa.ini.seperti.polusi.udara.atau.pencemaran.lingkungan.lainnya.edit', 'Apakah terdapat masalah terkait polusi di desa ini, seperti polusi udara atau pencemaran lingkungan lainnya?',
             c(
               "Ya"="1",
               "Tidak"="2",
@@ -91,7 +91,7 @@ tabItemAspekSpatial <- tabItem(
             )
           ),
           selectInput(
-            'Apakah.Anda.merasa.bahwa.infrastruktur.dan.fasilitas.umum.di.desa.ini.memadai.untuk.memenuhi.kebutuhan.sehari.hari.penduduk', 'Apakah Anda merasa bahwa infrastruktur dan fasilitas umum di desa ini memadai untuk memenuhi kebutuhan sehari-hari penduduk? ',
+            'Apakah.Anda.merasa.bahwa.infrastruktur.dan.fasilitas.umum.di.desa.ini.memadai.untuk.memenuhi.kebutuhan.sehari.hari.penduduk.edit', 'Apakah Anda merasa bahwa infrastruktur dan fasilitas umum di desa ini memadai untuk memenuhi kebutuhan sehari-hari penduduk? ',
             c(
               "Ya"="1",
               "Tidak"="2",

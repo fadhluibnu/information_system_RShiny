@@ -65,8 +65,8 @@ render_server_aspek_spatial <- function(params){
     
     action_buttons <- if (!is.null(input$stored_user)) {
       paste0(
-        '<button class="update-btn" data-id="', data$No, '">Update</button>',
-        '<button class="delete-btn" data-id="', data$No, '">Delete</button>'
+        '<button class="update-btn-aspek" data-id="', data$No, '">Update</button>',
+        '<button class="delete-btn-aspek" data-id="', data$No, '">Delete</button>'
       )
     } else {
       '<span></span>'
@@ -208,47 +208,47 @@ render_server_aspek_spatial <- function(params){
     
     updateNumericInput(
       session,
-      'Seberapa.jauh.rumah.Anda.dari.pusat.desa.atau.kota.terdekat.Kec.Sagaranten.KM',
+      'Seberapa.jauh.rumah.Anda.dari.pusat.desa.atau.kota.terdekat.Kec.Sagaranten.KM.edit',
       value = data$Seberapa.jauh.rumah.Anda.dari.pusat.desa.atau.kota.terdekat.Kec.Sagaranten.KM
     )	
     updateSelectInput(
       session,
-      'Bagaimana.Anda.biasanya.mengakses.fasilitas.umum.seperti.pasar.sekolah.dan.rumah.sakit.di.desa.ini',
+      'Bagaimana.Anda.biasanya.mengakses.fasilitas.umum.seperti.pasar.sekolah.dan.rumah.sakit.di.desa.ini.edit',
       selected = data$Bagaimana.Anda.biasanya.mengakses.fasilitas.umum.seperti.pasar.sekolah.dan.rumah.sakit.di.desa.ini
     )	
     updateSelectInput(
       session,
-      'Apakah.transportasi.umum.cukup.memadai.di.desa.ini',
+      'Apakah.transportasi.umum.cukup.memadai.di.desa.ini.edit',
       selected = data$Apakah.transportasi.umum.cukup.memadai.di.desa.ini
     )	
     updateSelectInput(
       session,
-      'Bagaimana.kondisi.infrastruktur.jalan.di.desa.ini',
+      'Bagaimana.kondisi.infrastruktur.jalan.di.desa.ini.edit',
       selected = data$Bagaimana.kondisi.infrastruktur.jalan.di.desa.ini
     )	
     updateSelectInput(
       session,
-      'Apakah.terdapat.masalah.terkait.sanitasi.di.desa.ini.seperti.akses.ke.fasilitas.toilet.yang.memadai.atau.masalah.limbah',
+      'Apakah.terdapat.masalah.terkait.sanitasi.di.desa.ini.seperti.akses.ke.fasilitas.toilet.yang.memadai.atau.masalah.limbah.edit',
       selected = data$Apakah.terdapat.masalah.terkait.sanitasi.di.desa.ini.seperti.akses.ke.fasilitas.toilet.yang.memadai.atau.masalah.limbah
     )	
     updateSelectInput(
       session,
-      'Bagaimana.pasokan.air.bersih.di.desa.ini',
+      'Bagaimana.pasokan.air.bersih.di.desa.ini.edit',
       selected = data$Bagaimana.pasokan.air.bersih.di.desa.ini
     )	
     updateSelectInput(
       session,
-      'Apakah.Anda.menghadapi.masalah.terkait.air.bersih',
+      'Apakah.Anda.menghadapi.masalah.terkait.air.bersih.edit',
       selected = data$Apakah.Anda.menghadapi.masalah.terkait.air.bersih
     )	
     updateSelectInput(
       session,
-      'Apakah.terdapat.masalah.terkait.polusi.di.desa.ini.seperti.polusi.udara.atau.pencemaran.lingkungan.lainnya',
+      'Apakah.terdapat.masalah.terkait.polusi.di.desa.ini.seperti.polusi.udara.atau.pencemaran.lingkungan.lainnya.edit',
       selected = data$Apakah.terdapat.masalah.terkait.polusi.di.desa.ini.seperti.polusi.udara.atau.pencemaran.lingkungan.lainnya
     )	
     updateSelectInput(
       session,
-      'Apakah.Anda.merasa.bahwa.infrastruktur.dan.fasilitas.umum.di.desa.ini.memadai.untuk.memenuhi.kebutuhan.sehari.hari.penduduk',
+      'Apakah.Anda.merasa.bahwa.infrastruktur.dan.fasilitas.umum.di.desa.ini.memadai.untuk.memenuhi.kebutuhan.sehari.hari.penduduk.edit',
       selected = data$Apakah.Anda.merasa.bahwa.infrastruktur.dan.fasilitas.umum.di.desa.ini.memadai.untuk.memenuhi.kebutuhan.sehari.hari.penduduk
     )
     
@@ -271,15 +271,23 @@ render_server_aspek_spatial <- function(params){
       data[data$No == input$selected_id_aspek, ] <- data.frame(
         No = input$selected_id_aspek,
         Seberapa.jauh.rumah.Anda.dari.pusat.desa.atau.kota.terdekat.Kec.Sagaranten.KM =
-          input$Seberapa.jauh.rumah.Anda.dari.pusat.desa.atau.kota.terdekat.Kec.Sagaranten.KM, Bagaimana.Anda.biasanya.mengakses.fasilitas.umum.seperti.pasar.sekolah.dan.rumah.sakit.di.desa.ini =
-          input$Bagaimana.Anda.biasanya.mengakses.fasilitas.umum.seperti.pasar.sekolah.dan.rumah.sakit.di.desa.ini, Apakah.transportasi.umum.cukup.memadai.di.desa.ini =
-          input$Apakah.transportasi.umum.cukup.memadai.di.desa.ini, Bagaimana.kondisi.infrastruktur.jalan.di.desa.ini =
-          input$Bagaimana.kondisi.infrastruktur.jalan.di.desa.ini, Apakah.terdapat.masalah.terkait.sanitasi.di.desa.ini.seperti.akses.ke.fasilitas.toilet.yang.memadai.atau.masalah.limbah =
-          input$Apakah.terdapat.masalah.terkait.sanitasi.di.desa.ini.seperti.akses.ke.fasilitas.toilet.yang.memadai.atau.masalah.limbah, Bagaimana.pasokan.air.bersih.di.desa.ini =
-          input$Bagaimana.pasokan.air.bersih.di.desa.ini, Apakah.Anda.menghadapi.masalah.terkait.air.bersih =
-          input$Apakah.Anda.menghadapi.masalah.terkait.air.bersih, Apakah.terdapat.masalah.terkait.polusi.di.desa.ini.seperti.polusi.udara.atau.pencemaran.lingkungan.lainnya =
-          input$Apakah.terdapat.masalah.terkait.polusi.di.desa.ini.seperti.polusi.udara.atau.pencemaran.lingkungan.lainnya, Apakah.Anda.merasa.bahwa.infrastruktur.dan.fasilitas.umum.di.desa.ini.memadai.untuk.memenuhi.kebutuhan.sehari.hari.penduduk =
-          input$Apakah.Anda.merasa.bahwa.infrastruktur.dan.fasilitas.umum.di.desa.ini.memadai.untuk.memenuhi.kebutuhan.sehari.hari.penduduk, 
+          input$Seberapa.jauh.rumah.Anda.dari.pusat.desa.atau.kota.terdekat.Kec.Sagaranten.KM.edit, 
+        Bagaimana.Anda.biasanya.mengakses.fasilitas.umum.seperti.pasar.sekolah.dan.rumah.sakit.di.desa.ini =
+          input$Bagaimana.Anda.biasanya.mengakses.fasilitas.umum.seperti.pasar.sekolah.dan.rumah.sakit.di.desa.ini.edit, 
+        Apakah.transportasi.umum.cukup.memadai.di.desa.ini =
+          input$Apakah.transportasi.umum.cukup.memadai.di.desa.ini.edit, 
+        Bagaimana.kondisi.infrastruktur.jalan.di.desa.ini =
+          input$Bagaimana.kondisi.infrastruktur.jalan.di.desa.ini.edit, 
+        Apakah.terdapat.masalah.terkait.sanitasi.di.desa.ini.seperti.akses.ke.fasilitas.toilet.yang.memadai.atau.masalah.limbah =
+          input$Apakah.terdapat.masalah.terkait.sanitasi.di.desa.ini.seperti.akses.ke.fasilitas.toilet.yang.memadai.atau.masalah.limbah.edit, 
+        Bagaimana.pasokan.air.bersih.di.desa.ini =
+          input$Bagaimana.pasokan.air.bersih.di.desa.ini.edit, 
+        Apakah.Anda.menghadapi.masalah.terkait.air.bersih =
+          input$Apakah.Anda.menghadapi.masalah.terkait.air.bersih.edit, 
+        Apakah.terdapat.masalah.terkait.polusi.di.desa.ini.seperti.polusi.udara.atau.pencemaran.lingkungan.lainnya =
+          input$Apakah.terdapat.masalah.terkait.polusi.di.desa.ini.seperti.polusi.udara.atau.pencemaran.lingkungan.lainnya.edit, 
+        Apakah.Anda.merasa.bahwa.infrastruktur.dan.fasilitas.umum.di.desa.ini.memadai.untuk.memenuhi.kebutuhan.sehari.hari.penduduk =
+          input$Apakah.Anda.merasa.bahwa.infrastruktur.dan.fasilitas.umum.di.desa.ini.memadai.untuk.memenuhi.kebutuhan.sehari.hari.penduduk.edit, 
         stringsAsFactors = FALSE
       )
       
