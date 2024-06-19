@@ -5,6 +5,7 @@ pathTambahPendanaan <- "data/Pendanaan.csv"
 pathTambahPeningkatanPAD <- "data/PeningkatanPAD.csv"
 pathTambahPeningkatanPerekonomian <- "data/PeningkatanPerekonomianDesa.csv"
 pathTambahPeningkatanProgramWisata <- "data/PeningkatanProgramWisata.csv"
+pathTambahGaleriPotensiDesa <- "data/PotensiDesaURL.csv"
 
 # # Save data to CSV
 # saveDataKarakteristik <- function(data) {
@@ -88,6 +89,7 @@ resetInputs <- function() {
   updateSelectInput(session,"Terdapat.tempat.wisata.yang.dikelola.dengan.menggunakan.dana.desa")
   updateSelectInput(session,"Terdapat.tempat.wisata.yang.dikelola.dengan.menggunakan.dana.CSR")
   
+  session$sendCustomMessage("resetFileInput", "Galeri.url")
   
   
   shinyjs::hide("update")
@@ -195,7 +197,6 @@ loadDataPeningkatanPerekonomian <- function(){
   }
 }
 
-
 # Peningkatan Program Wisata
 loadDataPeningkatanProgramWisata <- function(){
   if (file.exists(pathTambahPeningkatanProgramWisata)) {
@@ -204,6 +205,18 @@ loadDataPeningkatanProgramWisata <- function(){
     data.frame(
       Terdapat.tempat.wisata.yang.dikelola.dengan.menggunakan.dana.desa=character(),	
       Terdapat.tempat.wisata.yang.dikelola.dengan.menggunakan.dana.CSR=character(),
+    )
+  }
+}
+
+# galeri Potensi Wisata
+loadDataGaleriPotensiWisata <- function(){
+  if (file.exists(pathTambahGaleriPotensiDesa)) {
+    read.csv(pathTambahGaleriPotensiDesa, stringsAsFactors = FALSE)
+  } else {
+    data.frame(
+      Galeri.url=character(),
+      stringsAsFactors = FALSE
     )
   }
 }
@@ -281,7 +294,7 @@ observeEvent(input$add, {
   
   # Karakteristik
   new_data_karakteristik <- data.frame(
-    No = max(as.integer(loadDataKarakteristik()$No), na.rm = TRUE) + 1,
+    No = ifelse(nrow(loadDataKarakteristik()) == 0, "1", max(loadDataKarakteristik()$No) + 1),
     Nama = input$Nama,
     jenis.kelamin = input$jenis.kelamin,
     Usia = input$Usia,
@@ -300,7 +313,7 @@ observeEvent(input$add, {
   
   # Potensi Desa
   new_data_potensi_desa <- data.frame(
-    No = max(as.integer(loadDataPotensiDesa()$No), na.rm = TRUE) + 1,
+    No = ifelse(is.na(max(as.integer(loadDataPotensiDesa()$No), na.rm = TRUE)), 1, max(as.integer(loadDataPotensiDesa()$No), na.rm = TRUE) + 1),
     Jenis.potensi=input$Jenis.potensi,	
     Bidang=input$Bidang,	
     Jumlah.satuan=input$Jumlah.satuan,
@@ -313,7 +326,7 @@ observeEvent(input$add, {
   
   # Pendanaan
   new_data_pendanaan <- data.frame(
-    No = max(as.integer(loadDataPendanaan()$No), na.rm = TRUE) + 1,
+    No = ifelse(nrow(loadDataPendanaan()) == 0, "1", max(loadDataPendanaan()$No) + 1),
     Apakah.BapakIbu.tahu.mengenai.pendanaan.untuk.mengembangkan.usaha = input$Apakah.BapakIbu.tahu.mengenai.pendanaan.untuk.mengembangkan.usaha,
     Apakah.Bapak.Ibu.tahu.yang.dimaksud.dengan.dana.desa = input$Apakah.Bapak.Ibu.tahu.yang.dimaksud.dengan.dana.desa,
     Apakah.Bapak.Ibu.tahu.yang.dimaksud.dengan.dana.CSR.Coorporate.Social.Responsibility =
@@ -336,7 +349,7 @@ observeEvent(input$add, {
   
   # Peningkatan PAD
   new_data_peningkatan_PAD <- data.frame(
-    No = max(as.integer(loadDataPeningkatanPAD()$No), na.rm = TRUE) + 1,
+    No = ifelse(nrow(loadDataPeningkatanPAD()) == 0, "1", max(loadDataPeningkatanPAD()$No) + 1),
     Dana.desa.digunakan.untuk.membentuk.kegiatan.pembangunan.desa.termasuk.membangun.usaha =
       input$Dana.desa.digunakan.untuk.membentuk.kegiatan.pembangunan.desa.termasuk.membangun.usaha, Dana.desa.digunakan.untuk.membangun.Infrastruktur.desa.misalnya.jalan =
       input$Dana.desa.digunakan.untuk.membangun.Infrastruktur.desa.misalnya.jalan, Dana.desa.membantu.permodalan.bagi.kegiatan.BUMDes =
@@ -354,7 +367,7 @@ observeEvent(input$add, {
   
   # Peningkatan Perekonomian
   new_data_peningkatan_Perekonomian <- data.frame(
-    No = max(as.integer(loadDataPeningkatanPerekonomian()$No), na.rm = TRUE) + 1,
+    No = ifelse(nrow(loadDataPeningkatanPerekonomian()) == 0, "1", max(loadDataPeningkatanPerekonomian()$No) + 1),
     Terbukanya.usaha.ekonomi.rakyat.karena.adanya.dana.desa = input$Terbukanya.usaha.ekonomi.rakyat.karena.adanya.dana.desa, 
     Dana.desa.menambah.penghasilan.masyarakat =
       input$Dana.desa.menambah.penghasilan.masyarakat, 
@@ -377,7 +390,7 @@ observeEvent(input$add, {
   
   # Peningkatan Program Wista
   new_data_peningkatan_program_wisata <- data.frame(
-    No = max(as.integer(loadDataPeningkatanProgramWisata()$No), na.rm = TRUE) + 1,
+    No = ifelse(nrow(loadDataPeningkatanProgramWisata()) == 0, "1", max(loadDataPeningkatanProgramWisata()$No) + 1),
     Terdapat.tempat.wisata.yang.dikelola.dengan.menggunakan.dana.desa=input$Terdapat.tempat.wisata.yang.dikelola.dengan.menggunakan.dana.desa,	
     Terdapat.tempat.wisata.yang.dikelola.dengan.menggunakan.dana.CSR=input$Terdapat.tempat.wisata.yang.dikelola.dengan.menggunakan.dana.CSR,
     stringsAsFactors = FALSE
@@ -388,7 +401,28 @@ observeEvent(input$add, {
   data_peningkatanProgramWisata <- rbind(data_peningkatanProgramWisata, new_data_peningkatan_program_wisata)
   successPeningkatanProgramWisata <- safeWriteCSV(data_peningkatanProgramWisata, paste0(pathTambahPeningkatanProgramWisata, ".tmp"))
   
-  if (successKarakteristik && successPotensiDesa && successPendanaan && successPeningkatanPAD && successPeningkatanPerekonomian && successPeningkatanProgramWisata) {
+  file_info <- input$Galeri.url
+  file_name <- ""
+  if (!is.null(file_info)){
+    file_path <- file_info$datapath
+    file_name <- file_info$name
+    
+    save_path <- file.path("www", file_name)
+    
+    file.copy(file_path, save_path)
+  }
+  
+  # Potensi Wisata
+  new_data_galeri_potensi_wisata <- data.frame(
+    No = ifelse(nrow(loadDataGaleriPotensiWisata()) == 0, "1", max(loadDataGaleriPotensiWisata()$No) + 1),
+    Galeri.url = file_name
+  )
+  
+  data_galeri_potensi_wisata <- loadDataGaleriPotensiWisata()
+  data_galeri_potensi_wisata <- rbind(data_galeri_potensi_wisata, new_data_galeri_potensi_wisata)
+  succes_galeri_potensi_wisata <- safeWriteCSV(data_galeri_potensi_wisata, paste0(pathTambahGaleriPotensiDesa, ".tmp"))
+  
+  if (successKarakteristik && successPotensiDesa && successPendanaan && successPeningkatanPAD && successPeningkatanPerekonomian && successPeningkatanProgramWisata && succes_galeri_potensi_wisata) {
     
     file.rename(paste0(pathTambahKarakteristik, ".tmp"), pathTambahKarakteristik)
     file.rename(paste0(pathTambahPotensiDesa, ".tmp"), pathTambahPotensiDesa)
@@ -396,6 +430,7 @@ observeEvent(input$add, {
     file.rename(paste0(pathTambahPeningkatanPAD, ".tmp"), pathTambahPeningkatanPAD)
     file.rename(paste0(pathTambahPeningkatanPerekonomian, ".tmp"), pathTambahPeningkatanPerekonomian)
     file.rename(paste0(pathTambahPeningkatanProgramWisata, ".tmp"), pathTambahPeningkatanProgramWisata)
+    file.rename(paste0(pathTambahGaleriPotensiDesa, ".tmp"), pathTambahGaleriPotensiDesa)
     
     resetInputs()
     render_server_karakteristik(TRUE)
@@ -421,6 +456,7 @@ observeEvent(input$add, {
     unlink(paste0(pathTambahPeningkatanPAD, ".tmp"))
     unlink(paste0(pathTambahPeningkatanPerekonomian, ".tmp"))
     unlink(paste0(pathTambahPeningkatanProgramWisata, ".tmp"))
+    unlink(paste0(pathTambahGaleriPotensiDesa, ".tmp"))
     
     removeModal()
     
@@ -509,4 +545,47 @@ observeEvent(input$delete_id, {
     ))
   }
 
+})
+
+observeEvent(input$delete_galeri_id, {
+  
+  showModal(modalDialog(
+    title = "Loading...",
+    "Proses Penghapusan Data",
+    easyClose = FALSE,
+    footer = NULL
+  ))
+  
+  No <- as.integer(input$delete_galeri_id)
+  data <- loadDataGaleriPotensiWisata()
+  
+  data <- data[data$No != No, ]
+  
+  succesGaleri <- safeWriteCSV(data, paste0(pathTambahGaleriPotensiDesa, ".tmp"))
+  
+  if (succesGaleri ) {
+    
+    file.rename(paste0(pathTambahGaleriPotensiDesa, ".tmp"), pathTambahGaleriPotensiDesa)
+    
+    render_server_potensi_desa(TRUE)
+    
+    removeModal()
+    
+    showModal(modalDialog(
+      title = "Success",
+      "Data berhasil dihapus.",
+      easyClose = TRUE,
+      footer = NULL
+    ))
+    
+  } else {
+    unlink(paste0(pathTambahGaleriPotensiDesa, ".tmp"))
+    
+    showModal(modalDialog(
+      title = "Error",
+      "Gagal menghapus data.",
+      easyClose = TRUE,
+      footer = NULL
+    ))
+  }
 })

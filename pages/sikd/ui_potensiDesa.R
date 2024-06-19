@@ -19,9 +19,17 @@ tabItemPotensiDesa <- tabItem(
       Shiny.addCustomMessageHandler('selected_id_handler', function(message) {
         Shiny.setInputValue('selected_id', message);
       });
+      
+      Shiny.addCustomMessageHandler('form_update_galeri', function(message) {
+        Shiny.setInputValue('form_update_galeri', '0');
+      });
+      Shiny.addCustomMessageHandler('selected_id_galeri', function(message) {
+        Shiny.setInputValue('selected_id_galeri', message);
+      });
     "
     )
   ), 
+  
   conditionalPanel(
     condition = "input.form_update == '1'", 
     fluidRow(
@@ -41,11 +49,38 @@ tabItemPotensiDesa <- tabItem(
         ),
         actionButton("updatePotensiDesa", "Update"),
         actionButton("cancelPotensiDesa", "Cancel")
-    )
+      )
     )
   ),
   fluidRow(
     box(title = "Potensi Desa", width = 12, 
         DTOutput("data_table_PotensiDesa"))
+  ),
+  
+  conditionalPanel(
+    condition = "input.form_update_galeri == '1'", 
+    fluidRow(
+      box(
+        title = h3(tags$b("Update Galeri")),
+        status = "primary",
+        width = 12,
+        solidHeader = TRUE,
+        box(
+          status = "success",
+          width = 12,
+          h4(tags$b("Galeri Potensi Desa")),
+          
+          fileInput("Galeri.url.edit", "Foto Potensi Desa", 
+                    accept = c("image/png", "image/jpeg", "image/jpg"))
+          
+        ),
+        actionButton("updateGaleriPotensiDesa", "Update"),
+        actionButton("cancelGaleriPotensiDesa", "Cancel")
+      )
+    )
+  ),
+  fluidRow(
+    box(title = "Galeri Potensi Desa", width = 12, 
+        DTOutput("data_table_galeriPotensiDesa"))
   ),
 )

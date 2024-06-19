@@ -183,6 +183,16 @@ ui <- dashboardPage(
       Shiny.setInputValue('delete_aspek_id', id);
     });
     
+    $(document).on('click', '.update-btn-galeri', function() {
+      var id = $(this).data('id');
+      Shiny.setInputValue('update_galeri_id', id);
+      Shiny.setInputValue('form_update_galeri', '1');
+    });
+    $(document).on('click', '.delete-btn-galeri', function() {
+      var id = $(this).data('id');
+      Shiny.setInputValue('delete_galeri_id', id);
+    });
+    
     Shiny.addCustomMessageHandler('form_update_false', function(message) {
       Shiny.setInputValue('form_update', '0');
     });
@@ -208,6 +218,13 @@ ui <- dashboardPage(
       localStorage.removeItem('user');
     });
     
+    Shiny.addCustomMessageHandler('resetFileInput', function(elementId) {
+        var el = document.getElementById(elementId);
+        if (el) {
+          el.value = '';
+        }
+      });
+    
   "))
   )
 )
@@ -227,20 +244,20 @@ server <- function(input, output, session) {
   }
   checkLogin()
   source("pages/auth/server_login.R", local=TRUE)
-  # source("pages/profil/server_profilDesa.R", local=TRUE)
-  # source("pages/sikd/server_tambah_data.R", local=TRUE)
-  # source("pages/sikd/server_karakteristik.R", local=TRUE)
-  # source("pages/sikd/server_pendanaan.R", local=TRUE)
-  # source("pages/sikd/server_peningkatanPAD.R", local=TRUE)
-  # source("pages/sikd/server_peningkatanPerekonomian.R", local=TRUE)
-  # source("pages/sikd/server_peningkatanProgramWisata.R", local=TRUE)
-  # source("pages/sikd/server_potensiDesa.R", local=TRUE)
-  # # source("pages/sikd/server_hapus_data.R", local=TRUE)
-  # source("pages/aspek/server_tambah_hapus.R", local=TRUE)
-  # source("pages/aspek/server_identitas.R", local=TRUE)
-  # source("pages/aspek/server_aspekEkonomi.R", local=TRUE)
-  # source("pages/aspek/server_aspekSosial.R", local=TRUE)
-  # source("pages/aspek/server_aspekTemporal.R", local=TRUE)
+  source("pages/profil/server_profilDesa.R", local=TRUE)
+  source("pages/sikd/server_tambah_data.R", local=TRUE)
+  source("pages/sikd/server_karakteristik.R", local=TRUE)
+  source("pages/sikd/server_pendanaan.R", local=TRUE)
+  source("pages/sikd/server_peningkatanPAD.R", local=TRUE)
+  source("pages/sikd/server_peningkatanPerekonomian.R", local=TRUE)
+  source("pages/sikd/server_peningkatanProgramWisata.R", local=TRUE)
+  source("pages/sikd/server_potensiDesa.R", local=TRUE)
+  # source("pages/sikd/server_hapus_data.R", local=TRUE)
+  source("pages/aspek/server_tambah_hapus.R", local=TRUE)
+  source("pages/aspek/server_identitas.R", local=TRUE)
+  source("pages/aspek/server_aspekEkonomi.R", local=TRUE)
+  source("pages/aspek/server_aspekSosial.R", local=TRUE)
+  source("pages/aspek/server_aspekTemporal.R", local=TRUE)
   source("pages/aspek/server_aspekSpatial.R", local=TRUE)
   
   

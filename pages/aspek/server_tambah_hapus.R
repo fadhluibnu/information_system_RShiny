@@ -256,7 +256,7 @@ observeEvent(input$addAspek, {
   dataAspekSpatial <- loadDataAspekSpatial()
   
   new_dataIdentitasResponden <- data.frame(
-    No = max(as.integer(loadDataIdentitasResponden()$No), na.rm = TRUE) + 1,
+    No = ifelse(nrow(loadDataIdentitasResponden()) == 0, "1", max(loadDataIdentitasResponden()$No) + 1),
     Nama=input$Nama_Identitas,	
     Jenis.kelamin=input$Jenis.kelamin,	
     Usia.tahun=input$Usia.tahun,	
@@ -270,7 +270,7 @@ observeEvent(input$addAspek, {
   )
   
   new_dataAspekEkonomi <- data.frame(
-    No = max(as.integer(loadDataAspekEkonomi()$No), na.rm = TRUE) + 1,
+    No = ifelse(nrow(loadDataIdentitasResponden()) == 0, "1", max(loadDataIdentitasResponden()$No) + 1),
     Apakah.Anda.atau.anggota.keluarga.Anda.memiliki.usaha.sendiri.di.desa.ini = input$Apakah.Anda.atau.anggota.keluarga.Anda.memiliki.usaha.sendiri.di.desa.ini, 
     Berapa.pendapatan.bulanan.Anda.atau.anggota.keluarga.Anda.secara.keseluruhan.Kisaran.jumlah = input$Berapa.pendapatan.bulanan.Anda.atau.anggota.keluarga.Anda.secara.keseluruhan.Kisaran.jumlah, 
     Apakah.Anda.atau.anggota.keluarga.Anda.menerima.bantuan.sosial = input$Apakah.Anda.atau.anggota.keluarga.Anda.menerima.bantuan.sosial, 
@@ -284,7 +284,7 @@ observeEvent(input$addAspek, {
   )
   
   new_dataAspekSosial <- data.frame(
-    No = max(as.integer(loadDataAspekSosial()$No), na.rm = TRUE) + 1,
+    No = ifelse(nrow(loadDataAspekSosial()) == 0, "1", max(loadDataAspekSosial()$No) + 1),
     Apakah.Anda.tinggal.di.desa.ini.sejak.lahir = input$Apakah.Anda.tinggal.di.desa.ini.sejak.lahir, 
     Jika.tidak.sebutkan.asal.tempat =
       input$Jika.tidak.sebutkan.asal.tempat, 
@@ -298,7 +298,7 @@ observeEvent(input$addAspek, {
   )
   
   new_dataAspekTemporal <- data.frame(
-    No = max(as.integer(loadDataAspekTemporal()$No), na.rm = TRUE) + 1,
+    No = ifelse(nrow(loadDataAspekTemporal()) == 0, "1", max(loadDataAspekTemporal()$No) + 1),
     Berapa.lama.Anda.sudah.tinggal.di.desa.ini.tahun = input$Berapa.lama.Anda.sudah.tinggal.di.desa.ini.tahun, 
     Apakah.Anda.berencana.untuk.tinggal.di.desa.ini.dalam.jangka.waktu.yang.lama =
       input$Apakah.Anda.berencana.untuk.tinggal.di.desa.ini.dalam.jangka.waktu.yang.lama, 
@@ -309,7 +309,7 @@ observeEvent(input$addAspek, {
   )
   
   new_dataAspekSpatial <- data.frame(
-    No = max(as.integer(loadDataAspekSpatial()$No), na.rm = TRUE) + 1,
+    No = ifelse(nrow(loadDataAspekSpatial()) == 0, "1", max(loadDataAspekSpatial()$No) + 1),
     Seberapa.jauh.rumah.Anda.dari.pusat.desa.atau.kota.terdekat.Kec.Sagaranten.KM =
       input$Seberapa.jauh.rumah.Anda.dari.pusat.desa.atau.kota.terdekat.Kec.Sagaranten.KM, 
     Bagaimana.Anda.biasanya.mengakses.fasilitas.umum.seperti.pasar.sekolah.dan.rumah.sakit.di.desa.ini =

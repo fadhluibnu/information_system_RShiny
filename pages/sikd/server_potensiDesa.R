@@ -1,6 +1,7 @@
 render_server_potensi_desa <- function(params) {
   
   pathTambahPotensiDesa <- "data/PotensiDesa.csv"
+  pathTambahGaleriPotensiDesa <- "data/PotensiDesaURL.csv"
   
   pathPotensiDesa <- read_csv("data/PotensiDesa.csv")
   output$data_table_PotensiDesa <- renderDT({
@@ -153,6 +154,132 @@ render_server_potensi_desa <- function(params) {
     }
     params = TRUE
   })
+  
+  output$data_table_galeriPotensiDesa <- renderDT({
+    data <- read_csv(pathTambahGaleriPotensiDesa)
+    
+    action_buttons <- if (!is.null(input$stored_user)) {
+      paste0(
+        '<button class="update-btn-galeri" data-id="', data$No, '">Update</button>',
+        '<button class="delete-btn-galeri" data-id="', data$No, '">Delete</button>'
+      )
+    } else {
+      '<span></span>'
+    }
+    
+    data$Actions <- action_buttons
+    
+    datatable(
+      data,
+      escape = FALSE,  # To render HTML tags in the table
+      colnames = c(
+        "No",
+        "ID",
+        "Gambar",
+        "Actions"
+      ),
+      selection = "none",
+      options = list(
+        columnDefs = list(list(
+          targets = 2,  # Assuming the image URL is in the first column
+          render = JS(
+            "function(data, type, row, meta) {",
+            "console.log(data)",
+            "return type === 'display' && data != null ?",
+            "'<img src=\"' + data + '\" height=\"300\">' : data;",
+            "}"
+          )
+        )
+      ), 
+      scrollX = TRUE,
+      columnDefs = list(
+        list(orderable = FALSE, className = 'select-checkbox-potensi-desa', targets = 0),
+        list(targets = 0, visible = TRUE),
+        list(targets = ncol(data), orderable = FALSE, searchable = FALSE)
+      ),
+      select = list(style = 'multi', selector = 'td:first-child')
+      )
+    )%>%
+      formatStyle(
+        columns = c('Actions'),
+        cursor = 'pointer'
+      )
+  })
+  
+  observeEvent(input$cancelGaleriPotensiDesa, {
+    session$sendCustomMessage("form_update_galeri", "0")
+  })
+  
+  observeEvent(input$update_galeri_id, {
+    id <- as.integer(input$update_galeri_id)
+    data <- loadDataGaleriPotensiWisata()
+    
+    data <- data[data$No == id, ]
+    session$sendCustomMessage("selected_id_galeri", id)
+  })
+  
+  observeEvent(input$updateGaleriPotensiDesa, {
+    
+    if (params == TRUE){
+      showModal(modalDialog(
+        title = "Loading...",
+        "Proses Update Data",
+        easyClose = FALSE,
+        footer = NULL
+      ))
+      
+      data <- loadDataGaleriPotensiWisata()
+      
+      file_info <- input$Galeri.url.edit
+      file_name <- data$Galeri.url
+      if (!is.null(file_info)){
+        file_path <- file_info$datapath
+        file_name <- file_info$name
+        
+        save_path <- file.path("www", file_name)
+        
+        file.copy(file_path, save_path)
+      }
+      
+      data <- loadDataGaleriPotensiWisata()
+      data[data$No == input$selected_id_galeri, ] <- data.frame(
+        No = input$selected_id_galeri,
+        Galeri.url= file_name,
+        stringsAsFactors = FALSE
+      )
+      
+      successGaleriPotensiDesa <- safeWriteCSV(data, paste0(pathTambahGaleriPotensiDesa, ".tmp"))
+      if (successGaleriPotensiDesa){
+        file.rename(paste0(pathTambahGaleriPotensiDesa, ".tmp"), pathTambahGaleriPotensiDesa)
+        resetInputs()
+        render_server_potensi_desa(FALSE)
+        
+        session$sendCustomMessage("form_update_galeri", "0")
+        session$sendCustomMessage("resetFileInput", "Galeri.url.edit")
+        
+        showModal(modalDialog(
+          title = "Success",
+          "Data berhasil diperbarui",
+          easyClose = TRUE,
+          footer = NULL
+        ))
+      }else {
+        
+        unlink(paste0(pathTambahGaleriPotensiDesa, ".tmp"))
+        
+        removeModal()
+        
+        showModal(modalDialog(
+          title = "Error",
+          "Gagal menambahkan data.",
+          easyClose = TRUE,
+          footer = NULL
+        ))
+      }
+    }
+    params = TRUE
+  })
+  
 }
 
 render_server_potensi_desa(TRUE)

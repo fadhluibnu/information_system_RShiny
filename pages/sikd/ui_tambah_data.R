@@ -257,7 +257,8 @@ tabItemTambahData <- tabItem(
             "Cukup berperan" = "2",
             "Kurang berperan" = "1"
           ),
-        ), selectInput(
+        ), 
+        selectInput(
           "Terdapat.tempat.wisata.yang.dikelola.dengan.menggunakan.dana.CSR",
           "Terdapat tempat wisata yang dikelola dengan menggunakan dana CSR :"
           ,
@@ -266,7 +267,9 @@ tabItemTambahData <- tabItem(
             "Cukup berperan" = "2",
             "Kurang berperan" = "1"
           ),
-        )
+        ),
+        fileInput("Galeri.url", "Foto Potensi Desa", 
+                  accept = c("image/png", "image/jpeg", "image/jpg"))
       ),
       actionButton("add", "Tambah Data SIKD"),
       actionButton("update", "Update", style = "display: none;"),
